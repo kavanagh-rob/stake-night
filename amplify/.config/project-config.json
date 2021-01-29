@@ -1,0 +1,17 @@
+{
+  "providers": [
+    "awscloudformation"
+  ],
+  "projectName": "stake-night",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "angular",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist/stake-night",
+      "BuildCommand": "npm.cmd run-script build",
+      "StartCommand": "ng serve"
+    }
+  }
+}

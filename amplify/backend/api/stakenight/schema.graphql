@@ -1,0 +1,61 @@
+type Bets @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  isProcessed: Boolean
+  finalOdds: Float
+  payout: Float
+  status: String
+  stake: Float
+  userID: ID!
+  Horse: Horse @connection
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  avatorUrl: String
+  name: String
+  balance: Float
+  payments: [AWSJSON]
+  Events: [Event] @connection(keyName: "byUser", fields: ["id"])
+  Bets: [Bets] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type Result @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  WinningHorse: Horse @connection
+  videoUrl: String
+  totalPot: Float
+}
+
+type Horse @model @auth(rules: [{allow: public}]) @key(name: "byRace", fields: ["raceID"]) {
+  id: ID!
+  number: Int
+  name: String
+  liveOdds: Float
+  totalBetsForHorse: Float
+  raceID: ID!
+}
+
+type Race @model @auth(rules: [{allow: public}]) @key(name: "byEvent", fields: ["eventID"]) {
+  id: ID!
+  isActive: Boolean
+  name: String
+  payoutFactor: Float
+  raceCardImageUrl: String
+  number: String
+  time: String
+  showPayoutFactor: Boolean
+  eventID: ID!
+  Horses: [Horse] @connection(keyName: "byRace", fields: ["id"])
+  Result: Result @connection
+}
+
+type Event @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  date: String
+  eventImage: String
+  name: String
+  organiser: String
+  Races: [Race] @connection(keyName: "byEvent", fields: ["id"])
+  userID: ID!
+}
+ 

@@ -1,0 +1,427 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateBets {
+  onCreateBets {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+subscription OnUpdateBets {
+  onUpdateBets {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+subscription OnDeleteBets {
+  onDeleteBets {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnCreateResult {
+  onCreateResult {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+subscription OnUpdateResult {
+  onUpdateResult {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+subscription OnDeleteResult {
+  onDeleteResult {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+subscription OnCreateHorse {
+  onCreateHorse {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateHorse {
+  onUpdateHorse {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteHorse {
+  onDeleteHorse {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateRace {
+  onCreateRace {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnUpdateRace {
+  onUpdateRace {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnDeleteRace {
+  onDeleteRace {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnCreateEvent {
+  onCreateEvent {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnUpdateEvent {
+  onUpdateEvent {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnDeleteEvent {
+  onDeleteEvent {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}

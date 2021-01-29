@@ -1,0 +1,481 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateBets(
+  $input: CreateBetsInput!
+  $condition: ModelBetsConditionInput
+) {
+  createBets(input: $input, condition: $condition) {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+mutation UpdateBets(
+  $input: UpdateBetsInput!
+  $condition: ModelBetsConditionInput
+) {
+  updateBets(input: $input, condition: $condition) {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+mutation DeleteBets(
+  $input: DeleteBetsInput!
+  $condition: ModelBetsConditionInput
+) {
+  deleteBets(input: $input, condition: $condition) {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation CreateResult(
+  $input: CreateResultInput!
+  $condition: ModelResultConditionInput
+) {
+  createResult(input: $input, condition: $condition) {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+mutation UpdateResult(
+  $input: UpdateResultInput!
+  $condition: ModelResultConditionInput
+) {
+  updateResult(input: $input, condition: $condition) {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+mutation DeleteResult(
+  $input: DeleteResultInput!
+  $condition: ModelResultConditionInput
+) {
+  deleteResult(input: $input, condition: $condition) {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+mutation CreateHorse(
+  $input: CreateHorseInput!
+  $condition: ModelHorseConditionInput
+) {
+  createHorse(input: $input, condition: $condition) {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateHorse(
+  $input: UpdateHorseInput!
+  $condition: ModelHorseConditionInput
+) {
+  updateHorse(input: $input, condition: $condition) {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteHorse(
+  $input: DeleteHorseInput!
+  $condition: ModelHorseConditionInput
+) {
+  deleteHorse(input: $input, condition: $condition) {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateRace(
+  $input: CreateRaceInput!
+  $condition: ModelRaceConditionInput
+) {
+  createRace(input: $input, condition: $condition) {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation UpdateRace(
+  $input: UpdateRaceInput!
+  $condition: ModelRaceConditionInput
+) {
+  updateRace(input: $input, condition: $condition) {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation DeleteRace(
+  $input: DeleteRaceInput!
+  $condition: ModelRaceConditionInput
+) {
+  deleteRace(input: $input, condition: $condition) {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation CreateEvent(
+  $input: CreateEventInput!
+  $condition: ModelEventConditionInput
+) {
+  createEvent(input: $input, condition: $condition) {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation UpdateEvent(
+  $input: UpdateEventInput!
+  $condition: ModelEventConditionInput
+) {
+  updateEvent(input: $input, condition: $condition) {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation DeleteEvent(
+  $input: DeleteEventInput!
+  $condition: ModelEventConditionInput
+) {
+  deleteEvent(input: $input, condition: $condition) {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}

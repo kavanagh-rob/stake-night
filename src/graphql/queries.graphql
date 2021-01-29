@@ -1,0 +1,455 @@
+# this is an auto generated file. This will be overwritten
+query GetBets($id: ID!) {
+  getBets(id: $id) {
+    id
+    isProcessed
+    finalOdds
+    payout
+    status
+    stake
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Horse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+query ListBetss(
+  $filter: ModelBetsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBetss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      isProcessed
+      finalOdds
+      payout
+      status
+      stake
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncBets(
+  $filter: ModelBetsFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncBets(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      isProcessed
+      finalOdds
+      payout
+      status
+      stake
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Bets {
+      nextToken
+      startedAt
+    }
+    Events {
+      nextToken
+      startedAt
+    }
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncUsers(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query ListResults(
+  $filter: ModelResultFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResults(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetResult($id: ID!) {
+  getResult(id: $id) {
+    id
+    videoUrl
+    totalPot
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    WinningHorse {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+}
+query SyncResults(
+  $filter: ModelResultFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncResults(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetHorse($id: ID!) {
+  getHorse(id: $id) {
+    id
+    number
+    name
+    liveOdds
+    totalBetsForHorse
+    raceID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListHorses(
+  $filter: ModelHorseFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHorses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncHorses(
+  $filter: ModelHorseFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncHorses(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      number
+      name
+      liveOdds
+      totalBetsForHorse
+      raceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetRace($id: ID!) {
+  getRace(id: $id) {
+    id
+    isActive
+    name
+    payoutFactor
+    raceCardImageUrl
+    number
+    time
+    showPayoutFactor
+    eventID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Result {
+      id
+      videoUrl
+      totalPot
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    Horses {
+      nextToken
+      startedAt
+    }
+  }
+}
+query ListRaces(
+  $filter: ModelRaceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRaces(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      isActive
+      name
+      payoutFactor
+      raceCardImageUrl
+      number
+      time
+      showPayoutFactor
+      eventID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncRaces(
+  $filter: ModelRaceFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncRaces(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      isActive
+      name
+      payoutFactor
+      raceCardImageUrl
+      number
+      time
+      showPayoutFactor
+      eventID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetEvent($id: ID!) {
+  getEvent(id: $id) {
+    id
+    date
+    eventImage
+    name
+    organiser
+    userID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    Races {
+      nextToken
+      startedAt
+    }
+  }
+}
+query ListEvents(
+  $filter: ModelEventFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      date
+      eventImage
+      name
+      organiser
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncEvents(
+  $filter: ModelEventFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncEvents(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      date
+      eventImage
+      name
+      organiser
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
