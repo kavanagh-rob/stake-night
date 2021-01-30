@@ -1,0 +1,26 @@
+amplify-authenticator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 80vh;
+  }
+
+
+.auth-container {
+    min-height: auto !important;
+}
+
+:host {         
+    display: block;
+    width: 100%;      
+}
+
+main {         
+    display: block;
+    width: 100%;      
+}
+
+.fill-remaining-space{
+    width: inherit
+}

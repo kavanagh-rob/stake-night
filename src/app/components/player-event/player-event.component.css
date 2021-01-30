@@ -1,0 +1,47 @@
+.racecard-image {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+ }
+  .user-header-image {
+    background-size: cover;
+  }
+  
+  .card-container {
+    margin: 10px;
+    width: 100%;
+  }
+
+  .card-content-container {
+    margin: 10px;
+  }
+.subText{
+  font-size: 1.3em;
+}
+
+.balanceTxt {
+    color: green;
+    font-weight: bold;
+  }
+
+.helloTxt {
+  font-size: 1.3em;
+  color: darkmagenta;
+  font-weight: bold;
+}
+.matHeader{
+  text-align: right;
+  widows: 100%;
+}
+
+.startTxt {
+  color: darkcyan;
+}
+
+.runningGif {
+  height: 50px;
+}
+
+.modal-backdrop {
+  z-index: 1020;
+}

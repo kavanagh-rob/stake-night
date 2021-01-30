@@ -7,7 +7,6 @@ query GetBets($id: ID!) {
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -41,7 +40,6 @@ query ListBetss(
       payout
       status
       stake
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -71,7 +69,6 @@ query SyncBets(
       payout
       status
       stake
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -89,19 +86,12 @@ query GetUser($id: ID!) {
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 query ListUsers(
@@ -116,6 +106,7 @@ query ListUsers(
       name
       balance
       payments
+      subscribedEvents
       _version
       _deleted
       _lastChangedAt
@@ -144,6 +135,7 @@ query SyncUsers(
       name
       balance
       payments
+      subscribedEvents
       _version
       _deleted
       _lastChangedAt
@@ -389,7 +381,6 @@ query GetEvent($id: ID!) {
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -413,7 +404,6 @@ query ListEvents(
       eventImage
       name
       organiser
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -442,7 +432,6 @@ query SyncEvents(
       eventImage
       name
       organiser
-      userID
       _version
       _deleted
       _lastChangedAt

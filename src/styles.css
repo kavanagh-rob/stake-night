@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-card-avatar {
+    height: 75px !important;
+    width: 75px !important;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  .mat-card-title
+  .mat-card-subtitle {
+    margin: 0 !important;
+  }
+  .hoverTable tbody tr:hover {
+    background-color: #ffff99;
+    cursor: pointer;
+  }
+  
+  .hoverTable .highlighted {
+    background-color: #14ad19;
+    color: darkred;
+  }
+  
+  .mat-card-header-text{
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  .card-content-container{
+   text-align: center;
+  }
+  .mat-card {
+    padding: 5px 18px !important;
+  }
+  
+  .warningText {
+    color: red;
+  }
+  

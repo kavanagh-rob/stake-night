@@ -1,16 +1,103 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatCardModule} from '@angular/material/card'; 
+import { MatButtonModule} from '@angular/material/button';
+import { MatListModule} from '@angular/material/list';
+import { MatIconModule} from '@angular/material/icon';
+import { MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
+import { PlayerHomeComponent } from './components/player-home/player-home.component';
+import { PlayerEventComponent } from './components/player-event/player-event.component';
+import { EventListComponent } from './components/event-list/event-list.component'
+import { CreateEventComponent } from './components/create-event/create-event.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+
+import { EventsResolver } from './shared/resolvers/events-resolver';
+import { PlayerResolver } from './shared/resolvers/player-resolver';
 
 import { AppComponent } from './app.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+
+
+const appRoutes: Routes = [
+
+  {
+    path: 'admin-home',
+    component: EventListComponent,
+    resolve: {
+      resolvedEvents: EventsResolver
+    },
+  },
+  { path: '',
+    redirectTo: '/admin-home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin-home/:eventId',
+    resolve: {
+      resolvedEvent: EventsResolver
+    },
+    children: [
+      { path: '', redirectTo: 'users', pathMatch: 'full' },
+      { path: 'users', component: UserListComponent },
+    ]
+  },
+  {
+    path: 'player/:userId',
+    component: PlayerHomeComponent,
+    resolve: {
+      resolvedPlayer: PlayerResolver,
+    },
+    children: [
+      { 
+        path: 'event/:eventId', 
+        resolve: {
+          resolvedEvent: EventsResolver
+        },
+        component: PlayerEventComponent 
+      },
+    ]
+  },
+
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventListComponent,
+    CreateEventComponent,
+    UserListComponent,
+    CreateUserComponent,
+    PlayerHomeComponent
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false }
+       // <-- debugging purposes only
+    ),
+    RouterModule.forChild( appRoutes),
+    BrowserModule,
+    BrowserAnimationsModule,
+    AmplifyUIAngularModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [EventsResolver, PlayerResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

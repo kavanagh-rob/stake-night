@@ -7,7 +7,6 @@ subscription OnCreateBets {
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -36,7 +35,6 @@ subscription OnUpdateBets {
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -65,7 +63,6 @@ subscription OnDeleteBets {
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -93,19 +90,12 @@ subscription OnCreateUser {
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 subscription OnUpdateUser {
@@ -115,19 +105,12 @@ subscription OnUpdateUser {
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 subscription OnDeleteUser {
@@ -137,19 +120,12 @@ subscription OnDeleteUser {
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 subscription OnCreateResult {
@@ -375,7 +351,6 @@ subscription OnCreateEvent {
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -394,7 +369,6 @@ subscription OnUpdateEvent {
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -413,7 +387,6 @@ subscription OnDeleteEvent {
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt

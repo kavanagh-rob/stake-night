@@ -45,13 +45,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "Horse": {
                     "name": "Horse",
                     "isArray": false,
@@ -72,15 +65,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -219,33 +203,13 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "Events": {
-                    "name": "Events",
+                "subscribedEvents": {
+                    "name": "subscribedEvents",
                     "isArray": true,
-                    "type": {
-                        "model": "Event"
-                    },
+                    "type": "String",
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
-                },
-                "Bets": {
-                    "name": "Bets",
-                    "isArray": true,
-                    "type": {
-                        "model": "Bets"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
+                    "isArrayNullable": true
                 }
             },
             "syncable": true,
@@ -273,8 +237,8 @@ export const schema = {
                 }
             ]
         },
-        "Event": {
-            "name": "Event",
+        "Result": {
+            "name": "Result",
             "fields": {
                 "id": {
                     "name": "id",
@@ -283,71 +247,40 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "date": {
-                    "name": "date",
+                "WinningHorse": {
+                    "name": "WinningHorse",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "eventImage": {
-                    "name": "eventImage",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "organiser": {
-                    "name": "organiser",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Races": {
-                    "name": "Races",
-                    "isArray": true,
                     "type": {
-                        "model": "Race"
+                        "model": "Horse"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "eventID"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "resultWinningHorseId"
                     }
                 },
-                "userID": {
-                    "name": "userID",
+                "videoUrl": {
+                    "name": "videoUrl",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "totalPot": {
+                    "name": "totalPot",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Events",
+            "pluralName": "Results",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -495,8 +428,8 @@ export const schema = {
                 }
             ]
         },
-        "Result": {
-            "name": "Result",
+        "Event": {
+            "name": "Event",
             "fields": {
                 "id": {
                     "name": "id",
@@ -505,36 +438,51 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "WinningHorse": {
-                    "name": "WinningHorse",
-                    "isArray": false,
-                    "type": {
-                        "model": "Horse"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "resultWinningHorseId"
-                    }
-                },
-                "videoUrl": {
-                    "name": "videoUrl",
+                "date": {
+                    "name": "date",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "totalPot": {
-                    "name": "totalPot",
+                "eventImage": {
+                    "name": "eventImage",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "organiser": {
+                    "name": "organiser",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Races": {
+                    "name": "Races",
+                    "isArray": true,
+                    "type": {
+                        "model": "Race"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "eventID"
+                    }
                 }
             },
             "syncable": true,
-            "pluralName": "Results",
+            "pluralName": "Events",
             "attributes": [
                 {
                     "type": "model",
@@ -561,5 +509,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "56434b40dd5d902a02724694de89c239"
+    "version": "9ea6ddbcdb609449b6b738d4b85e6dcd"
 };

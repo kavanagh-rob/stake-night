@@ -4,13 +4,13 @@ import { schema } from './schema';
 
 
 
-const { Bets, Horse, User, Event, Race, Result } = initSchema(schema);
+const { Bets, Horse, User, Result, Race, Event } = initSchema(schema);
 
 export {
   Bets,
   Horse,
   User,
-  Event,
+  Result,
   Race,
-  Result
+  Event
 };

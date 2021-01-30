@@ -11,7 +11,6 @@ export declare class Bets {
   readonly payout?: number;
   readonly status?: string;
   readonly stake?: number;
-  readonly userID: string;
   readonly Horse?: Horse;
   constructor(init: ModelInit<Bets>);
   static copyOf(source: Bets, mutator: (draft: MutableModel<Bets>) => MutableModel<Bets> | void): Bets;
@@ -34,22 +33,18 @@ export declare class User {
   readonly name?: string;
   readonly balance?: number;
   readonly payments?: (string | null)[];
-  readonly Events?: (Event | null)[];
-  readonly Bets?: (Bets | null)[];
+  readonly subscribedEvents?: (string | null)[];
   constructor(init: ModelInit<User>);
   static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
 }
 
-export declare class Event {
+export declare class Result {
   readonly id: string;
-  readonly date?: string;
-  readonly eventImage?: string;
-  readonly name?: string;
-  readonly organiser?: string;
-  readonly Races?: (Race | null)[];
-  readonly userID: string;
-  constructor(init: ModelInit<Event>);
-  static copyOf(source: Event, mutator: (draft: MutableModel<Event>) => MutableModel<Event> | void): Event;
+  readonly WinningHorse?: Horse;
+  readonly videoUrl?: string;
+  readonly totalPot?: number;
+  constructor(init: ModelInit<Result>);
+  static copyOf(source: Result, mutator: (draft: MutableModel<Result>) => MutableModel<Result> | void): Result;
 }
 
 export declare class Race {
@@ -68,11 +63,13 @@ export declare class Race {
   static copyOf(source: Race, mutator: (draft: MutableModel<Race>) => MutableModel<Race> | void): Race;
 }
 
-export declare class Result {
+export declare class Event {
   readonly id: string;
-  readonly WinningHorse?: Horse;
-  readonly videoUrl?: string;
-  readonly totalPot?: number;
-  constructor(init: ModelInit<Result>);
-  static copyOf(source: Result, mutator: (draft: MutableModel<Result>) => MutableModel<Result> | void): Result;
+  readonly date?: string;
+  readonly eventImage?: string;
+  readonly name?: string;
+  readonly organiser?: string;
+  readonly Races?: (Race | null)[];
+  constructor(init: ModelInit<Event>);
+  static copyOf(source: Event, mutator: (draft: MutableModel<Event>) => MutableModel<Event> | void): Event;
 }

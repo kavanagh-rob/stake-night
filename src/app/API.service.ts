@@ -16,7 +16,6 @@ export type CreateBetsInput = {
   payout?: number | null;
   status?: string | null;
   stake?: number | null;
-  userID: string;
   _version?: number | null;
   betsHorseId?: string | null;
 };
@@ -27,7 +26,6 @@ export type ModelBetsConditionInput = {
   payout?: ModelFloatInput | null;
   status?: ModelStringInput | null;
   stake?: ModelFloatInput | null;
-  userID?: ModelIDInput | null;
   and?: Array<ModelBetsConditionInput | null> | null;
   or?: Array<ModelBetsConditionInput | null> | null;
   not?: ModelBetsConditionInput | null;
@@ -91,22 +89,6 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
 export type UpdateBetsInput = {
   id: string;
   isProcessed?: boolean | null;
@@ -114,7 +96,6 @@ export type UpdateBetsInput = {
   payout?: number | null;
   status?: string | null;
   stake?: number | null;
-  userID?: string | null;
   _version?: number | null;
   betsHorseId?: string | null;
 };
@@ -130,6 +111,7 @@ export type CreateUserInput = {
   name?: string | null;
   balance?: number | null;
   payments?: Array<string | null> | null;
+  subscribedEvents?: Array<string | null> | null;
   _version?: number | null;
 };
 
@@ -138,6 +120,7 @@ export type ModelUserConditionInput = {
   name?: ModelStringInput | null;
   balance?: ModelFloatInput | null;
   payments?: ModelStringInput | null;
+  subscribedEvents?: ModelStringInput | null;
   and?: Array<ModelUserConditionInput | null> | null;
   or?: Array<ModelUserConditionInput | null> | null;
   not?: ModelUserConditionInput | null;
@@ -149,6 +132,7 @@ export type UpdateUserInput = {
   name?: string | null;
   balance?: number | null;
   payments?: Array<string | null> | null;
+  subscribedEvents?: Array<string | null> | null;
   _version?: number | null;
 };
 
@@ -219,6 +203,22 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type UpdateHorseInput = {
   id: string;
   number?: number | null;
@@ -287,7 +287,6 @@ export type CreateEventInput = {
   eventImage?: string | null;
   name?: string | null;
   organiser?: string | null;
-  userID: string;
   _version?: number | null;
 };
 
@@ -296,7 +295,6 @@ export type ModelEventConditionInput = {
   eventImage?: ModelStringInput | null;
   name?: ModelStringInput | null;
   organiser?: ModelStringInput | null;
-  userID?: ModelIDInput | null;
   and?: Array<ModelEventConditionInput | null> | null;
   or?: Array<ModelEventConditionInput | null> | null;
   not?: ModelEventConditionInput | null;
@@ -308,7 +306,6 @@ export type UpdateEventInput = {
   eventImage?: string | null;
   name?: string | null;
   organiser?: string | null;
-  userID?: string | null;
   _version?: number | null;
 };
 
@@ -324,7 +321,6 @@ export type ModelBetsFilterInput = {
   payout?: ModelFloatInput | null;
   status?: ModelStringInput | null;
   stake?: ModelFloatInput | null;
-  userID?: ModelIDInput | null;
   and?: Array<ModelBetsFilterInput | null> | null;
   or?: Array<ModelBetsFilterInput | null> | null;
   not?: ModelBetsFilterInput | null;
@@ -336,6 +332,7 @@ export type ModelUserFilterInput = {
   name?: ModelStringInput | null;
   balance?: ModelFloatInput | null;
   payments?: ModelStringInput | null;
+  subscribedEvents?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -383,7 +380,6 @@ export type ModelEventFilterInput = {
   eventImage?: ModelStringInput | null;
   name?: ModelStringInput | null;
   organiser?: ModelStringInput | null;
-  userID?: ModelIDInput | null;
   and?: Array<ModelEventFilterInput | null> | null;
   or?: Array<ModelEventFilterInput | null> | null;
   not?: ModelEventFilterInput | null;
@@ -397,7 +393,6 @@ export type CreateBetsMutation = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -427,7 +422,6 @@ export type UpdateBetsMutation = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -457,7 +451,6 @@ export type DeleteBetsMutation = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -486,21 +479,12 @@ export type CreateUserMutation = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type UpdateUserMutation = {
@@ -510,21 +494,12 @@ export type UpdateUserMutation = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type DeleteUserMutation = {
@@ -534,21 +509,12 @@ export type DeleteUserMutation = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type CreateResultMutation = {
@@ -783,7 +749,6 @@ export type CreateEventMutation = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -803,7 +768,6 @@ export type UpdateEventMutation = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -823,7 +787,6 @@ export type DeleteEventMutation = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -844,7 +807,6 @@ export type GetBetsQuery = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -876,7 +838,6 @@ export type ListBetssQuery = {
     payout: number | null;
     status: string | null;
     stake: number | null;
-    userID: string;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -897,7 +858,6 @@ export type SyncBetsQuery = {
     payout: number | null;
     status: string | null;
     stake: number | null;
-    userID: string;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -915,21 +875,12 @@ export type GetUserQuery = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type ListUsersQuery = {
@@ -941,6 +892,7 @@ export type ListUsersQuery = {
     name: string | null;
     balance: number | null;
     payments: Array<string | null> | null;
+    subscribedEvents: Array<string | null> | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -960,6 +912,7 @@ export type SyncUsersQuery = {
     name: string | null;
     balance: number | null;
     payments: Array<string | null> | null;
+    subscribedEvents: Array<string | null> | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1172,7 +1125,6 @@ export type GetEventQuery = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1194,7 +1146,6 @@ export type ListEventsQuery = {
     eventImage: string | null;
     name: string | null;
     organiser: string | null;
-    userID: string;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1214,7 +1165,6 @@ export type SyncEventsQuery = {
     eventImage: string | null;
     name: string | null;
     organiser: string | null;
-    userID: string;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1233,7 +1183,6 @@ export type OnCreateBetsSubscription = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1263,7 +1212,6 @@ export type OnUpdateBetsSubscription = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1293,7 +1241,6 @@ export type OnDeleteBetsSubscription = {
   payout: number | null;
   status: string | null;
   stake: number | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1322,21 +1269,12 @@ export type OnCreateUserSubscription = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type OnUpdateUserSubscription = {
@@ -1346,21 +1284,12 @@ export type OnUpdateUserSubscription = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type OnDeleteUserSubscription = {
@@ -1370,21 +1299,12 @@ export type OnDeleteUserSubscription = {
   name: string | null;
   balance: number | null;
   payments: Array<string | null> | null;
+  subscribedEvents: Array<string | null> | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-  Bets: {
-    __typename: "ModelBetsConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
-  Events: {
-    __typename: "ModelEventConnection";
-    nextToken: string | null;
-    startedAt: number | null;
-  } | null;
 };
 
 export type OnCreateResultSubscription = {
@@ -1619,7 +1539,6 @@ export type OnCreateEventSubscription = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1639,7 +1558,6 @@ export type OnUpdateEventSubscription = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1659,7 +1577,6 @@ export type OnDeleteEventSubscription = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
-  userID: string;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1689,7 +1606,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -1735,7 +1651,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -1781,7 +1696,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -1826,21 +1740,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1866,21 +1771,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1906,21 +1802,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2315,7 +2202,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -2351,7 +2237,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -2387,7 +2272,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -2421,7 +2305,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -2467,7 +2350,6 @@ export class APIService {
             payout
             status
             stake
-            userID
             _version
             _deleted
             _lastChangedAt
@@ -2510,7 +2392,6 @@ export class APIService {
             payout
             status
             stake
-            userID
             _version
             _deleted
             _lastChangedAt
@@ -2548,21 +2429,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -2588,6 +2460,7 @@ export class APIService {
             name
             balance
             payments
+            subscribedEvents
             _version
             _deleted
             _lastChangedAt
@@ -2629,6 +2502,7 @@ export class APIService {
             name
             balance
             payments
+            subscribedEvents
             _version
             _deleted
             _lastChangedAt
@@ -3029,7 +2903,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -3065,7 +2938,6 @@ export class APIService {
             eventImage
             name
             organiser
-            userID
             _version
             _deleted
             _lastChangedAt
@@ -3107,7 +2979,6 @@ export class APIService {
             eventImage
             name
             organiser
-            userID
             _version
             _deleted
             _lastChangedAt
@@ -3149,7 +3020,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -3187,7 +3057,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -3225,7 +3094,6 @@ export class APIService {
           payout
           status
           stake
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -3262,21 +3130,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`
     )
@@ -3294,21 +3153,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`
     )
@@ -3326,21 +3176,12 @@ export class APIService {
           name
           balance
           payments
+          subscribedEvents
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-          Bets {
-            __typename
-            nextToken
-            startedAt
-          }
-          Events {
-            __typename
-            nextToken
-            startedAt
-          }
         }
       }`
     )
@@ -3655,7 +3496,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -3683,7 +3523,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt
@@ -3711,7 +3550,6 @@ export class APIService {
           eventImage
           name
           organiser
-          userID
           _version
           _deleted
           _lastChangedAt

@@ -1,0 +1,54 @@
+<div class="row">
+  <button data-toggle="modal" data-target="#createEventForm" class="btn btn-primary offset-md-3 col-md-6">Create a New Event</button>
+</div>
+
+<div class="modal fade" id="createEventForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 font-weight-bold">Setup an Event</h3>
+        <button type="button" id="closeCreateEventFormButton" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form [formGroup]="form" class="eventForm">
+          <div>
+              <mat-form-field [style.width.px]="256">
+                  <mat-label><span>Name</span></mat-label>
+                  <input matInput type="string" formControlName="name">
+              </mat-form-field>
+          </div>
+        
+          <div>
+              <mat-form-field [style.width.px]="256">
+                  <mat-label><span>Organiser</span></mat-label>
+                  <input matInput type="string" formControlName="organiser">
+              </mat-form-field>
+          </div>
+        
+          <div>
+              <mat-form-field [style.width.px]="256">
+                  <mat-label><span>Event Image URL</span></mat-label>
+                  <input matInput type="string" formControlName="eventImage">
+              </mat-form-field>
+          </div>
+        
+          <!-- <div>
+              <mat-form-field [style.width.px]="256">
+                  <mat-label><span>Date</span></mat-label>
+                  <input matInput type="string" formControlName="date">
+              </mat-form-field>
+          </div> -->
+        
+          <div class="buttonbar">
+              <button mat-raised-button color="primary" (click)="createEvent()">Create Event</button>
+          </div>
+        </form>
+        
+      </div>    
+    </div>
+  </div>
+</div>
+

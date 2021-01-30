@@ -10,7 +10,6 @@ mutation CreateBets(
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -42,7 +41,6 @@ mutation UpdateBets(
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -74,7 +72,6 @@ mutation DeleteBets(
     payout
     status
     stake
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -105,19 +102,12 @@ mutation CreateUser(
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 mutation UpdateUser(
@@ -130,19 +120,12 @@ mutation UpdateUser(
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 mutation DeleteUser(
@@ -155,19 +138,12 @@ mutation DeleteUser(
     name
     balance
     payments
+    subscribedEvents
     _version
     _deleted
     _lastChangedAt
     createdAt
     updatedAt
-    Bets {
-      nextToken
-      startedAt
-    }
-    Events {
-      nextToken
-      startedAt
-    }
   }
 }
 mutation CreateResult(
@@ -423,7 +399,6 @@ mutation CreateEvent(
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -445,7 +420,6 @@ mutation UpdateEvent(
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt
@@ -467,7 +441,6 @@ mutation DeleteEvent(
     eventImage
     name
     organiser
-    userID
     _version
     _deleted
     _lastChangedAt
