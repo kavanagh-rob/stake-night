@@ -59,6 +59,7 @@ export declare class Race {
   readonly eventID: string;
   readonly Horses?: (Horse | null)[];
   readonly Result?: Result;
+  readonly isCurrentRace?: boolean;
   constructor(init: ModelInit<Race>);
   static copyOf(source: Race, mutator: (draft: MutableModel<Race>) => MutableModel<Race> | void): Race;
 }
@@ -70,6 +71,7 @@ export declare class Event {
   readonly name?: string;
   readonly organiser?: string;
   readonly Races?: (Race | null)[];
+  readonly type?: string;
   constructor(init: ModelInit<Event>);
   static copyOf(source: Event, mutator: (draft: MutableModel<Event>) => MutableModel<Event> | void): Event;
 }

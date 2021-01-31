@@ -11,7 +11,7 @@ export class PlayerResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot) {
 
     if (route.params['userId']) {
-      return  this.api.GetUser(route.params['eventId'])
+      return  this.api.GetUser(route.params['userId'])
     }
   }
 }

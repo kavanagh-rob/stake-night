@@ -244,6 +244,7 @@ export type CreateRaceInput = {
   time?: string | null;
   showPayoutFactor?: boolean | null;
   eventID: string;
+  isCurrentRace?: boolean | null;
   _version?: number | null;
   raceResultId?: string | null;
 };
@@ -257,6 +258,7 @@ export type ModelRaceConditionInput = {
   time?: ModelStringInput | null;
   showPayoutFactor?: ModelBooleanInput | null;
   eventID?: ModelIDInput | null;
+  isCurrentRace?: ModelBooleanInput | null;
   and?: Array<ModelRaceConditionInput | null> | null;
   or?: Array<ModelRaceConditionInput | null> | null;
   not?: ModelRaceConditionInput | null;
@@ -272,6 +274,7 @@ export type UpdateRaceInput = {
   time?: string | null;
   showPayoutFactor?: boolean | null;
   eventID?: string | null;
+  isCurrentRace?: boolean | null;
   _version?: number | null;
   raceResultId?: string | null;
 };
@@ -287,6 +290,7 @@ export type CreateEventInput = {
   eventImage?: string | null;
   name?: string | null;
   organiser?: string | null;
+  type?: string | null;
   _version?: number | null;
 };
 
@@ -295,6 +299,7 @@ export type ModelEventConditionInput = {
   eventImage?: ModelStringInput | null;
   name?: ModelStringInput | null;
   organiser?: ModelStringInput | null;
+  type?: ModelStringInput | null;
   and?: Array<ModelEventConditionInput | null> | null;
   or?: Array<ModelEventConditionInput | null> | null;
   not?: ModelEventConditionInput | null;
@@ -306,6 +311,7 @@ export type UpdateEventInput = {
   eventImage?: string | null;
   name?: string | null;
   organiser?: string | null;
+  type?: string | null;
   _version?: number | null;
 };
 
@@ -369,6 +375,7 @@ export type ModelRaceFilterInput = {
   time?: ModelStringInput | null;
   showPayoutFactor?: ModelBooleanInput | null;
   eventID?: ModelIDInput | null;
+  isCurrentRace?: ModelBooleanInput | null;
   and?: Array<ModelRaceFilterInput | null> | null;
   or?: Array<ModelRaceFilterInput | null> | null;
   not?: ModelRaceFilterInput | null;
@@ -380,6 +387,7 @@ export type ModelEventFilterInput = {
   eventImage?: ModelStringInput | null;
   name?: ModelStringInput | null;
   organiser?: ModelStringInput | null;
+  type?: ModelStringInput | null;
   and?: Array<ModelEventFilterInput | null> | null;
   or?: Array<ModelEventFilterInput | null> | null;
   not?: ModelEventFilterInput | null;
@@ -651,6 +659,7 @@ export type CreateRaceMutation = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -685,6 +694,7 @@ export type UpdateRaceMutation = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -719,6 +729,7 @@ export type DeleteRaceMutation = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -749,6 +760,7 @@ export type CreateEventMutation = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -768,6 +780,7 @@ export type UpdateEventMutation = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -787,6 +800,7 @@ export type DeleteEventMutation = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1049,6 +1063,7 @@ export type GetRaceQuery = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1085,6 +1100,7 @@ export type ListRacesQuery = {
     time: string | null;
     showPayoutFactor: boolean | null;
     eventID: string;
+    isCurrentRace: boolean | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1108,6 +1124,7 @@ export type SyncRacesQuery = {
     time: string | null;
     showPayoutFactor: boolean | null;
     eventID: string;
+    isCurrentRace: boolean | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1125,6 +1142,7 @@ export type GetEventQuery = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1146,6 +1164,7 @@ export type ListEventsQuery = {
     eventImage: string | null;
     name: string | null;
     organiser: string | null;
+    type: string | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1165,6 +1184,7 @@ export type SyncEventsQuery = {
     eventImage: string | null;
     name: string | null;
     organiser: string | null;
+    type: string | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1441,6 +1461,7 @@ export type OnCreateRaceSubscription = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1475,6 +1496,7 @@ export type OnUpdateRaceSubscription = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1509,6 +1531,7 @@ export type OnDeleteRaceSubscription = {
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
+  isCurrentRace: boolean | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1539,6 +1562,7 @@ export type OnCreateEventSubscription = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1558,6 +1582,7 @@ export type OnUpdateEventSubscription = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1577,6 +1602,7 @@ export type OnDeleteEventSubscription = {
   eventImage: string | null;
   name: string | null;
   organiser: string | null;
+  type: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -2056,6 +2082,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -2106,6 +2133,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -2156,6 +2184,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -2202,6 +2231,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt
@@ -2237,6 +2267,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt
@@ -2272,6 +2303,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt
@@ -2771,6 +2803,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -2821,6 +2854,7 @@ export class APIService {
             time
             showPayoutFactor
             eventID
+            isCurrentRace
             _version
             _deleted
             _lastChangedAt
@@ -2866,6 +2900,7 @@ export class APIService {
             time
             showPayoutFactor
             eventID
+            isCurrentRace
             _version
             _deleted
             _lastChangedAt
@@ -2903,6 +2938,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt
@@ -2938,6 +2974,7 @@ export class APIService {
             eventImage
             name
             organiser
+            type
             _version
             _deleted
             _lastChangedAt
@@ -2979,6 +3016,7 @@ export class APIService {
             eventImage
             name
             organiser
+            type
             _version
             _deleted
             _lastChangedAt
@@ -3374,6 +3412,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -3416,6 +3455,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -3458,6 +3498,7 @@ export class APIService {
           time
           showPayoutFactor
           eventID
+          isCurrentRace
           _version
           _deleted
           _lastChangedAt
@@ -3496,6 +3537,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt
@@ -3523,6 +3565,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt
@@ -3550,6 +3593,7 @@ export class APIService {
           eventImage
           name
           organiser
+          type
           _version
           _deleted
           _lastChangedAt

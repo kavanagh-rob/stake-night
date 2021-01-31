@@ -11,23 +11,19 @@
                 </mat-card-subtitle>
              </mat-card-header>
              <mat-card-content> 
-                 <div *ngIf="liveHorseRaceInfo" class="card-content-container">
-                     <h5>Current Race: <strong>Race  {{liveHorseRaceInfo.raceNumber}}</strong></h5>
-                     <h6 class="startTxt">(Starting at: <strong>  {{liveHorseRaceInfo.raceTime}}</strong>)</h6>
+                 <div *ngIf="currentRace" class="card-content-container">
+                     <h5>Current Race: <strong>Race  {{currentRace.number}}</strong></h5>
+                     <h6 class="startTxt">(Starting at: <strong>  {{currentRace.time}}</strong>)</h6>
                      <h5>Win Pot: <strong>€{{getWinPot()}}</strong></h5>
-                     <h6 [hidden]="!liveHorseRaceInfo.showPayoutFactor">(Tote Returns : <strong> {{ getPoolPayoutFactor()}}%)</strong></h6>
-                     <h5>Betting Status: <span [ngStyle]="getGameStatusStyle(liveHorseRaceInfo.isActive)">{{liveHorseRaceInfo.isActive ? 'Active' : 'Suspended' }}</span></h5>
+                     <h6 [hidden]="!currentRace.showPayoutFactor">(Tote Returns : <strong> {{ getPoolPayoutFactor()}}%)</strong></h6>
+                     <h5>Betting Status: <span [ngStyle]="getGameStatusStyle(currentRace.isActive)">{{currentRace.isActive ? 'Active' : 'Suspended' }}</span></h5>
                  </div>
-                 <div *ngIf="nextRouletteGameInfo" class="card-content-container">
-                    <h5>Next Spin: <strong>{{nextRouletteGameInfo.spinNumber}}</strong></h5>
-                    <h5>Betting Status: <span [ngStyle]="getGameStatusStyle(nextRouletteGameInfo.isActive)">{{nextRouletteGameInfo.isActive ? 'Active' : 'Suspended' }}</span></h5>
-                </div>
                 </mat-card-content>
          </mat-card>
     </div>
 </div>
 
-<div *ngIf="!liveHorseRaceInfo && !nextRouletteGameInfo" class="card-content-container">
+<!--div *ngIf="!currentRace && !nextRouletteGameInfo" class="card-content-container">
     <h3 [style.color]="'blue'">{{eventInfo.name}}</h3>
     <img class="racecard-image" [src]="getEventStartCardImage()"/>
     <br/>
@@ -40,56 +36,13 @@
     <img class="racecard-image" src="/assets/images/runner.gif"/>
     <br/>
     <br/>
-</div>
+</div-->
 
-<mat-tab-group *ngIf="liveHorseRaceInfo || nextRouletteGameInfo">
-    <mat-tab *ngIf="nextRouletteGameInfo" label="Roulette Board">
-        <app-roulette-bet [eventInfo]="eventInfo"></app-roulette-bet>
+<mat-tab-group *ngIf="currentRace">
+    <mat-tab *ngIf="currentRace" label="Bet">
+        <app-bet-page [currentRace]="currentRace" [user]="user" [event]="event"></app-bet-page>
     </mat-tab>
-    <mat-tab *ngIf="nextRouletteGameInfo" label="Bet Hisory">
-            <br/>
-            <h2>My Bets History</h2>
-            <app-game-history [eventInfo]="eventInfo"></app-game-history>
-        </mat-tab>
-    <mat-tab *ngIf="liveHorseRaceInfo" label="Bet">
-        <br/>
-        <div class="row">
-            <div class="col-8 ">
-                <h2 [hidden]="!liveHorseRaceInfo.isActive"> Live Odds </h2>
-                <h2 [hidden]="liveHorseRaceInfo.isActive"> Final Odds </h2>
-            </div>
-            <div  [hidden]="liveHorseRaceInfo.isActive" class="col-4">
-                <img class="runningGif" src="/assets/images/running.gif" />
-            </div>
-        </div>
-        <div *ngIf="liveHorseRaceInfo">
-            <table class="table hoverTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Horse Number</th>
-                        <th scope="col">Horse Name</th>
-                        <th scope="col">Return per €</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let horse of liveHorseRaceInfo.horses;">
-                        <td>{{horse.horseNumber}}</td>
-                        <td>{{horse.name}}</td>
-                        <td>{{horse.liveOdds}}</td>
-                        <td>
-                            <button [hidden]="!liveHorseRaceInfo.isActive" data-toggle="modal" data-target="#placeBetForm" (click)="setSelectedHorse(horse)" class="btn btn-primary">Bet</button>
-                            <button  [hidden]="liveHorseRaceInfo.isActive" class="btn btn-warning"><fa-icon [icon]="faLock"></fa-icon></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div *ngIf="!liveHorseRaceInfo" class="card-content-container">
-            <h5><strong>No Live Races</strong></h5>
-        </div>
-    </mat-tab>
-    <mat-tab *ngIf="liveHorseRaceInfo" label="History">
+    <!-- <mat-tab *ngIf="currentRace" label="History">
         <br/>
         <h2> Top Ups </h2>
         <table class="table hoverTable">
@@ -139,58 +92,14 @@
             </tbody>
         </table>
     </mat-tab>
-    <mat-tab *ngIf="liveHorseRaceInfo" label="Card">
+    <mat-tab *ngIf="currentRace" label="Card">
             <br/>
             <h2>{{getRaceCardTitle()}}</h2>
         <img class="racecard-image" [src]="getRaceCardImage()"/>
     </mat-tab>
-    <mat-tab *ngIf="liveHorseRaceInfo" label="Results">
+    <mat-tab *ngIf="currentRace" label="Results">
         <br/>
         <h2>Race Results</h2>
         <app-results-video [eventInfo]="eventInfo"></app-results-video>
-    </mat-tab>
+    </mat-tab> -->
 </mat-tab-group>
-
-
-<div class="modal fade" id="placeBetForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h3 class="modal-title w-100 font-weight-bold">Bet On Horse Number: {{betslip.horseNumber}}, Name: {{betslip.horseName}}</h3>
-        <button type="button" id="closeBetFormButton" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div>
-            <h4 class="modal-subtitle text-center w-100 font-weight-bold">Your Remaining Balance is €{{user.balance}}</h4>
-      </div>
-      <div class="modal-body mx-3">
-        <form (ngSubmit)="requestBet(); buttonClicked = true;" class="form-horizontal" #betForm="ngForm">
-             <fieldset>     
-                 <div class="form-group">
-                    <div class="md-form mb-3">
-                      <label data-error="wrong" data-success="right" for="betAmountInput"> <i class="fas fa-phone prefix grey-text"></i>Stake (€)</label>
-                      <input [(ngModel)]="betslip.stake" name="betAmountInput" type="textbox" id="betAmountInput" class="form-control validate" required appTwoDecimal>
-                    </div>
-                 </div>
-          </fieldset>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="submit" class="btn btn-dark">Place Bet</button>
-            </div>
-        </form>
-        <div [hidden]="!balanceError" class="alert alert-error box-msg warningText" role="alert">
-            <strong>Sorry!</strong> Your not have enough funds. 
-            Please lower the bet or add more funds.
-        </div>
-        <div [hidden]="!raceExpiredError" class="alert alert-error box-msg warningText" role="alert">
-            <strong>Sorry!</strong> Sorry this race has Expired
-        </div>    
-        <div [hidden]="!stakeError" class="alert alert-error box-msg warningText" role="alert">
-                <strong>Sorry!</strong> The Stake is too low
-        </div> 
-      </div>
-    
-    </div>
-  </div>
-</div>

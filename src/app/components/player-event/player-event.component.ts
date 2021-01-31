@@ -3,7 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import { v1 as uuid } from 'uuid';
 
-import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { APIService } from 'src/app/API.service';
+import { Event, User } from '../../../models';
 
 @Component({
   selector: 'app-player-event',
@@ -11,63 +12,108 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./player-event.component.css']
 })
 export class PlayerEventComponent implements OnInit {
-  faLock = faLock;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    const resolvedUserKey = 'resolvedPlayer';
-    const resolvedUSerEventKey = 'resolvedUserEvent';
-    // this.user = this.route.snapshot.data[resolvedUserKey].Item;
-    // this.eventInfo = this.route.snapshot.data[resolvedUSerEventKey].Item;
+  constructor(private route: ActivatedRoute, private router: Router, private api: APIService) {
+      this.event = this.route.snapshot.data['resolvedEvent'];
+      this.user = this.route.snapshot.data['resolvedPlayer'];
   }
+     
+  event: any;
+  user: User;
 
   // user: User;
   interval: any;
   // eventInfo: EventInfo;
-  userBetsList;
-  betslip: any = {};
-  balanceError = false;
-  stakeError = false;
-  raceExpiredError = false;
-  totalBetValue = 0;
-  buttonClicked = false;
-  placingbet = false;
 
-  liveHorseRaceInfo: any = null;
+  totalBetValue = 100;
+
+  currentRace: any = null;
   nextRouletteGameInfo: any = null;
 
 
   ngOnInit(): void {
-    // this.setCurrentGameInfo();
+    this.setCurrentGameInfo();
 
-    // if (this.user === undefined){
-    //   this.router.navigate(['/pageNotFound']);
-    // }
-    // this.refreshData();
-    // this.interval = setInterval(() => {
-    //     this.refreshData();
-    // }, 12000);
+    if (this.user === undefined){
+      this.router.navigate(['/pageNotFound']);
+    }
+    this.refreshData();
+    this.interval = setInterval(() => {
+        this.refreshData();
+    }, 12000);
   }
 
-  // setCurrentGameInfo() {
-  //   if (this.eventInfo  && this.eventInfo.currentGame && this.eventInfo.currentGame.gameType === 'roulette'){
-  //     this.nextRouletteGameInfo = this.eventInfo.currentGame;
-  //   }
-  //   else {
-  //     this.liveHorseRaceInfo =  this.eventInfo ? this.eventInfo.currentRace : null;
-  //   }
-  // }
+  setTestData(){
+    this.event.type = 'race';
+    this.event.Races = [];
+    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, Horses: [{name: 'horse1', number: 1, liveOdds: 5}, {name: 'horse2', number: 2, liveOdds: 0.0}]});    
+  }
 
 
+  setCurrentGameInfo() {
+    if (this.event  && this.event.type === 'race'){
+        this.currentRace =  this.getCurrentRace();
+    }
+  }
 
-  // refreshData() {
-  //   this.dataService.getEventInfo(this.user.eventId).then(eventInfoData => {
-  //     this.eventInfo = eventInfoData.Item;
-  //     this.setCurrentGameInfo();
-  //     if (this.liveHorseRaceInfo) {
-  //       this.getCurrentBetsForRace();
-  //     }
-  //   });
-  // }
+  getCurrentRace(){
+    if(this.event.Races){
+      const currentRaces: any[] = this.event.Races.filter(
+            race => race.isCurrentRace);
+      if (currentRaces.length === 1){
+        	return currentRaces[0];
+      }
+    }
+  }
+
+    
+  refreshData() {
+    this.api.GetEvent(this.event.id).then(eventResponse => {
+      this.event = eventResponse;
+      this.setTestData();
+      this.setCurrentGameInfo();
+      if (this.currentRace) {
+        // this.getCurrentBetsForRace();
+      }
+    });
+  }
+
+
+    
+  getWinPot() {
+    if (this.currentRace.payoutFactor && this.currentRace.payoutFactor > 0 && this.currentRace.payoutFactor < 1) {
+      return this.setTwoDecimals(Number(this.currentRace.payoutFactor) * Number(this.totalBetValue));
+     }
+    return this.totalBetValue;
+  }
+
+  getPoolPayoutFactor(){
+    if (this.currentRace.payoutFactor && this.currentRace.payoutFactor > 0 && this.currentRace.payoutFactor < 1) {
+     return Number(this.currentRace.payoutFactor) * 100;
+    }
+    return 100;
+  }
+
+  getUserImage(){
+    let avator = 'https://www.disneyclips.com/images/images/donald-duck25.png';
+    if (this.user.avatorUrl){
+      avator = this.user.avatorUrl;
+    }
+    return { 'background-image': 'url(' + avator + ')' };
+  }
+
+
+  getGameStatusStyle(isActive){
+    let actColor = '';
+    if (isActive){
+      actColor = 'blue';
+    }
+    else {
+      actColor = 'red';
+    }
+    return { color: actColor };
+
+  }
 
   // getCurrentBetsForRace() {
   //   const betsQueryData: any = {};
@@ -95,7 +141,7 @@ export class PlayerEventComponent implements OnInit {
   //   this.raceExpiredError = false;
   //   this.betslip.result = 'PENDING';
   //   this.betslip.eventId = this.eventInfo.eventInfoId;
-  //   this.betslip.raceNumber = this.liveHorseRaceInfo.raceNumber;
+  //   this.betslip.raceNumber = this.currentRace.raceNumber;
   //   this.betslip.userId = this.user.userId;
   //   this.betslip.userName = this.user.name;
   //   this.betslip.userBalance = this.setTwoDecimals(this.user.balance);
@@ -113,8 +159,8 @@ export class PlayerEventComponent implements OnInit {
   //       return;
   //     }
   //     this.dataService.getEventInfo(this.user.eventId).then(eventInfoData => {
-  //       this.liveHorseRaceInfo = eventInfoData.Item.currentRace;
-  //       if (this.liveHorseRaceInfo.isActive){
+  //       this.currentRace = eventInfoData.Item.currentRace;
+  //       if (this.currentRace.isActive){
   //         this.placeBet();
   //       }else{
   //         this.raceExpiredError = true;
@@ -124,7 +170,7 @@ export class PlayerEventComponent implements OnInit {
   // }
 
   // calculateBetTotals(raceBets) {
-  //   this.liveHorseRaceInfo.horses.forEach(horse => {
+  //   this.currentRace.horses.forEach(horse => {
   //     let betTotalForHorse = 0;
   //     const betsForHorse = raceBets.filter(
   //       bets => bets.horseNumber === horse.horseNumber);
@@ -139,12 +185,12 @@ export class PlayerEventComponent implements OnInit {
   // }
 
   // getLiveToteOdds() {
-  //   const currentHorse = this.liveHorseRaceInfo.horses.forEach(
+  //   const currentHorse = this.currentRace.horses.forEach(
   //     horse => {
   //       let factoredHorseOdds = horse.totalBetsForHorse === 0 ?
   //       this.setTwoDecimals(this.totalBetValue) : this.setTwoDecimals(Number(this.totalBetValue) / Number(horse.totalBetsForHorse));
-  //       if (this.liveHorseRaceInfo.payoutFactor && this.liveHorseRaceInfo.payoutFactor > 0 && this.liveHorseRaceInfo.payoutFactor < 1) {
-  //         factoredHorseOdds =   this.setTwoDecimals(factoredHorseOdds * Number(this.liveHorseRaceInfo.payoutFactor));
+  //       if (this.currentRace.payoutFactor && this.currentRace.payoutFactor > 0 && this.currentRace.payoutFactor < 1) {
+  //         factoredHorseOdds =   this.setTwoDecimals(factoredHorseOdds * Number(this.currentRace.payoutFactor));
   //       }
   //       horse.liveOdds = factoredHorseOdds;
   //       });
@@ -190,24 +236,18 @@ export class PlayerEventComponent implements OnInit {
   // filterBetsForRace(betList) {
   //   return betList.filter(
   //     betData => {
-  //       if (betData.eventId !== this.eventInfo.eventInfoId || betData.raceNumber !== this.liveHorseRaceInfo.raceNumber) {
+  //       if (betData.eventId !== this.eventInfo.eventInfoId || betData.raceNumber !== this.currentRace.raceNumber) {
   //         return false;
   //       }
   //       return true;
   //   });
   // }
 
-  // getUserImage(){
-  //   let avator = 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Donald_Duck.svg/1200px-Donald_Duck.svg.png';
-  //   if (this.user.avatorUrl){
-  //     avator = this.user.avatorUrl;
-  //   }
-  //   return { 'background-image': 'url(' + avator + ')' };
-  // }
+
 
   // getRaceCardImage(){
-  //   return this.liveHorseRaceInfo && this.liveHorseRaceInfo.raceCardImageUrl && this.liveHorseRaceInfo.raceCardImageUrl !== 'N/A' ?
-  //   this.liveHorseRaceInfo.raceCardImageUrl : 'https://i.pinimg.com/originals/42/3c/37/423c375c2e12c1a708ecc1694e472ff1.gif';
+  //   return this.currentRace && this.currentRace.raceCardImageUrl && this.currentRace.raceCardImageUrl !== 'N/A' ?
+  //   this.currentRace.raceCardImageUrl : 'https://i.pinimg.com/originals/42/3c/37/423c375c2e12c1a708ecc1694e472ff1.gif';
   // }
 
   // getEventStartCardImage() {
@@ -215,21 +255,11 @@ export class PlayerEventComponent implements OnInit {
   // }
 
   // getRaceCardTitle(){
-  //   return this.liveHorseRaceInfo && this.liveHorseRaceInfo.raceCardImageUrl ? 'Race Card' :
+  //   return this.currentRace && this.currentRace.raceCardImageUrl ? 'Race Card' :
   //     'Wating On Next Race';
   // }
 
-  // getGameStatusStyle(isActive){
-  //   let actColor = '';
-  //   if (isActive){
-  //     actColor = 'blue';
-  //   }
-  //   else {
-  //     actColor = 'red';
-  //   }
-  //   return { color: actColor };
-
-  // }
+  
   // getBetColor(bet){
   //   let color = '';
   //   if (bet.paymentStatus === 'COMPLETE'){
@@ -263,21 +293,10 @@ export class PlayerEventComponent implements OnInit {
   //     b[raceNumberProp] - a[raceNumberProp]);
   // }
 
-  // getPoolPayoutFactor(){
-  //   if (this.liveHorseRaceInfo.payoutFactor && this.liveHorseRaceInfo.payoutFactor > 0 && this.liveHorseRaceInfo.payoutFactor < 1) {
-  //    return Number(this.liveHorseRaceInfo.payoutFactor) * 100;
-  //   }
-  //   return 100;
-  // }
 
-  // getWinPot() {
-  //   if (this.liveHorseRaceInfo.payoutFactor && this.liveHorseRaceInfo.payoutFactor > 0 && this.liveHorseRaceInfo.payoutFactor < 1) {
-  //     return this.setTwoDecimals(Number(this.liveHorseRaceInfo.payoutFactor) * Number(this.totalBetValue));
-  //    }
-  //   return this.totalBetValue;
-  // }
 
-  // setTwoDecimals(input){
-  //   return Number((Math.round(Number(input) * 100) / 100).toFixed(2));
-  // }
+
+  setTwoDecimals(input){
+    return Number((Math.round(Number(input) * 100) / 100).toFixed(2));
+  }
 }

@@ -29,7 +29,7 @@ export class EventListComponent implements OnInit {
   }
 
   navigateToEvent(eventId) {
-    this.router.navigateByUrl('/event-home/' + eventId);
+    this.router.navigateByUrl('/admin-home/' + eventId);
   }
 
 }

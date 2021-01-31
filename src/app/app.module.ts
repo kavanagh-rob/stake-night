@@ -3,15 +3,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatTabsModule} from '@angular/material/tabs'; 
-import {MatCardModule} from '@angular/material/card'; 
-import { MatButtonModule} from '@angular/material/button';
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatTabsModule}  from '@angular/material/tabs'; 
+import { MatCardModule }  from '@angular/material/card'; 
+import { MatButtonModule } from '@angular/material/button';
 import { MatListModule} from '@angular/material/list';
 import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+
 
 import { PlayerHomeComponent } from './components/player-home/player-home.component';
 import { PlayerEventComponent } from './components/player-event/player-event.component';
@@ -24,7 +27,8 @@ import { PlayerResolver } from './shared/resolvers/player-resolver';
 
 import { AppComponent } from './app.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
-
+import { BetPageComponent } from './components/bet-page/bet-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
 
@@ -47,6 +51,13 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: 'users', component: UserListComponent },
+      { 
+        path: 'users/:userId',
+        component: PlayerEventComponent, 
+        resolve: {
+          resolvedPlayer: PlayerResolver,
+        }, 
+      },
     ]
   },
   {
@@ -75,7 +86,9 @@ const appRoutes: Routes = [
     CreateEventComponent,
     UserListComponent,
     CreateUserComponent,
-    PlayerHomeComponent
+    PlayerHomeComponent,
+    PlayerEventComponent,
+    BetPageComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -95,7 +108,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatListModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    NgbModule
   ],
   providers: [EventsResolver, PlayerResolver],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { v1 as uuid } from 'uuid';
 import { APIService } from 'src/app/API.service';
 
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -12,8 +13,6 @@ export class UserListComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private router: Router, private api: APIService) {
     this.eventInfo = this.route.snapshot.data['resolvedEvent'];
-    console.log(this.route.snapshot.data['resolvedEvent']);
-    // this.userModel = new User(uuid(), 'name', null, 0, []);
   }
   eventInfo;
   users : any[];
@@ -33,7 +32,8 @@ loadUsers() {
 
 
 navigateToUser(userId) {
-  this.router.navigateByUrl('/player-home/' + userId);
+  // this.router.navigateByUrl('/player/' + userId);
+  this.router.navigate([userId],  {relativeTo: this.route});
 }
 
 navigateToPage(route) {

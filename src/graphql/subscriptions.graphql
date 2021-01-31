@@ -259,6 +259,7 @@ subscription OnCreateRace {
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -291,6 +292,7 @@ subscription OnUpdateRace {
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -323,6 +325,7 @@ subscription OnDeleteRace {
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -351,6 +354,7 @@ subscription OnCreateEvent {
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt
@@ -369,6 +373,7 @@ subscription OnUpdateEvent {
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt
@@ -387,6 +392,7 @@ subscription OnDeleteEvent {
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt

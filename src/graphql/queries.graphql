@@ -295,6 +295,7 @@ query GetRace($id: ID!) {
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -332,6 +333,7 @@ query ListRaces(
       time
       showPayoutFactor
       eventID
+      isCurrentRace
       _version
       _deleted
       _lastChangedAt
@@ -364,6 +366,7 @@ query SyncRaces(
       time
       showPayoutFactor
       eventID
+      isCurrentRace
       _version
       _deleted
       _lastChangedAt
@@ -381,6 +384,7 @@ query GetEvent($id: ID!) {
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt
@@ -404,6 +408,7 @@ query ListEvents(
       eventImage
       name
       organiser
+      type
       _version
       _deleted
       _lastChangedAt
@@ -432,6 +437,7 @@ query SyncEvents(
       eventImage
       name
       organiser
+      type
       _version
       _deleted
       _lastChangedAt

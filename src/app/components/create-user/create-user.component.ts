@@ -13,7 +13,6 @@ export class CreateUserComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private router: Router, private api: APIService) {
     this.eventInfo = this.route.snapshot.data['resolvedEvent'];
-    console.log(this.route.snapshot.data['resolvedEvent']);
   }
 
   eventInfo;  

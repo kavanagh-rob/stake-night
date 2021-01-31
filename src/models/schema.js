@@ -392,6 +392,13 @@ export const schema = {
                         "connectionType": "BELONGS_TO",
                         "targetName": "raceResultId"
                     }
+                },
+                "isCurrentRace": {
+                    "name": "isCurrentRace",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -479,6 +486,13 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "eventID"
                     }
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -509,5 +523,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "9ea6ddbcdb609449b6b738d4b85e6dcd"
+    "version": "a718ccb61537169f716b8f82c516788b"
 };

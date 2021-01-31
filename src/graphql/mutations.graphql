@@ -298,6 +298,7 @@ mutation CreateRace(
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -333,6 +334,7 @@ mutation UpdateRace(
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -368,6 +370,7 @@ mutation DeleteRace(
     time
     showPayoutFactor
     eventID
+    isCurrentRace
     _version
     _deleted
     _lastChangedAt
@@ -399,6 +402,7 @@ mutation CreateEvent(
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt
@@ -420,6 +424,7 @@ mutation UpdateEvent(
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt
@@ -441,6 +446,7 @@ mutation DeleteEvent(
     eventImage
     name
     organiser
+    type
     _version
     _deleted
     _lastChangedAt
