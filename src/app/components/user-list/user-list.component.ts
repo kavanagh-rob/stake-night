@@ -12,9 +12,9 @@ import { APIService } from 'src/app/API.service';
 export class UserListComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private router: Router, private api: APIService) {
-    this.eventInfo = this.route.snapshot.data['resolvedEvent'];
+    this.event = this.route.snapshot.data['resolvedEvent'];
   }
-  eventInfo;
+  event;
   users : any[];
   userToTopUp: any = {};
   topUpAmount;
@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
 }
 
 loadUsers() {
-  this.api.ListUsers({ subscribedEvents: { contains: this.eventInfo.id } }).then(res => { // Success
+  this.api.ListUsers({ eventId: { eq: this.event.id } }).then(res => { // Success
       this.users = res.items;
   });
 }
@@ -43,7 +43,7 @@ navigateToPage(route) {
 submitUser() {
   // const data: any = {};
   // this.userModel.userId = uuid();
-  // this.userModel.eventId = this.eventInfo.eventInfoId;
+  // this.userModel.eventId = this.event.eventId;
   // data.item = this.userModel;
   // data.table_name = 'RN_Users';
   // if (this.userModel.balance) {

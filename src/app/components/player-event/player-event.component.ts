@@ -38,17 +38,18 @@ export class PlayerEventComponent implements OnInit {
       this.router.navigate(['/pageNotFound']);
     }
     this.refreshData();
-    this.interval = setInterval(() => {
-        this.refreshData();
-    }, 12000);
+    // this.interval = setInterval(() => {
+    //     this.refreshData();
+    // }, 12000);
   }
 
+  
   setTestData(){
     this.event.type = 'race';
     this.event.Races = [];
-    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, Horses: [{name: 'horse1', number: 1, liveOdds: 5}, {name: 'horse2', number: 2, liveOdds: 0.0}]});    
+    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, 
+      Horses: [{name: 'horse1', number: 1, liveOdds: 5, raceId: '001', id: '1215'}, {name: 'horse2', number: 2, liveOdds: 0.0, raceId: '001', id: '1215'}]});     
   }
-
 
   setCurrentGameInfo() {
     if (this.event  && this.event.type === 'race'){

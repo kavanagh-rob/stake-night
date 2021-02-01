@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Bets": {
-            "name": "Bets",
+        "Bet": {
+            "name": "Bet",
             "fields": {
                 "id": {
                     "name": "id",
@@ -55,7 +55,20 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "betsHorseId"
+                        "targetName": "betHorseId"
+                    }
+                },
+                "User": {
+                    "name": "User",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "betUserId"
                     }
                 }
             },
@@ -197,19 +210,17 @@ export const schema = {
                 },
                 "payments": {
                     "name": "payments",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "AWSJSON",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
-                "subscribedEvents": {
-                    "name": "subscribedEvents",
-                    "isArray": true,
+                "eventId": {
+                    "name": "eventId",
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -523,5 +534,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "a718ccb61537169f716b8f82c516788b"
+    "version": "74d3c8e02ad169c1d48834ab7effcd85"
 };

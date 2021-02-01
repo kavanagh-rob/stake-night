@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-query GetBets($id: ID!) {
-  getBets(id: $id) {
+query GetBet($id: ID!) {
+  getBet(id: $id) {
     id
     isProcessed
     finalOdds
@@ -12,6 +12,19 @@ query GetBets($id: ID!) {
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -27,12 +40,8 @@ query GetBets($id: ID!) {
     }
   }
 }
-query ListBetss(
-  $filter: ModelBetsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listBetss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+query ListBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String) {
+  listBets(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       isProcessed
@@ -51,7 +60,7 @@ query ListBetss(
   }
 }
 query SyncBets(
-  $filter: ModelBetsFilterInput
+  $filter: ModelBetFilterInput
   $limit: Int
   $nextToken: String
   $lastSync: AWSTimestamp
@@ -79,21 +88,6 @@ query SyncBets(
     startedAt
   }
 }
-query GetUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    avatorUrl
-    name
-    balance
-    payments
-    subscribedEvents
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
 query ListUsers(
   $filter: ModelUserFilterInput
   $limit: Int
@@ -106,7 +100,7 @@ query ListUsers(
       name
       balance
       payments
-      subscribedEvents
+      eventId
       _version
       _deleted
       _lastChangedAt
@@ -115,6 +109,21 @@ query ListUsers(
     }
     nextToken
     startedAt
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    avatorUrl
+    name
+    balance
+    payments
+    eventId
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
   }
 }
 query SyncUsers(
@@ -135,7 +144,7 @@ query SyncUsers(
       name
       balance
       payments
-      subscribedEvents
+      eventId
       _version
       _deleted
       _lastChangedAt

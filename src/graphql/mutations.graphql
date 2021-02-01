@@ -1,9 +1,9 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateBets(
-  $input: CreateBetsInput!
-  $condition: ModelBetsConditionInput
+mutation CreateBet(
+  $input: CreateBetInput!
+  $condition: ModelBetConditionInput
 ) {
-  createBets(input: $input, condition: $condition) {
+  createBet(input: $input, condition: $condition) {
     id
     isProcessed
     finalOdds
@@ -15,6 +15,19 @@ mutation CreateBets(
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -30,11 +43,11 @@ mutation CreateBets(
     }
   }
 }
-mutation UpdateBets(
-  $input: UpdateBetsInput!
-  $condition: ModelBetsConditionInput
+mutation UpdateBet(
+  $input: UpdateBetInput!
+  $condition: ModelBetConditionInput
 ) {
-  updateBets(input: $input, condition: $condition) {
+  updateBet(input: $input, condition: $condition) {
     id
     isProcessed
     finalOdds
@@ -46,6 +59,19 @@ mutation UpdateBets(
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -61,11 +87,11 @@ mutation UpdateBets(
     }
   }
 }
-mutation DeleteBets(
-  $input: DeleteBetsInput!
-  $condition: ModelBetsConditionInput
+mutation DeleteBet(
+  $input: DeleteBetInput!
+  $condition: ModelBetConditionInput
 ) {
-  deleteBets(input: $input, condition: $condition) {
+  deleteBet(input: $input, condition: $condition) {
     id
     isProcessed
     finalOdds
@@ -77,6 +103,19 @@ mutation DeleteBets(
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -102,7 +141,7 @@ mutation CreateUser(
     name
     balance
     payments
-    subscribedEvents
+    eventId
     _version
     _deleted
     _lastChangedAt
@@ -120,7 +159,7 @@ mutation UpdateUser(
     name
     balance
     payments
-    subscribedEvents
+    eventId
     _version
     _deleted
     _lastChangedAt
@@ -138,7 +177,7 @@ mutation DeleteUser(
     name
     balance
     payments
-    subscribedEvents
+    eventId
     _version
     _deleted
     _lastChangedAt

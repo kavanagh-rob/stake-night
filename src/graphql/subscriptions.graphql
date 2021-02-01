@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateBets {
-  onCreateBets {
+subscription OnCreateBet {
+  onCreateBet {
     id
     isProcessed
     finalOdds
@@ -12,6 +12,19 @@ subscription OnCreateBets {
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -27,8 +40,8 @@ subscription OnCreateBets {
     }
   }
 }
-subscription OnUpdateBets {
-  onUpdateBets {
+subscription OnUpdateBet {
+  onUpdateBet {
     id
     isProcessed
     finalOdds
@@ -40,6 +53,19 @@ subscription OnUpdateBets {
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -55,8 +81,8 @@ subscription OnUpdateBets {
     }
   }
 }
-subscription OnDeleteBets {
-  onDeleteBets {
+subscription OnDeleteBet {
+  onDeleteBet {
     id
     isProcessed
     finalOdds
@@ -68,6 +94,19 @@ subscription OnDeleteBets {
     _lastChangedAt
     createdAt
     updatedAt
+    User {
+      id
+      avatorUrl
+      name
+      balance
+      payments
+      eventId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
     Horse {
       id
       number
@@ -90,7 +129,7 @@ subscription OnCreateUser {
     name
     balance
     payments
-    subscribedEvents
+    eventId
     _version
     _deleted
     _lastChangedAt
@@ -105,7 +144,7 @@ subscription OnUpdateUser {
     name
     balance
     payments
-    subscribedEvents
+    eventId
     _version
     _deleted
     _lastChangedAt
@@ -120,7 +159,7 @@ subscription OnDeleteUser {
     name
     balance
     payments
-    subscribedEvents
+    eventId
     _version
     _deleted
     _lastChangedAt

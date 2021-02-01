@@ -9,7 +9,7 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
-export type CreateBetsInput = {
+export type CreateBetInput = {
   id?: string | null;
   isProcessed?: boolean | null;
   finalOdds?: number | null;
@@ -17,18 +17,19 @@ export type CreateBetsInput = {
   status?: string | null;
   stake?: number | null;
   _version?: number | null;
-  betsHorseId?: string | null;
+  betHorseId?: string | null;
+  betUserId?: string | null;
 };
 
-export type ModelBetsConditionInput = {
+export type ModelBetConditionInput = {
   isProcessed?: ModelBooleanInput | null;
   finalOdds?: ModelFloatInput | null;
   payout?: ModelFloatInput | null;
   status?: ModelStringInput | null;
   stake?: ModelFloatInput | null;
-  and?: Array<ModelBetsConditionInput | null> | null;
-  or?: Array<ModelBetsConditionInput | null> | null;
-  not?: ModelBetsConditionInput | null;
+  and?: Array<ModelBetConditionInput | null> | null;
+  or?: Array<ModelBetConditionInput | null> | null;
+  not?: ModelBetConditionInput | null;
 };
 
 export type ModelBooleanInput = {
@@ -89,7 +90,7 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type UpdateBetsInput = {
+export type UpdateBetInput = {
   id: string;
   isProcessed?: boolean | null;
   finalOdds?: number | null;
@@ -97,10 +98,11 @@ export type UpdateBetsInput = {
   status?: string | null;
   stake?: number | null;
   _version?: number | null;
-  betsHorseId?: string | null;
+  betHorseId?: string | null;
+  betUserId?: string | null;
 };
 
-export type DeleteBetsInput = {
+export type DeleteBetInput = {
   id?: string | null;
   _version?: number | null;
 };
@@ -110,8 +112,8 @@ export type CreateUserInput = {
   avatorUrl?: string | null;
   name?: string | null;
   balance?: number | null;
-  payments?: Array<string | null> | null;
-  subscribedEvents?: Array<string | null> | null;
+  payments?: string | null;
+  eventId?: string | null;
   _version?: number | null;
 };
 
@@ -120,7 +122,7 @@ export type ModelUserConditionInput = {
   name?: ModelStringInput | null;
   balance?: ModelFloatInput | null;
   payments?: ModelStringInput | null;
-  subscribedEvents?: ModelStringInput | null;
+  eventId?: ModelStringInput | null;
   and?: Array<ModelUserConditionInput | null> | null;
   or?: Array<ModelUserConditionInput | null> | null;
   not?: ModelUserConditionInput | null;
@@ -131,8 +133,8 @@ export type UpdateUserInput = {
   avatorUrl?: string | null;
   name?: string | null;
   balance?: number | null;
-  payments?: Array<string | null> | null;
-  subscribedEvents?: Array<string | null> | null;
+  payments?: string | null;
+  eventId?: string | null;
   _version?: number | null;
 };
 
@@ -320,16 +322,16 @@ export type DeleteEventInput = {
   _version?: number | null;
 };
 
-export type ModelBetsFilterInput = {
+export type ModelBetFilterInput = {
   id?: ModelIDInput | null;
   isProcessed?: ModelBooleanInput | null;
   finalOdds?: ModelFloatInput | null;
   payout?: ModelFloatInput | null;
   status?: ModelStringInput | null;
   stake?: ModelFloatInput | null;
-  and?: Array<ModelBetsFilterInput | null> | null;
-  or?: Array<ModelBetsFilterInput | null> | null;
-  not?: ModelBetsFilterInput | null;
+  and?: Array<ModelBetFilterInput | null> | null;
+  or?: Array<ModelBetFilterInput | null> | null;
+  not?: ModelBetFilterInput | null;
 };
 
 export type ModelUserFilterInput = {
@@ -338,7 +340,7 @@ export type ModelUserFilterInput = {
   name?: ModelStringInput | null;
   balance?: ModelFloatInput | null;
   payments?: ModelStringInput | null;
-  subscribedEvents?: ModelStringInput | null;
+  eventId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -393,8 +395,8 @@ export type ModelEventFilterInput = {
   not?: ModelEventFilterInput | null;
 };
 
-export type CreateBetsMutation = {
-  __typename: "Bets";
+export type CreateBetMutation = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -406,6 +408,20 @@ export type CreateBetsMutation = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -422,8 +438,8 @@ export type CreateBetsMutation = {
   } | null;
 };
 
-export type UpdateBetsMutation = {
-  __typename: "Bets";
+export type UpdateBetMutation = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -435,6 +451,20 @@ export type UpdateBetsMutation = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -451,8 +481,8 @@ export type UpdateBetsMutation = {
   } | null;
 };
 
-export type DeleteBetsMutation = {
-  __typename: "Bets";
+export type DeleteBetMutation = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -464,6 +494,20 @@ export type DeleteBetsMutation = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -486,8 +530,8 @@ export type CreateUserMutation = {
   avatorUrl: string | null;
   name: string | null;
   balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
+  payments: string | null;
+  eventId: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -501,8 +545,8 @@ export type UpdateUserMutation = {
   avatorUrl: string | null;
   name: string | null;
   balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
+  payments: string | null;
+  eventId: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -516,8 +560,8 @@ export type DeleteUserMutation = {
   avatorUrl: string | null;
   name: string | null;
   balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
+  payments: string | null;
+  eventId: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -813,8 +857,8 @@ export type DeleteEventMutation = {
   } | null;
 };
 
-export type GetBetsQuery = {
-  __typename: "Bets";
+export type GetBetQuery = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -826,6 +870,20 @@ export type GetBetsQuery = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -842,10 +900,10 @@ export type GetBetsQuery = {
   } | null;
 };
 
-export type ListBetssQuery = {
-  __typename: "ModelBetsConnection";
+export type ListBetsQuery = {
+  __typename: "ModelBetConnection";
   items: Array<{
-    __typename: "Bets";
+    __typename: "Bet";
     id: string;
     isProcessed: boolean | null;
     finalOdds: number | null;
@@ -863,9 +921,9 @@ export type ListBetssQuery = {
 };
 
 export type SyncBetsQuery = {
-  __typename: "ModelBetsConnection";
+  __typename: "ModelBetConnection";
   items: Array<{
-    __typename: "Bets";
+    __typename: "Bet";
     id: string;
     isProcessed: boolean | null;
     finalOdds: number | null;
@@ -882,21 +940,6 @@ export type SyncBetsQuery = {
   startedAt: number | null;
 };
 
-export type GetUserQuery = {
-  __typename: "User";
-  id: string;
-  avatorUrl: string | null;
-  name: string | null;
-  balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type ListUsersQuery = {
   __typename: "ModelUserConnection";
   items: Array<{
@@ -905,8 +948,8 @@ export type ListUsersQuery = {
     avatorUrl: string | null;
     name: string | null;
     balance: number | null;
-    payments: Array<string | null> | null;
-    subscribedEvents: Array<string | null> | null;
+    payments: string | null;
+    eventId: string | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -917,6 +960,21 @@ export type ListUsersQuery = {
   startedAt: number | null;
 };
 
+export type GetUserQuery = {
+  __typename: "User";
+  id: string;
+  avatorUrl: string | null;
+  name: string | null;
+  balance: number | null;
+  payments: string | null;
+  eventId: string | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type SyncUsersQuery = {
   __typename: "ModelUserConnection";
   items: Array<{
@@ -925,8 +983,8 @@ export type SyncUsersQuery = {
     avatorUrl: string | null;
     name: string | null;
     balance: number | null;
-    payments: Array<string | null> | null;
-    subscribedEvents: Array<string | null> | null;
+    payments: string | null;
+    eventId: string | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
@@ -1195,8 +1253,8 @@ export type SyncEventsQuery = {
   startedAt: number | null;
 };
 
-export type OnCreateBetsSubscription = {
-  __typename: "Bets";
+export type OnCreateBetSubscription = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -1208,6 +1266,20 @@ export type OnCreateBetsSubscription = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -1224,8 +1296,8 @@ export type OnCreateBetsSubscription = {
   } | null;
 };
 
-export type OnUpdateBetsSubscription = {
-  __typename: "Bets";
+export type OnUpdateBetSubscription = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -1237,6 +1309,20 @@ export type OnUpdateBetsSubscription = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -1253,8 +1339,8 @@ export type OnUpdateBetsSubscription = {
   } | null;
 };
 
-export type OnDeleteBetsSubscription = {
-  __typename: "Bets";
+export type OnDeleteBetSubscription = {
+  __typename: "Bet";
   id: string;
   isProcessed: boolean | null;
   finalOdds: number | null;
@@ -1266,6 +1352,20 @@ export type OnDeleteBetsSubscription = {
   _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
+  User: {
+    __typename: "User";
+    id: string;
+    avatorUrl: string | null;
+    name: string | null;
+    balance: number | null;
+    payments: string | null;
+    eventId: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   Horse: {
     __typename: "Horse";
     id: string;
@@ -1288,8 +1388,8 @@ export type OnCreateUserSubscription = {
   avatorUrl: string | null;
   name: string | null;
   balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
+  payments: string | null;
+  eventId: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1303,8 +1403,8 @@ export type OnUpdateUserSubscription = {
   avatorUrl: string | null;
   name: string | null;
   balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
+  payments: string | null;
+  eventId: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1318,8 +1418,8 @@ export type OnDeleteUserSubscription = {
   avatorUrl: string | null;
   name: string | null;
   balance: number | null;
-  payments: Array<string | null> | null;
-  subscribedEvents: Array<string | null> | null;
+  payments: string | null;
+  eventId: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
@@ -1619,12 +1719,12 @@ export type OnDeleteEventSubscription = {
   providedIn: "root"
 })
 export class APIService {
-  async CreateBets(
-    input: CreateBetsInput,
-    condition?: ModelBetsConditionInput
-  ): Promise<CreateBetsMutation> {
-    const statement = `mutation CreateBets($input: CreateBetsInput!, $condition: ModelBetsConditionInput) {
-        createBets(input: $input, condition: $condition) {
+  async CreateBet(
+    input: CreateBetInput,
+    condition?: ModelBetConditionInput
+  ): Promise<CreateBetMutation> {
+    const statement = `mutation CreateBet($input: CreateBetInput!, $condition: ModelBetConditionInput) {
+        createBet(input: $input, condition: $condition) {
           __typename
           id
           isProcessed
@@ -1637,6 +1737,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -1662,14 +1776,14 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateBetsMutation>response.data.createBets;
+    return <CreateBetMutation>response.data.createBet;
   }
-  async UpdateBets(
-    input: UpdateBetsInput,
-    condition?: ModelBetsConditionInput
-  ): Promise<UpdateBetsMutation> {
-    const statement = `mutation UpdateBets($input: UpdateBetsInput!, $condition: ModelBetsConditionInput) {
-        updateBets(input: $input, condition: $condition) {
+  async UpdateBet(
+    input: UpdateBetInput,
+    condition?: ModelBetConditionInput
+  ): Promise<UpdateBetMutation> {
+    const statement = `mutation UpdateBet($input: UpdateBetInput!, $condition: ModelBetConditionInput) {
+        updateBet(input: $input, condition: $condition) {
           __typename
           id
           isProcessed
@@ -1682,6 +1796,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -1707,14 +1835,14 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateBetsMutation>response.data.updateBets;
+    return <UpdateBetMutation>response.data.updateBet;
   }
-  async DeleteBets(
-    input: DeleteBetsInput,
-    condition?: ModelBetsConditionInput
-  ): Promise<DeleteBetsMutation> {
-    const statement = `mutation DeleteBets($input: DeleteBetsInput!, $condition: ModelBetsConditionInput) {
-        deleteBets(input: $input, condition: $condition) {
+  async DeleteBet(
+    input: DeleteBetInput,
+    condition?: ModelBetConditionInput
+  ): Promise<DeleteBetMutation> {
+    const statement = `mutation DeleteBet($input: DeleteBetInput!, $condition: ModelBetConditionInput) {
+        deleteBet(input: $input, condition: $condition) {
           __typename
           id
           isProcessed
@@ -1727,6 +1855,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -1752,7 +1894,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteBetsMutation>response.data.deleteBets;
+    return <DeleteBetMutation>response.data.deleteBet;
   }
   async CreateUser(
     input: CreateUserInput,
@@ -1766,7 +1908,7 @@ export class APIService {
           name
           balance
           payments
-          subscribedEvents
+          eventId
           _version
           _deleted
           _lastChangedAt
@@ -1797,7 +1939,7 @@ export class APIService {
           name
           balance
           payments
-          subscribedEvents
+          eventId
           _version
           _deleted
           _lastChangedAt
@@ -1828,7 +1970,7 @@ export class APIService {
           name
           balance
           payments
-          subscribedEvents
+          eventId
           _version
           _deleted
           _lastChangedAt
@@ -2327,9 +2469,9 @@ export class APIService {
     )) as any;
     return <DeleteEventMutation>response.data.deleteEvent;
   }
-  async GetBets(id: string): Promise<GetBetsQuery> {
-    const statement = `query GetBets($id: ID!) {
-        getBets(id: $id) {
+  async GetBet(id: string): Promise<GetBetQuery> {
+    const statement = `query GetBet($id: ID!) {
+        getBet(id: $id) {
           __typename
           id
           isProcessed
@@ -2342,6 +2484,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -2364,15 +2520,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetBetsQuery>response.data.getBets;
+    return <GetBetQuery>response.data.getBet;
   }
-  async ListBetss(
-    filter?: ModelBetsFilterInput,
+  async ListBets(
+    filter?: ModelBetFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListBetssQuery> {
-    const statement = `query ListBetss($filter: ModelBetsFilterInput, $limit: Int, $nextToken: String) {
-        listBetss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListBetsQuery> {
+    const statement = `query ListBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String) {
+        listBets(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
@@ -2405,15 +2561,15 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListBetssQuery>response.data.listBetss;
+    return <ListBetsQuery>response.data.listBets;
   }
   async SyncBets(
-    filter?: ModelBetsFilterInput,
+    filter?: ModelBetFilterInput,
     limit?: number,
     nextToken?: string,
     lastSync?: number
   ): Promise<SyncBetsQuery> {
-    const statement = `query SyncBets($filter: ModelBetsFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+    const statement = `query SyncBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
         syncBets(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
           __typename
           items {
@@ -2452,31 +2608,6 @@ export class APIService {
     )) as any;
     return <SyncBetsQuery>response.data.syncBets;
   }
-  async GetUser(id: string): Promise<GetUserQuery> {
-    const statement = `query GetUser($id: ID!) {
-        getUser(id: $id) {
-          __typename
-          id
-          avatorUrl
-          name
-          balance
-          payments
-          subscribedEvents
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetUserQuery>response.data.getUser;
-  }
   async ListUsers(
     filter?: ModelUserFilterInput,
     limit?: number,
@@ -2492,7 +2623,7 @@ export class APIService {
             name
             balance
             payments
-            subscribedEvents
+            eventId
             _version
             _deleted
             _lastChangedAt
@@ -2518,6 +2649,31 @@ export class APIService {
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
   }
+  async GetUser(id: string): Promise<GetUserQuery> {
+    const statement = `query GetUser($id: ID!) {
+        getUser(id: $id) {
+          __typename
+          id
+          avatorUrl
+          name
+          balance
+          payments
+          eventId
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetUserQuery>response.data.getUser;
+  }
   async SyncUsers(
     filter?: ModelUserFilterInput,
     limit?: number,
@@ -2534,7 +2690,7 @@ export class APIService {
             name
             balance
             payments
-            subscribedEvents
+            eventId
             _version
             _deleted
             _lastChangedAt
@@ -3045,12 +3201,12 @@ export class APIService {
     )) as any;
     return <SyncEventsQuery>response.data.syncEvents;
   }
-  OnCreateBetsListener: Observable<
-    SubscriptionResponse<OnCreateBetsSubscription>
+  OnCreateBetListener: Observable<
+    SubscriptionResponse<OnCreateBetSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnCreateBets {
-        onCreateBets {
+      `subscription OnCreateBet {
+        onCreateBet {
           __typename
           id
           isProcessed
@@ -3063,6 +3219,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -3080,14 +3250,14 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateBetsSubscription>>;
+  ) as Observable<SubscriptionResponse<OnCreateBetSubscription>>;
 
-  OnUpdateBetsListener: Observable<
-    SubscriptionResponse<OnUpdateBetsSubscription>
+  OnUpdateBetListener: Observable<
+    SubscriptionResponse<OnUpdateBetSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateBets {
-        onUpdateBets {
+      `subscription OnUpdateBet {
+        onUpdateBet {
           __typename
           id
           isProcessed
@@ -3100,6 +3270,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -3117,14 +3301,14 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateBetsSubscription>>;
+  ) as Observable<SubscriptionResponse<OnUpdateBetSubscription>>;
 
-  OnDeleteBetsListener: Observable<
-    SubscriptionResponse<OnDeleteBetsSubscription>
+  OnDeleteBetListener: Observable<
+    SubscriptionResponse<OnDeleteBetSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteBets {
-        onDeleteBets {
+      `subscription OnDeleteBet {
+        onDeleteBet {
           __typename
           id
           isProcessed
@@ -3137,6 +3321,20 @@ export class APIService {
           _lastChangedAt
           createdAt
           updatedAt
+          User {
+            __typename
+            id
+            avatorUrl
+            name
+            balance
+            payments
+            eventId
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
           Horse {
             __typename
             id
@@ -3154,7 +3352,7 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteBetsSubscription>>;
+  ) as Observable<SubscriptionResponse<OnDeleteBetSubscription>>;
 
   OnCreateUserListener: Observable<
     SubscriptionResponse<OnCreateUserSubscription>
@@ -3168,7 +3366,7 @@ export class APIService {
           name
           balance
           payments
-          subscribedEvents
+          eventId
           _version
           _deleted
           _lastChangedAt
@@ -3191,7 +3389,7 @@ export class APIService {
           name
           balance
           payments
-          subscribedEvents
+          eventId
           _version
           _deleted
           _lastChangedAt
@@ -3214,7 +3412,7 @@ export class APIService {
           name
           balance
           payments
-          subscribedEvents
+          eventId
           _version
           _deleted
           _lastChangedAt

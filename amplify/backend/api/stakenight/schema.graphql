@@ -1,4 +1,4 @@
-type Bets @model @auth(rules: [{allow: public}]) {
+type Bet @model @auth(rules: [{allow: public}]) {
   id: ID!
   isProcessed: Boolean
   finalOdds: Float
@@ -6,6 +6,7 @@ type Bets @model @auth(rules: [{allow: public}]) {
   status: String
   stake: Float
   Horse: Horse @connection
+  User: User @connection
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -13,8 +14,8 @@ type User @model @auth(rules: [{allow: public}]) {
   avatorUrl: String
   name: String
   balance: Float
-  payments: [AWSJSON]
-  subscribedEvents: [String]
+  payments: AWSJSON
+  eventId: String
 }
 
 type Result @model @auth(rules: [{allow: public}]) {

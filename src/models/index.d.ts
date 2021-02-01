@@ -4,7 +4,7 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-export declare class Bets {
+export declare class Bet {
   readonly id: string;
   readonly isProcessed?: boolean;
   readonly finalOdds?: number;
@@ -12,8 +12,9 @@ export declare class Bets {
   readonly status?: string;
   readonly stake?: number;
   readonly Horse?: Horse;
-  constructor(init: ModelInit<Bets>);
-  static copyOf(source: Bets, mutator: (draft: MutableModel<Bets>) => MutableModel<Bets> | void): Bets;
+  readonly User?: User;
+  constructor(init: ModelInit<Bet>);
+  static copyOf(source: Bet, mutator: (draft: MutableModel<Bet>) => MutableModel<Bet> | void): Bet;
 }
 
 export declare class Horse {
@@ -32,8 +33,8 @@ export declare class User {
   readonly avatorUrl?: string;
   readonly name?: string;
   readonly balance?: number;
-  readonly payments?: (string | null)[];
-  readonly subscribedEvents?: (string | null)[];
+  readonly payments?: string;
+  readonly eventId?: string;
   constructor(init: ModelInit<User>);
   static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
 }
