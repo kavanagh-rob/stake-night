@@ -1,10 +1,12 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation, SimpleChange } from '@angular/core';
 import { Horse, Race, User } from '../../../models';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { APIService, CreateBetInput, UpdateUserInput } from 'src/app/API.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as uuid from 'uuid';
+import { BetService } from 'src/app/shared/services/bet.service';
+import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
 
 
 @Component({
@@ -26,20 +28,33 @@ export class BetPageComponent implements OnInit  {
   event: any;
 
   selectedHorse: Horse;
+  horseBetInfoList: HorseBetInfo[]; 
+
   balanceError = false;
   stakeError = false;
   raceExpiredError = false;
   buttonClicked = false;
   placingbet = false;
 
-  constructor(private modalService: NgbModal, private api: APIService) { }
+  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService) { }
 
-  form: FormGroup;
+  betForm: FormGroup;
+
+  ngOnChanges(changes: SimpleChange) {
+    if(this.currentRace){
+      this.betService.getBetInfoForRace(this.currentRace).subscribe((data) => {
+        this.horseBetInfoList = data;
+        console.log(data);
+     });
+    }
+  }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.betForm = new FormGroup({
       stake: new FormControl(null),
     });
+
+   
   }
 
   openBetModal(horse, content) {
@@ -61,7 +76,7 @@ export class BetPageComponent implements OnInit  {
     this.stakeError = false;
     this.raceExpiredError = false;
 
-    const stake = Number(this.form.get('stake').value);
+    const stake = Number(this.betForm.get('stake').value);
 
     if (!stake || isNaN(stake) || stake < 1) {
       this.stakeError = true;
@@ -107,12 +122,13 @@ export class BetPageComponent implements OnInit  {
       this.user = userUpdateRes
       const betData: CreateBetInput = {
         id: uuid.v4(),
+        raceId: this.currentRace.id,
         status: 'PENDING',
         stake: stakeInput,
         betUserId: this.user.id,
         betHorseId: this.selectedHorse.id
       };
-      console.log(this.selectedHorse);
+      console.log(betData);
 
       // submit bet
       this.api.CreateBet(betData).then(resp => {
@@ -137,7 +153,7 @@ export class BetPageComponent implements OnInit  {
   setTestData(){
     this.event.type = 'race';
     this.event.Races = [];
-    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, 
+    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, id:'001',
       Horses: [{name: 'horse1', number: 1, liveOdds: 5, raceId: '001', id: '1215'}, {name: 'horse2', number: 2, liveOdds: 0.0, raceId: '001', id: '1215'}]});    
   }
   setTwoDecimals(input){

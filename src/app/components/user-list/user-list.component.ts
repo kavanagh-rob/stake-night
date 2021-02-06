@@ -12,7 +12,7 @@ import { APIService } from 'src/app/API.service';
 export class UserListComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, private router: Router, private api: APIService) {
-    this.event = this.route.snapshot.data['resolvedEvent'];
+    this.event = this.route.parent.snapshot.data['resolvedEvent'];
   }
   event;
   users : any[];

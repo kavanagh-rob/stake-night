@@ -1,0 +1,81 @@
+<div>
+    <h4>Race List</h4>
+    <table class="table hoverTable" *ngIf="event">
+        <thead>
+            <tr>
+                <th scope="col">Race Number</th>
+                <th scope="col">Race Name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let race of sortRaceList(eventInfo.races); let i = index">
+            <tr [ngClass]="(eventInfo.currentRace && eventInfo.currentRace.raceId === race.raceId)? 'currentRace': ''">
+                <td (click)="toggleAccordian(i)">{{race.raceNumber}}</td>   
+                <td (click)="toggleAccordian(i)">{{race.name}}</td>
+                <td><button (click)="setRaceToEdit(race)" data-toggle="modal" data-target="#editRaceForm"  class="btn btn-primary">Edit Race</button></td>
+                <td><button (click)="removeRace(i)" class="btn btn-danger">Delete Race</button></td>
+                <td [hidden]="eventInfo.currentRace && eventInfo.currentRace.raceId === race.raceId"><button (click)="makeCurrentRace(race)" class="btn btn-success">Make Current Race</button></td>
+                <td [hidden]="!eventInfo.currentRace || !(eventInfo.currentRace.raceId === race.raceId)"><button (click)="clearCurrentRace()" class="btn btn-secondary">Unset Current Race</button></td>
+            </tr>
+            <tr [hidden]="!(accordianOpened === i)" class="race-accordian">
+                <td colspan="6"class="table-cell-text raceInfoTable">
+                    <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Property</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>{{race.raceId}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Number</td>
+                                    <td>{{race.raceNumber}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Race Name</td>
+                                    <td>{{race.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Payout Factor</td>
+                                    <td>{{race.payoutFactor}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Show Payout Factor</td>
+                                    <td>{{race.showPayoutFactor}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Race Card URL</td>
+                                    <td>{{race.raceCardImageUrl}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Is Active</td>
+                                    <td>{{race.isActive}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Horse Number</th>
+                                        <th scope="col">Horse Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let horse of race.horses; let j = index">
+                                        <td>{{horse.horseNumber}}</td>
+                                        <td>{{horse.name}}</td>   
+                                    </tr>
+                                </tbody>
+                            </table>
+                </td>    
+                
+            </tr>
+        </tbody>
+    </table>
+</div>

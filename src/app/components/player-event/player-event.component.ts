@@ -47,7 +47,7 @@ export class PlayerEventComponent implements OnInit {
   setTestData(){
     this.event.type = 'race';
     this.event.Races = [];
-    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, 
+    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, id: '001',
       Horses: [{name: 'horse1', number: 1, liveOdds: 5, raceId: '001', id: '1215'}, {name: 'horse2', number: 2, liveOdds: 0.0, raceId: '001', id: '1215'}]});     
   }
 
