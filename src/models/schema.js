@@ -42,7 +42,7 @@ export const schema = {
                     "name": "stake",
                     "isArray": false,
                     "type": "Float",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "Horse": {
@@ -70,6 +70,13 @@ export const schema = {
                         "connectionType": "BELONGS_TO",
                         "targetName": "betUserId"
                     }
+                },
+                "raceId": {
+                    "name": "raceId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -111,14 +118,14 @@ export const schema = {
                     "name": "number",
                     "isArray": false,
                     "type": "Int",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "name": {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "liveOdds": {
@@ -198,7 +205,7 @@ export const schema = {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "balance": {
@@ -534,5 +541,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "74d3c8e02ad169c1d48834ab7effcd85"
+    "version": "b5ce66caa1f9fbf194159d9522284891"
 };

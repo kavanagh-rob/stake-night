@@ -14,16 +14,14 @@ import { Event, User } from '../../../models';
 export class PlayerEventComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private api: APIService) {
-      this.event = this.route.snapshot.data['resolvedEvent'];
-      this.user = this.route.snapshot.data['resolvedPlayer'];
+      this.event = this.route.snapshot.data['resolvedEvent'] || this.route.parent.snapshot.data['resolvedEvent']
+      this.user = this.route.snapshot.data['resolvedPlayer'] ||  this.route.parent.snapshot.data['resolvedPlayer'] 
   }
      
   event: any;
   user: User;
 
-  // user: User;
   interval: any;
-  // eventInfo: EventInfo;
 
   totalBetValue = 100;
 

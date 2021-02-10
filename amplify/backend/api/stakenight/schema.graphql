@@ -4,15 +4,16 @@ type Bet @model @auth(rules: [{allow: public}]) {
   finalOdds: Float
   payout: Float
   status: String
-  stake: Float
+  stake: Float!
   Horse: Horse @connection
   User: User @connection
+  raceId: String!
 }
 
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   avatorUrl: String
-  name: String
+  name: String!
   balance: Float
   payments: AWSJSON
   eventId: String
@@ -25,16 +26,16 @@ type Result @model @auth(rules: [{allow: public}]) {
   totalPot: Float
 }
 
-type Horse @model @auth(rules: [{allow: public}]) @key(name: "byRace", fields: ["raceID"]) {
+type Horse @model @key(name: "byRace", fields: ["raceID"]) @auth(rules: [{allow: public}]) {
   id: ID!
-  number: Int
-  name: String
+  number: Int!
+  name: String!
   liveOdds: Float
   totalBetsForHorse: Float
   raceID: ID!
 }
 
-type Race @model @auth(rules: [{allow: public}]) @key(name: "byEvent", fields: ["eventID"]) {
+type Race @model @key(name: "byEvent", fields: ["eventID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   isActive: Boolean
   name: String

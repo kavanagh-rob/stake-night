@@ -10,9 +10,7 @@ mutation CreateBet(
     payout
     status
     stake
-    _version
-    _deleted
-    _lastChangedAt
+    raceId
     createdAt
     updatedAt
     User {
@@ -22,9 +20,6 @@ mutation CreateBet(
       balance
       payments
       eventId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -35,9 +30,6 @@ mutation CreateBet(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -54,9 +46,7 @@ mutation UpdateBet(
     payout
     status
     stake
-    _version
-    _deleted
-    _lastChangedAt
+    raceId
     createdAt
     updatedAt
     User {
@@ -66,9 +56,6 @@ mutation UpdateBet(
       balance
       payments
       eventId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -79,9 +66,6 @@ mutation UpdateBet(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -98,9 +82,7 @@ mutation DeleteBet(
     payout
     status
     stake
-    _version
-    _deleted
-    _lastChangedAt
+    raceId
     createdAt
     updatedAt
     User {
@@ -110,9 +92,6 @@ mutation DeleteBet(
       balance
       payments
       eventId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -123,9 +102,6 @@ mutation DeleteBet(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -142,9 +118,6 @@ mutation CreateUser(
     balance
     payments
     eventId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -160,9 +133,6 @@ mutation UpdateUser(
     balance
     payments
     eventId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -178,9 +148,6 @@ mutation DeleteUser(
     balance
     payments
     eventId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -193,9 +160,6 @@ mutation CreateResult(
     id
     videoUrl
     totalPot
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     WinningHorse {
@@ -205,9 +169,6 @@ mutation CreateResult(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -221,9 +182,6 @@ mutation UpdateResult(
     id
     videoUrl
     totalPot
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     WinningHorse {
@@ -233,9 +191,6 @@ mutation UpdateResult(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -249,9 +204,6 @@ mutation DeleteResult(
     id
     videoUrl
     totalPot
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     WinningHorse {
@@ -261,9 +213,6 @@ mutation DeleteResult(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -280,9 +229,6 @@ mutation CreateHorse(
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -298,9 +244,6 @@ mutation UpdateHorse(
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -316,9 +259,6 @@ mutation DeleteHorse(
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -338,24 +278,17 @@ mutation CreateRace(
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -374,24 +307,17 @@ mutation UpdateRace(
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -410,24 +336,17 @@ mutation DeleteRace(
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -442,14 +361,10 @@ mutation CreateEvent(
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -464,14 +379,10 @@ mutation UpdateEvent(
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -486,14 +397,10 @@ mutation DeleteEvent(
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }

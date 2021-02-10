@@ -29,6 +29,10 @@ import { AppComponent } from './app.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { BetPageComponent } from './components/bet-page/bet-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminEventComponent } from './components/admin-event/admin-event.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { RaceListComponent } from './components/race-list/race-list.component';
+import { RaceFormComponent } from './components/race-form/race-form.component';
 
 const appRoutes: Routes = [
 
@@ -45,6 +49,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'admin-home/:eventId',
+    component: AdminHomeComponent, 
     resolve: {
       resolvedEvent: EventsResolver
     },
@@ -58,6 +63,7 @@ const appRoutes: Routes = [
           resolvedPlayer: PlayerResolver,
         }, 
       },
+      { path: 'event', component: AdminEventComponent},
     ]
   },
   {
@@ -88,7 +94,11 @@ const appRoutes: Routes = [
     CreateUserComponent,
     PlayerHomeComponent,
     PlayerEventComponent,
-    BetPageComponent
+    BetPageComponent,
+    AdminEventComponent,
+    AdminHomeComponent,
+    RaceListComponent,
+    RaceFormComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -1,6 +1,6 @@
 <div>
     <h4>Race List</h4>
-    <table class="table hoverTable" *ngIf="event">
+    <table class="table hoverTable" *ngIf="races">
         <thead>
             <tr>
                 <th scope="col">Race Number</th>
@@ -10,14 +10,14 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody *ngFor="let race of sortRaceList(eventInfo.races); let i = index">
-            <tr [ngClass]="(eventInfo.currentRace && eventInfo.currentRace.raceId === race.raceId)? 'currentRace': ''">
-                <td (click)="toggleAccordian(i)">{{race.raceNumber}}</td>   
+        <tbody *ngFor="let race of sortRaceList(races); let i = index">
+            <tr [ngClass]="isCurrentRace(race) ? 'currentRace': ''">
+                <td (click)="toggleAccordian(i)">{{race.number}}</td>   
                 <td (click)="toggleAccordian(i)">{{race.name}}</td>
-                <td><button (click)="setRaceToEdit(race)" data-toggle="modal" data-target="#editRaceForm"  class="btn btn-primary">Edit Race</button></td>
-                <td><button (click)="removeRace(i)" class="btn btn-danger">Delete Race</button></td>
-                <td [hidden]="eventInfo.currentRace && eventInfo.currentRace.raceId === race.raceId"><button (click)="makeCurrentRace(race)" class="btn btn-success">Make Current Race</button></td>
-                <td [hidden]="!eventInfo.currentRace || !(eventInfo.currentRace.raceId === race.raceId)"><button (click)="clearCurrentRace()" class="btn btn-secondary">Unset Current Race</button></td>
+                <td><app-race-form [race]="race"></app-race-form></td>
+                <td><button (click)="deleteRace(race)" class="btn btn-danger">Delete Race</button></td>
+                <td [hidden]="isCurrentRace(race)"><button (click)="makeCurrentRace(race)" class="btn btn-success">Make Current Race</button></td>
+                <td [hidden]="!isCurrentRace(race)"><button (click)="clearCurrentRace()" class="btn btn-secondary">Unset Current Race</button></td>
             </tr>
             <tr [hidden]="!(accordianOpened === i)" class="race-accordian">
                 <td colspan="6"class="table-cell-text raceInfoTable">
@@ -31,11 +31,11 @@
                             <tbody>
                                 <tr>
                                     <td>ID</td>
-                                    <td>{{race.raceId}}</td>
+                                    <td>{{race.id}}</td>
                                 </tr>
                                 <tr>
                                     <td>Number</td>
-                                    <td>{{race.raceNumber}}</td>
+                                    <td>{{race.number}}</td>
                                 </tr>
                                 <tr>
                                     <td>Race Name</td>
@@ -67,8 +67,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let horse of race.horses; let j = index">
-                                        <td>{{horse.horseNumber}}</td>
+                                    <tr *ngFor="let horse of sortHorseList(horses); let j = index">
+                                        <td>{{horse.number}}</td>
                                         <td>{{horse.name}}</td>   
                                     </tr>
                                 </tbody>

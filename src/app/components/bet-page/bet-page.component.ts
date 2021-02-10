@@ -6,6 +6,7 @@ import { APIService, CreateBetInput, UpdateUserInput } from 'src/app/API.service
 import { FormControl, FormGroup } from '@angular/forms';
 import * as uuid from 'uuid';
 import { BetService } from 'src/app/shared/services/bet.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
 
 
@@ -36,7 +37,7 @@ export class BetPageComponent implements OnInit  {
   buttonClicked = false;
   placingbet = false;
 
-  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService) { }
+  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private userService: UserService) { }
 
   betForm: FormGroup;
 
@@ -44,7 +45,6 @@ export class BetPageComponent implements OnInit  {
     if(this.currentRace){
       this.betService.getBetInfoForRace(this.currentRace).subscribe((data) => {
         this.horseBetInfoList = data;
-        console.log(data);
      });
     }
   }
@@ -53,8 +53,6 @@ export class BetPageComponent implements OnInit  {
     this.betForm = new FormGroup({
       stake: new FormControl(null),
     });
-
-   
   }
 
   openBetModal(horse, content) {
@@ -108,35 +106,31 @@ export class BetPageComponent implements OnInit  {
     }
     this.placingbet = true;
     
-    const updateUser: UpdateUserInput = {
-      id : this.user.id,
-      balance : this.setTwoDecimals(Number(this.user.balance) - Number(stakeInput)),
-      name: this.user.name,
-      payments:  this.user.payments,
-      eventId: this.user.eventId,
-      avatorUrl: 'https://www.disneyclips.com/images/images/donald-duck25.png',
-      _version: this.user['_version']
-    };
+    const updatedUser = { ...this.user }
+    updatedUser.balance = this.setTwoDecimals(Number(this.user.balance) - Number(stakeInput));
 
-    this.api.UpdateUser(updateUser).then(userUpdateRes => {
+    this.userService.updateUser(updatedUser).then(userUpdateRes => {
       this.user = userUpdateRes
-      const betData: CreateBetInput = {
-        id: uuid.v4(),
-        raceId: this.currentRace.id,
-        status: 'PENDING',
-        stake: stakeInput,
-        betUserId: this.user.id,
-        betHorseId: this.selectedHorse.id
-      };
-      console.log(betData);
 
+      const createBetInput = this.createNewBetModel(stakeInput);
       // submit bet
-      this.api.CreateBet(betData).then(resp => {
+      this.api.CreateBet(createBetInput).then(resp => {
         document.getElementById('closeBetFormButton').click();
         location.reload();
       });
 
     });
+  }
+
+  createNewBetModel(stakeInput): CreateBetInput{
+    return {
+      id: uuid.v4(),
+      raceId: this.currentRace.id,
+      status: 'PENDING',
+      stake: stakeInput,
+      betUserId: this.user.id,
+      betHorseId: this.selectedHorse.id
+    };
   }
 
   getCurrentRace(){

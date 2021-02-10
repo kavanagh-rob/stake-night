@@ -10,17 +10,18 @@ export declare class Bet {
   readonly finalOdds?: number;
   readonly payout?: number;
   readonly status?: string;
-  readonly stake?: number;
+  readonly stake: number;
   readonly Horse?: Horse;
   readonly User?: User;
+  readonly raceId: string;
   constructor(init: ModelInit<Bet>);
   static copyOf(source: Bet, mutator: (draft: MutableModel<Bet>) => MutableModel<Bet> | void): Bet;
 }
 
 export declare class Horse {
   readonly id: string;
-  readonly number?: number;
-  readonly name?: string;
+  readonly number: number;
+  readonly name: string;
   readonly liveOdds?: number;
   readonly totalBetsForHorse?: number;
   readonly raceID: string;
@@ -31,7 +32,7 @@ export declare class Horse {
 export declare class User {
   readonly id: string;
   readonly avatorUrl?: string;
-  readonly name?: string;
+  readonly name: string;
   readonly balance?: number;
   readonly payments?: string;
   readonly eventId?: string;

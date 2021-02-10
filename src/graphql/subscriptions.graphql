@@ -7,9 +7,7 @@ subscription OnCreateBet {
     payout
     status
     stake
-    _version
-    _deleted
-    _lastChangedAt
+    raceId
     createdAt
     updatedAt
     User {
@@ -19,9 +17,6 @@ subscription OnCreateBet {
       balance
       payments
       eventId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -32,9 +27,6 @@ subscription OnCreateBet {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -48,9 +40,7 @@ subscription OnUpdateBet {
     payout
     status
     stake
-    _version
-    _deleted
-    _lastChangedAt
+    raceId
     createdAt
     updatedAt
     User {
@@ -60,9 +50,6 @@ subscription OnUpdateBet {
       balance
       payments
       eventId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -73,9 +60,6 @@ subscription OnUpdateBet {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -89,9 +73,7 @@ subscription OnDeleteBet {
     payout
     status
     stake
-    _version
-    _deleted
-    _lastChangedAt
+    raceId
     createdAt
     updatedAt
     User {
@@ -101,9 +83,6 @@ subscription OnDeleteBet {
       balance
       payments
       eventId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -114,9 +93,6 @@ subscription OnDeleteBet {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -130,9 +106,6 @@ subscription OnCreateUser {
     balance
     payments
     eventId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -145,9 +118,6 @@ subscription OnUpdateUser {
     balance
     payments
     eventId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -160,9 +130,6 @@ subscription OnDeleteUser {
     balance
     payments
     eventId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -172,9 +139,6 @@ subscription OnCreateResult {
     id
     videoUrl
     totalPot
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     WinningHorse {
@@ -184,9 +148,6 @@ subscription OnCreateResult {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -197,9 +158,6 @@ subscription OnUpdateResult {
     id
     videoUrl
     totalPot
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     WinningHorse {
@@ -209,9 +167,6 @@ subscription OnUpdateResult {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -222,9 +177,6 @@ subscription OnDeleteResult {
     id
     videoUrl
     totalPot
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     WinningHorse {
@@ -234,9 +186,6 @@ subscription OnDeleteResult {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -250,9 +199,6 @@ subscription OnCreateHorse {
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -265,9 +211,6 @@ subscription OnUpdateHorse {
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -280,9 +223,6 @@ subscription OnDeleteHorse {
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -299,24 +239,17 @@ subscription OnCreateRace {
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -332,24 +265,17 @@ subscription OnUpdateRace {
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -365,24 +291,17 @@ subscription OnDeleteRace {
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -394,14 +313,10 @@ subscription OnCreateEvent {
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -413,14 +328,10 @@ subscription OnUpdateEvent {
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -432,14 +343,10 @@ subscription OnDeleteEvent {
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }

@@ -15,8 +15,8 @@ export type CreateBetInput = {
   finalOdds?: number | null;
   payout?: number | null;
   status?: string | null;
-  stake?: number | null;
-  _version?: number | null;
+  stake: number;
+  raceId: string;
   betHorseId?: string | null;
   betUserId?: string | null;
 };
@@ -27,6 +27,7 @@ export type ModelBetConditionInput = {
   payout?: ModelFloatInput | null;
   status?: ModelStringInput | null;
   stake?: ModelFloatInput | null;
+  raceId?: ModelStringInput | null;
   and?: Array<ModelBetConditionInput | null> | null;
   or?: Array<ModelBetConditionInput | null> | null;
   not?: ModelBetConditionInput | null;
@@ -97,24 +98,22 @@ export type UpdateBetInput = {
   payout?: number | null;
   status?: string | null;
   stake?: number | null;
-  _version?: number | null;
+  raceId?: string | null;
   betHorseId?: string | null;
   betUserId?: string | null;
 };
 
 export type DeleteBetInput = {
   id?: string | null;
-  _version?: number | null;
 };
 
 export type CreateUserInput = {
   id?: string | null;
   avatorUrl?: string | null;
-  name?: string | null;
+  name: string;
   balance?: number | null;
   payments?: string | null;
   eventId?: string | null;
-  _version?: number | null;
 };
 
 export type ModelUserConditionInput = {
@@ -135,19 +134,16 @@ export type UpdateUserInput = {
   balance?: number | null;
   payments?: string | null;
   eventId?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteUserInput = {
   id?: string | null;
-  _version?: number | null;
 };
 
 export type CreateResultInput = {
   id?: string | null;
   videoUrl?: string | null;
   totalPot?: number | null;
-  _version?: number | null;
   resultWinningHorseId?: string | null;
 };
 
@@ -163,23 +159,20 @@ export type UpdateResultInput = {
   id: string;
   videoUrl?: string | null;
   totalPot?: number | null;
-  _version?: number | null;
   resultWinningHorseId?: string | null;
 };
 
 export type DeleteResultInput = {
   id?: string | null;
-  _version?: number | null;
 };
 
 export type CreateHorseInput = {
   id?: string | null;
-  number?: number | null;
-  name?: string | null;
+  number: number;
+  name: string;
   liveOdds?: number | null;
   totalBetsForHorse?: number | null;
   raceID: string;
-  _version?: number | null;
 };
 
 export type ModelHorseConditionInput = {
@@ -228,12 +221,10 @@ export type UpdateHorseInput = {
   liveOdds?: number | null;
   totalBetsForHorse?: number | null;
   raceID?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteHorseInput = {
   id?: string | null;
-  _version?: number | null;
 };
 
 export type CreateRaceInput = {
@@ -247,7 +238,6 @@ export type CreateRaceInput = {
   showPayoutFactor?: boolean | null;
   eventID: string;
   isCurrentRace?: boolean | null;
-  _version?: number | null;
   raceResultId?: string | null;
 };
 
@@ -277,13 +267,11 @@ export type UpdateRaceInput = {
   showPayoutFactor?: boolean | null;
   eventID?: string | null;
   isCurrentRace?: boolean | null;
-  _version?: number | null;
   raceResultId?: string | null;
 };
 
 export type DeleteRaceInput = {
   id?: string | null;
-  _version?: number | null;
 };
 
 export type CreateEventInput = {
@@ -293,7 +281,6 @@ export type CreateEventInput = {
   name?: string | null;
   organiser?: string | null;
   type?: string | null;
-  _version?: number | null;
 };
 
 export type ModelEventConditionInput = {
@@ -314,12 +301,10 @@ export type UpdateEventInput = {
   name?: string | null;
   organiser?: string | null;
   type?: string | null;
-  _version?: number | null;
 };
 
 export type DeleteEventInput = {
   id?: string | null;
-  _version?: number | null;
 };
 
 export type ModelBetFilterInput = {
@@ -329,6 +314,7 @@ export type ModelBetFilterInput = {
   payout?: ModelFloatInput | null;
   status?: ModelStringInput | null;
   stake?: ModelFloatInput | null;
+  raceId?: ModelStringInput | null;
   and?: Array<ModelBetFilterInput | null> | null;
   or?: Array<ModelBetFilterInput | null> | null;
   not?: ModelBetFilterInput | null;
@@ -402,37 +388,29 @@ export type CreateBetMutation = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -445,37 +423,29 @@ export type UpdateBetMutation = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -488,37 +458,29 @@ export type DeleteBetMutation = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -528,13 +490,10 @@ export type CreateUserMutation = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -543,13 +502,10 @@ export type UpdateUserMutation = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -558,13 +514,10 @@ export type DeleteUserMutation = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -574,22 +527,16 @@ export type CreateResultMutation = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -600,22 +547,16 @@ export type UpdateResultMutation = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -626,22 +567,16 @@ export type DeleteResultMutation = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -650,14 +585,11 @@ export type DeleteResultMutation = {
 export type CreateHorseMutation = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -665,14 +597,11 @@ export type CreateHorseMutation = {
 export type UpdateHorseMutation = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -680,14 +609,11 @@ export type UpdateHorseMutation = {
 export type DeleteHorseMutation = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -704,9 +630,6 @@ export type CreateRaceMutation = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -714,16 +637,12 @@ export type CreateRaceMutation = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -739,9 +658,6 @@ export type UpdateRaceMutation = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -749,16 +665,12 @@ export type UpdateRaceMutation = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -774,9 +686,6 @@ export type DeleteRaceMutation = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -784,16 +693,12 @@ export type DeleteRaceMutation = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -805,15 +710,11 @@ export type CreateEventMutation = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -825,15 +726,11 @@ export type UpdateEventMutation = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -845,15 +742,11 @@ export type DeleteEventMutation = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -864,37 +757,29 @@ export type GetBetQuery = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -909,35 +794,12 @@ export type ListBetsQuery = {
     finalOdds: number | null;
     payout: number | null;
     status: string | null;
-    stake: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
+    stake: number;
+    raceId: string;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken: string | null;
-  startedAt: number | null;
-};
-
-export type SyncBetsQuery = {
-  __typename: "ModelBetConnection";
-  items: Array<{
-    __typename: "Bet";
-    id: string;
-    isProcessed: boolean | null;
-    finalOdds: number | null;
-    payout: number | null;
-    status: string | null;
-    stake: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type ListUsersQuery = {
@@ -946,53 +808,26 @@ export type ListUsersQuery = {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type GetUserQuery = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
-};
-
-export type SyncUsersQuery = {
-  __typename: "ModelUserConnection";
-  items: Array<{
-    __typename: "User";
-    id: string;
-    avatorUrl: string | null;
-    name: string | null;
-    balance: number | null;
-    payments: string | null;
-    eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type ListResultsQuery = {
@@ -1002,14 +837,10 @@ export type ListResultsQuery = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type GetResultQuery = {
@@ -1017,55 +848,29 @@ export type GetResultQuery = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
 };
 
-export type SyncResultsQuery = {
-  __typename: "ModelResultConnection";
-  items: Array<{
-    __typename: "Result";
-    id: string;
-    videoUrl: string | null;
-    totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-  startedAt: number | null;
-};
-
 export type GetHorseQuery = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1075,39 +880,15 @@ export type ListHorsesQuery = {
   items: Array<{
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken: string | null;
-  startedAt: number | null;
-};
-
-export type SyncHorsesQuery = {
-  __typename: "ModelHorseConnection";
-  items: Array<{
-    __typename: "Horse";
-    id: string;
-    number: number | null;
-    name: string | null;
-    liveOdds: number | null;
-    totalBetsForHorse: number | null;
-    raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type GetRaceQuery = {
@@ -1122,9 +903,6 @@ export type GetRaceQuery = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -1132,16 +910,12 @@ export type GetRaceQuery = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1159,38 +933,10 @@ export type ListRacesQuery = {
     showPayoutFactor: boolean | null;
     eventID: string;
     isCurrentRace: boolean | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken: string | null;
-  startedAt: number | null;
-};
-
-export type SyncRacesQuery = {
-  __typename: "ModelRaceConnection";
-  items: Array<{
-    __typename: "Race";
-    id: string;
-    isActive: boolean | null;
-    name: string | null;
-    payoutFactor: number | null;
-    raceCardImageUrl: string | null;
-    number: string | null;
-    time: string | null;
-    showPayoutFactor: boolean | null;
-    eventID: string;
-    isCurrentRace: boolean | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type GetEventQuery = {
@@ -1201,15 +947,11 @@ export type GetEventQuery = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1223,34 +965,10 @@ export type ListEventsQuery = {
     name: string | null;
     organiser: string | null;
     type: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   nextToken: string | null;
-  startedAt: number | null;
-};
-
-export type SyncEventsQuery = {
-  __typename: "ModelEventConnection";
-  items: Array<{
-    __typename: "Event";
-    id: string;
-    date: string | null;
-    eventImage: string | null;
-    name: string | null;
-    organiser: string | null;
-    type: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-  startedAt: number | null;
 };
 
 export type OnCreateBetSubscription = {
@@ -1260,37 +978,29 @@ export type OnCreateBetSubscription = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1303,37 +1013,29 @@ export type OnUpdateBetSubscription = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1346,37 +1048,29 @@ export type OnDeleteBetSubscription = {
   finalOdds: number | null;
   payout: number | null;
   status: string | null;
-  stake: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
+  stake: number;
+  raceId: string;
   createdAt: string;
   updatedAt: string;
   User: {
     __typename: "User";
     id: string;
     avatorUrl: string | null;
-    name: string | null;
+    name: string;
     balance: number | null;
     payments: string | null;
     eventId: string | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1386,13 +1080,10 @@ export type OnCreateUserSubscription = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1401,13 +1092,10 @@ export type OnUpdateUserSubscription = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1416,13 +1104,10 @@ export type OnDeleteUserSubscription = {
   __typename: "User";
   id: string;
   avatorUrl: string | null;
-  name: string | null;
+  name: string;
   balance: number | null;
   payments: string | null;
   eventId: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1432,22 +1117,16 @@ export type OnCreateResultSubscription = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1458,22 +1137,16 @@ export type OnUpdateResultSubscription = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1484,22 +1157,16 @@ export type OnDeleteResultSubscription = {
   id: string;
   videoUrl: string | null;
   totalPot: number | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   WinningHorse: {
     __typename: "Horse";
     id: string;
-    number: number | null;
-    name: string | null;
+    number: number;
+    name: string;
     liveOdds: number | null;
     totalBetsForHorse: number | null;
     raceID: string;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1508,14 +1175,11 @@ export type OnDeleteResultSubscription = {
 export type OnCreateHorseSubscription = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1523,14 +1187,11 @@ export type OnCreateHorseSubscription = {
 export type OnUpdateHorseSubscription = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1538,14 +1199,11 @@ export type OnUpdateHorseSubscription = {
 export type OnDeleteHorseSubscription = {
   __typename: "Horse";
   id: string;
-  number: number | null;
-  name: string | null;
+  number: number;
+  name: string;
   liveOdds: number | null;
   totalBetsForHorse: number | null;
   raceID: string;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -1562,9 +1220,6 @@ export type OnCreateRaceSubscription = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -1572,16 +1227,12 @@ export type OnCreateRaceSubscription = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1597,9 +1248,6 @@ export type OnUpdateRaceSubscription = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -1607,16 +1255,12 @@ export type OnUpdateRaceSubscription = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1632,9 +1276,6 @@ export type OnDeleteRaceSubscription = {
   showPayoutFactor: boolean | null;
   eventID: string;
   isCurrentRace: boolean | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Result: {
@@ -1642,16 +1283,12 @@ export type OnDeleteRaceSubscription = {
     id: string;
     videoUrl: string | null;
     totalPot: number | null;
-    _version: number;
-    _deleted: boolean | null;
-    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
   } | null;
   Horses: {
     __typename: "ModelHorseConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1663,15 +1300,11 @@ export type OnCreateEventSubscription = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1683,15 +1316,11 @@ export type OnUpdateEventSubscription = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1703,15 +1332,11 @@ export type OnDeleteEventSubscription = {
   name: string | null;
   organiser: string | null;
   type: string | null;
-  _version: number;
-  _deleted: boolean | null;
-  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   Races: {
     __typename: "ModelRaceConnection";
     nextToken: string | null;
-    startedAt: number | null;
   } | null;
 };
 
@@ -1732,9 +1357,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -1745,9 +1368,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1759,9 +1379,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1791,9 +1408,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -1804,9 +1419,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1818,9 +1430,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1850,9 +1459,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -1863,9 +1470,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1877,9 +1481,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1909,9 +1510,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1940,9 +1538,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1971,9 +1566,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1999,9 +1591,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -2012,9 +1601,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2041,9 +1627,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -2054,9 +1637,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2083,9 +1663,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -2096,9 +1673,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2128,9 +1702,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2159,9 +1730,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2190,9 +1758,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2225,9 +1790,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -2235,16 +1797,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -2276,9 +1834,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -2286,16 +1841,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -2327,9 +1878,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -2337,16 +1885,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -2374,15 +1918,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -2410,15 +1950,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -2446,15 +1982,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -2479,9 +2011,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -2492,9 +2022,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2506,9 +2033,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2538,14 +2062,11 @@ export class APIService {
             payout
             status
             stake
-            _version
-            _deleted
-            _lastChangedAt
+            raceId
             createdAt
             updatedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2563,51 +2084,6 @@ export class APIService {
     )) as any;
     return <ListBetsQuery>response.data.listBets;
   }
-  async SyncBets(
-    filter?: ModelBetFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncBetsQuery> {
-    const statement = `query SyncBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncBets(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
-          __typename
-          items {
-            __typename
-            id
-            isProcessed
-            finalOdds
-            payout
-            status
-            stake
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncBetsQuery>response.data.syncBets;
-  }
   async ListUsers(
     filter?: ModelUserFilterInput,
     limit?: number,
@@ -2624,14 +2100,10 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2659,9 +2131,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2673,51 +2142,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetUserQuery>response.data.getUser;
-  }
-  async SyncUsers(
-    filter?: ModelUserFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncUsersQuery> {
-    const statement = `query SyncUsers($filter: ModelUserFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncUsers(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
-          __typename
-          items {
-            __typename
-            id
-            avatorUrl
-            name
-            balance
-            payments
-            eventId
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncUsersQuery>response.data.syncUsers;
   }
   async ListResults(
     filter?: ModelResultFilterInput,
@@ -2732,14 +2156,10 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2764,9 +2184,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -2777,9 +2194,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2793,48 +2207,6 @@ export class APIService {
     )) as any;
     return <GetResultQuery>response.data.getResult;
   }
-  async SyncResults(
-    filter?: ModelResultFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncResultsQuery> {
-    const statement = `query SyncResults($filter: ModelResultFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncResults(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
-          __typename
-          items {
-            __typename
-            id
-            videoUrl
-            totalPot
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncResultsQuery>response.data.syncResults;
-  }
   async GetHorse(id: string): Promise<GetHorseQuery> {
     const statement = `query GetHorse($id: ID!) {
         getHorse(id: $id) {
@@ -2845,9 +2217,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2876,14 +2245,10 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2901,51 +2266,6 @@ export class APIService {
     )) as any;
     return <ListHorsesQuery>response.data.listHorses;
   }
-  async SyncHorses(
-    filter?: ModelHorseFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncHorsesQuery> {
-    const statement = `query SyncHorses($filter: ModelHorseFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncHorses(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
-          __typename
-          items {
-            __typename
-            id
-            number
-            name
-            liveOdds
-            totalBetsForHorse
-            raceID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncHorsesQuery>response.data.syncHorses;
-  }
   async GetRace(id: string): Promise<GetRaceQuery> {
     const statement = `query GetRace($id: ID!) {
         getRace(id: $id) {
@@ -2960,9 +2280,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -2970,16 +2287,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -3011,14 +2324,10 @@ export class APIService {
             showPayoutFactor
             eventID
             isCurrentRace
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -3036,55 +2345,6 @@ export class APIService {
     )) as any;
     return <ListRacesQuery>response.data.listRaces;
   }
-  async SyncRaces(
-    filter?: ModelRaceFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncRacesQuery> {
-    const statement = `query SyncRaces($filter: ModelRaceFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncRaces(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
-          __typename
-          items {
-            __typename
-            id
-            isActive
-            name
-            payoutFactor
-            raceCardImageUrl
-            number
-            time
-            showPayoutFactor
-            eventID
-            isCurrentRace
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncRacesQuery>response.data.syncRaces;
-  }
   async GetEvent(id: string): Promise<GetEventQuery> {
     const statement = `query GetEvent($id: ID!) {
         getEvent(id: $id) {
@@ -3095,15 +2355,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`;
@@ -3131,14 +2387,10 @@ export class APIService {
             name
             organiser
             type
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           nextToken
-          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -3156,51 +2408,6 @@ export class APIService {
     )) as any;
     return <ListEventsQuery>response.data.listEvents;
   }
-  async SyncEvents(
-    filter?: ModelEventFilterInput,
-    limit?: number,
-    nextToken?: string,
-    lastSync?: number
-  ): Promise<SyncEventsQuery> {
-    const statement = `query SyncEvents($filter: ModelEventFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncEvents(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
-          __typename
-          items {
-            __typename
-            id
-            date
-            eventImage
-            name
-            organiser
-            type
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          nextToken
-          startedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    if (lastSync) {
-      gqlAPIServiceArguments.lastSync = lastSync;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SyncEventsQuery>response.data.syncEvents;
-  }
   OnCreateBetListener: Observable<
     SubscriptionResponse<OnCreateBetSubscription>
   > = API.graphql(
@@ -3214,9 +2421,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -3227,9 +2432,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3241,9 +2443,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3265,9 +2464,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -3278,9 +2475,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3292,9 +2486,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3316,9 +2507,7 @@ export class APIService {
           payout
           status
           stake
-          _version
-          _deleted
-          _lastChangedAt
+          raceId
           createdAt
           updatedAt
           User {
@@ -3329,9 +2518,6 @@ export class APIService {
             balance
             payments
             eventId
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3343,9 +2529,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3367,9 +2550,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3390,9 +2570,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3413,9 +2590,6 @@ export class APIService {
           balance
           payments
           eventId
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3433,9 +2607,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -3446,9 +2617,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3467,9 +2635,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -3480,9 +2645,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3501,9 +2663,6 @@ export class APIService {
           id
           videoUrl
           totalPot
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           WinningHorse {
@@ -3514,9 +2673,6 @@ export class APIService {
             liveOdds
             totalBetsForHorse
             raceID
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3538,9 +2694,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3561,9 +2714,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3584,9 +2734,6 @@ export class APIService {
           liveOdds
           totalBetsForHorse
           raceID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3611,9 +2758,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -3621,16 +2765,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`
@@ -3654,9 +2794,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -3664,16 +2801,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`
@@ -3697,9 +2830,6 @@ export class APIService {
           showPayoutFactor
           eventID
           isCurrentRace
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Result {
@@ -3707,16 +2837,12 @@ export class APIService {
             id
             videoUrl
             totalPot
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           Horses {
             __typename
             nextToken
-            startedAt
           }
         }
       }`
@@ -3736,15 +2862,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`
@@ -3764,15 +2886,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`
@@ -3792,15 +2910,11 @@ export class APIService {
           name
           organiser
           type
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           Races {
             __typename
             nextToken
-            startedAt
           }
         }
       }`

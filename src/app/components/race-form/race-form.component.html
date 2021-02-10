@@ -1,16 +1,16 @@
-<button class="btn btn-primary" (click)="createRaceModal(raceModalContent)">Create Race</button>
+<button class="btn btn-primary" (click)="createRaceModal(raceModalContent)">{{buttonText}}</button>
 
 <ng-template #raceModalContent let-modal>
     <div class="modal-dialog-container" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-              <h3 class="modal-title w-100 font-weight-bold">Add Race</h3>
+              <h3 class="modal-title w-100 font-weight-bold">{{buttonText}}</h3>
               <button type="button" id="closeUpdateRaceFormButton"  class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body mx-3">
-                <form [formGroup]="raceForm" class="raceForm">
+                <form [formGroup]="raceForm" class="raceForm"  (ngSubmit)="submitRace()">
                     <div>
                         <mat-form-field [style.width.px]="256">
                             <mat-label data-error="wrong" data-success="right" for="name"><span>Race Name</span></mat-label>
@@ -22,21 +22,21 @@
                         </mat-form-field>
                         <mat-form-field [style.width.px]="256">
                             <mat-label data-error="wrong" data-success="right" for="raceCardImageUrl"><span>Race Card Image URL</span></mat-label>
-                            <input matInput formControlName="raceCardImageUrl" name="raceCardImageUrl" type="textbox" id="raceCardImageUrl" class="form-control validate" required >
+                            <input matInput formControlName="raceCardImageUrl" name="raceCardImageUrl" type="textbox" id="raceCardImageUrl" class="form-control validate" >
                         </mat-form-field>
                         <mat-form-field [style.width.px]="256">
                             <mat-label data-error="wrong" data-success="right" for="payoutFactor"><span>Payout Factor (between 0 and 1)</span></mat-label>
-                            <input matInput formControlName="payoutFactor" name="payoutFactor" type="number" id="payoutFactor" class="form-control validate" required >
+                            <input matInput formControlName="payoutFactor" name="payoutFactor" type="number" id="payoutFactor" class="form-control validate" >
                         </mat-form-field>
                         <mat-form-field [style.width.px]="256">
                             <mat-label data-error="wrong" data-success="right" for="time"><span>Race Time</span></mat-label>
-                            <input matInput formControlName="time" name="time" type="textbox" id="time" class="form-control validate" required >
+                            <input matInput formControlName="time" name="time" type="textbox" id="time" class="form-control validate" >
                         </mat-form-field>
                     </div>
 
                     <h3 class="modal-title w-100 font-weight-bold">Horses</h3>
                     <br/>
-                    <div formArrayName="horses"  *ngFor="let horse of raceForm.get('horses')['controls']; let i=index">
+                    <div formArrayName="horses"  *ngFor="let horse of horseFormArray['controls']; let i=index">
                         Horse {{i+1}}
                         <div [formGroupName]="i">
                             <mat-form-field class="horse-input-name mr-4">
@@ -52,11 +52,11 @@
                     </div>
             
                     <div class="row">
-                        <button type="button" (click)="addHorse()" class="btn btn-primary offset-md-3 col-md-6">Add Horse</button>
+                        <button type="button" (click)="addNewHorse()" class="btn btn-primary offset-md-4 col-md-4">Add Horse</button>
                     </div>
 
-                    <div class="buttonbar">
-                        <button mat-raised-button color="primary" (click)="addRace();">Add Race</button>
+                    <div class="form-group">
+                        <button  mat-raised-button color="primary" type="submit" class="btn btn-success offset-md-3 col-md-6 mt-3">Submit Race</button>
                     </div>
                 </form>
              
