@@ -1,3 +1,4 @@
+
 .dark-modal .modal-content {
     background-color: #292b2c;
     color: white;
@@ -11,4 +12,8 @@
 
 .betForm{
     text-align: center;
+}
+
+.runningGif{
+    height: 60px;
 }

@@ -359,7 +359,7 @@ export const schema = {
                 "number": {
                     "name": "number",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -541,5 +541,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "b5ce66caa1f9fbf194159d9522284891"
+    "version": "cbf9243f085057e8e94dc53d6200fcc8"
 };

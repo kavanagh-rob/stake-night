@@ -40,7 +40,6 @@ export class RaceListComponent implements OnInit {
     }
   }
 
-
   toggleAccordian(index) {
     this.accordianOpened = this.accordianOpened === index ? -1 : index;
     this.api.ListHorses({ raceID: { eq: this.races[index].id } }).then(res => { 

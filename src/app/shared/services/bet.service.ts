@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { APIService, CreateBetInput } from 'src/app/API.service';
+import { APICustomService } from 'src/app/API-Custom.service';
 import { Bet, Horse, Race } from 'src/models';
 import { HorseBetInfo } from '../interfaces/horse-bet-info-interface';
 
@@ -9,17 +10,33 @@ import { HorseBetInfo } from '../interfaces/horse-bet-info-interface';
 })
 export class BetService {
 
-  constructor(private api: APIService) { }
+  constructor(private api: APIService, private customApi: APICustomService) { }
 
   totalBetValue;
-  subscriber: Subscriber<HorseBetInfo[]>;
+  betInfoSubscriber: Subscriber<HorseBetInfo[]>;
+  betTotalSubscriber: Subscriber<number>;
+
   horseBetInfoArray: HorseBetInfo[] = [];
 
   getBetInfoForRace(currentRace: Race): Observable <HorseBetInfo[]>{
     return new Observable(subscriber => {
-      this.subscriber = subscriber;
-      this.api.ListBets({ raceId: { eq: currentRace.id } }).then(listBetsRes => { // Success
+      this.betInfoSubscriber = subscriber;
+      this.customApi.ListBetsWithHorseInfo({ raceId: { eq: currentRace.id } }).then(listBetsRes => { // Success
         this.calculateBetTotals(currentRace, listBetsRes.items);
+      });
+    });
+  }
+
+  getTotalPotForRace(currentRace: Race): Observable <number>{
+    return new Observable(subscriber => {
+      this.betTotalSubscriber = subscriber;
+      this.api.ListBets({ raceId: { eq: currentRace.id } }).then(listBetsRes => { // Success
+        let count = 0;
+        listBetsRes.items.forEach(bet => {
+          count = count + bet.stake;
+        });
+        this.betTotalSubscriber.next(count);
+        this.betTotalSubscriber.complete();
       });
     });
   }
@@ -56,8 +73,8 @@ export class BetService {
         }
         this.getBetInfoForHorse(horse.id).liveOdds = factoredHorseOdds;
       });
-      this.subscriber.next(this.horseBetInfoArray);
-      this.subscriber.complete();
+      this.betInfoSubscriber.next(this.horseBetInfoArray);
+      this.betInfoSubscriber.complete();
   }
 
   private getBetTotalForHorse(horseId){

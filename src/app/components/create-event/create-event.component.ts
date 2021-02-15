@@ -30,6 +30,7 @@ export class CreateEventComponent implements OnInit {
   createEvent(): void {
     this.form.patchValue({
       id: uuid.v4(),
+      type: 'race',
       date: new Date().toDateString()
     })
 

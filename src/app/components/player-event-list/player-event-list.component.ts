@@ -4,11 +4,11 @@
   import { APIService } from 'src/app/API.service';
 
 @Component({
-  selector: 'app-player-home',
-  templateUrl: './player-home.component.html',
-  styleUrls: ['./player-home.component.css']
+  selector: 'app-player-event-list',
+  templateUrl: './player-event-list.component.html',
+  styleUrls: ['./player-event-list.component.css']
 })
-export class PlayerHomeComponent implements OnInit {  
+export class PlayerEventListComponent implements OnInit {  
     constructor(private route: ActivatedRoute, private router: Router, private api: APIService) {
       this.events = this.route.snapshot.data['resolvedEvents'].items;
      }

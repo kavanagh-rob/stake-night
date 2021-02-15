@@ -55,7 +55,7 @@ export declare class Race {
   readonly name?: string;
   readonly payoutFactor?: number;
   readonly raceCardImageUrl?: string;
-  readonly number?: string;
+  readonly number?: number;
   readonly time?: string;
   readonly showPayoutFactor?: boolean;
   readonly eventID: string;

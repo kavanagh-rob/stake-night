@@ -8,6 +8,7 @@ import { Event, Race, Horse } from 'src/models';
 import { RaceService } from 'src/app/shared/services/race.service';
 import { v1 as uuid } from 'uuid';
 
+
 export class HorseFormInput {
   public id : string = uuid();
   public number = 0;
@@ -82,7 +83,7 @@ export class RaceFormComponent implements OnInit {
     if (this.raceForm.valid) {
       const raceId = this.race ? this.race.id: uuid();
       const raceInput: CreateRaceInput = this.createRaceInputRequest(raceId);
-      if (!this.race || confirm('Updating a race will overwrite any existing race or horse data')) {
+      if (!this.race || confirm('Updating a race will overwrite any existing race or horse or betting data')) {
         this.updateRace(raceId, raceInput).then(() => {
           document.getElementById('closeUpdateRaceFormButton').click();
           location.reload();
@@ -114,7 +115,6 @@ export class RaceFormComponent implements OnInit {
  updateRace(raceId, raceInput){
     return new Promise((resolve, reject) => {
       if(this.race){
-        console.log(raceInput);
         this.api.UpdateRace(raceInput).then(() => {
           this.updateHorses(raceId, resolve);
         });  
@@ -144,10 +144,10 @@ export class RaceFormComponent implements OnInit {
     });
   }
 
+
   addNewHorse() {
     this.horseFormArray.push(this.createHorseFormGroup(null));
   }
-
 
 
   

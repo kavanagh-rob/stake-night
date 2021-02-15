@@ -41,7 +41,7 @@ type Race @model @key(name: "byEvent", fields: ["eventID"]) @auth(rules: [{allow
   name: String
   payoutFactor: Float
   raceCardImageUrl: String
-  number: String
+  number: Int
   time: String
   showPayoutFactor: Boolean
   eventID: ID!

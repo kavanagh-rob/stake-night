@@ -233,7 +233,7 @@ export type CreateRaceInput = {
   name?: string | null;
   payoutFactor?: number | null;
   raceCardImageUrl?: string | null;
-  number?: string | null;
+  number?: number | null;
   time?: string | null;
   showPayoutFactor?: boolean | null;
   eventID: string;
@@ -246,7 +246,7 @@ export type ModelRaceConditionInput = {
   name?: ModelStringInput | null;
   payoutFactor?: ModelFloatInput | null;
   raceCardImageUrl?: ModelStringInput | null;
-  number?: ModelStringInput | null;
+  number?: ModelIntInput | null;
   time?: ModelStringInput | null;
   showPayoutFactor?: ModelBooleanInput | null;
   eventID?: ModelIDInput | null;
@@ -262,7 +262,7 @@ export type UpdateRaceInput = {
   name?: string | null;
   payoutFactor?: number | null;
   raceCardImageUrl?: string | null;
-  number?: string | null;
+  number?: number | null;
   time?: string | null;
   showPayoutFactor?: boolean | null;
   eventID?: string | null;
@@ -359,7 +359,7 @@ export type ModelRaceFilterInput = {
   name?: ModelStringInput | null;
   payoutFactor?: ModelFloatInput | null;
   raceCardImageUrl?: ModelStringInput | null;
-  number?: ModelStringInput | null;
+  number?: ModelIntInput | null;
   time?: ModelStringInput | null;
   showPayoutFactor?: ModelBooleanInput | null;
   eventID?: ModelIDInput | null;
@@ -625,7 +625,7 @@ export type CreateRaceMutation = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
@@ -653,7 +653,7 @@ export type UpdateRaceMutation = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
@@ -681,7 +681,7 @@ export type DeleteRaceMutation = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
@@ -898,7 +898,7 @@ export type GetRaceQuery = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
@@ -928,7 +928,7 @@ export type ListRacesQuery = {
     name: string | null;
     payoutFactor: number | null;
     raceCardImageUrl: string | null;
-    number: string | null;
+    number: number | null;
     time: string | null;
     showPayoutFactor: boolean | null;
     eventID: string;
@@ -1215,7 +1215,7 @@ export type OnCreateRaceSubscription = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
@@ -1243,7 +1243,7 @@ export type OnUpdateRaceSubscription = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;
@@ -1271,7 +1271,7 @@ export type OnDeleteRaceSubscription = {
   name: string | null;
   payoutFactor: number | null;
   raceCardImageUrl: string | null;
-  number: string | null;
+  number: number | null;
   time: string | null;
   showPayoutFactor: boolean | null;
   eventID: string;

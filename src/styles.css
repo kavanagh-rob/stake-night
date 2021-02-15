@@ -39,4 +39,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .warningText {
     color: red;
   }
-  
+
+  .mat-tab-body-content{
+    overflow:inherit!important;
+}

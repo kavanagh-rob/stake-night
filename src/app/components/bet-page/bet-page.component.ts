@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import * as uuid from 'uuid';
 import { BetService } from 'src/app/shared/services/bet.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { RaceService } from 'src/app/shared/services/race.service';
 import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
 
 
@@ -37,11 +38,19 @@ export class BetPageComponent implements OnInit  {
   buttonClicked = false;
   placingbet = false;
 
-  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private userService: UserService) { }
+  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private userService: UserService, private raceService: RaceService) { }
 
   betForm: FormGroup;
 
   ngOnChanges(changes: SimpleChange) {
+    
+  }
+
+  ngOnInit(): void {
+    this.betForm = new FormGroup({
+      stake: new FormControl(null),
+    });
+
     if(this.currentRace){
       this.betService.getBetInfoForRace(this.currentRace).subscribe((data) => {
         this.horseBetInfoList = data;
@@ -49,10 +58,9 @@ export class BetPageComponent implements OnInit  {
     }
   }
 
-  ngOnInit(): void {
-    this.betForm = new FormGroup({
-      stake: new FormControl(null),
-    });
+  getLiveOdds(horse){
+    const selectHorseBetInfo = this.horseBetInfoList.filter(horseBetInfo => horseBetInfo.horseId === horse.id);
+    return  selectHorseBetInfo[0] ? selectHorseBetInfo[0].liveOdds : '';
   }
 
   openBetModal(horse, content) {
@@ -86,9 +94,9 @@ export class BetPageComponent implements OnInit  {
         this.balanceError = true;
         return;
       }
-      this.api.GetEvent(this.event.id).then(res => {
-        this.event = res;
-        this.currentRace = this.getCurrentRace();
+      this.raceService.getCurrentRace(this.event.id).then(res => {
+        //add this logic to race service
+        this.currentRace = res.items ? res.items[0]: null;
         if(this.currentRace){
           if (this.currentRace.isActive){
             this.placeBet(stake);
@@ -110,8 +118,7 @@ export class BetPageComponent implements OnInit  {
     updatedUser.balance = this.setTwoDecimals(Number(this.user.balance) - Number(stakeInput));
 
     this.userService.updateUser(updatedUser).then(userUpdateRes => {
-      this.user = userUpdateRes
-
+      this.user = userUpdateRes;
       const createBetInput = this.createNewBetModel(stakeInput);
       // submit bet
       this.api.CreateBet(createBetInput).then(resp => {
@@ -134,9 +141,9 @@ export class BetPageComponent implements OnInit  {
   }
 
   getCurrentRace(){
-    this.setTestData();
+    this.raceService
     if(this.event.Races){
-      const currentRaces: any[] = this.event.Races.filter(
+      const currentRaces: any[] = this.event.Races.items.filter(
             race => race.isCurrentRace);
       if (currentRaces.length === 1){
         	return currentRaces[0];
@@ -144,12 +151,6 @@ export class BetPageComponent implements OnInit  {
     }
   }
 
-  setTestData(){
-    this.event.type = 'race';
-    this.event.Races = [];
-    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, id:'001',
-      Horses: [{name: 'horse1', number: 1, liveOdds: 5, raceId: '001', id: '1215'}, {name: 'horse2', number: 2, liveOdds: 0.0, raceId: '001', id: '1215'}]});    
-  }
   setTwoDecimals(input){
     return Number((Math.round(Number(input) * 100) / 100).toFixed(2));
   }

@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { APIService } from 'src/app/API.service';
-import { Race } from 'src/models';
+import { APICustomService } from 'src/app/API-Custom.service';
+import { Event, Race } from 'src/models';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RaceService {
 
-  constructor(private api: APIService)  { }
+  constructor(private api: APIService, private customApi: APICustomService)  { }
+
+  
+  getCurrentRace(eventId: string) {
+    return this.customApi.ListRacesWithHorses({ eventID: { eq: eventId },  isCurrentRace: { eq: true } });
+   }
 
   deleteHorsesForRace(race: Race) {
     return new Promise((resolve, reject) => {

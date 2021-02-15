@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import { v1 as uuid } from 'uuid';
 import { APIService } from 'src/app/API.service';
 
 

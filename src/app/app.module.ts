@@ -16,8 +16,8 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
 
 
-import { PlayerHomeComponent } from './components/player-home/player-home.component';
-import { PlayerEventComponent } from './components/player-event/player-event.component';
+import { PlayerEventListComponent } from './components/player-event-list/player-event-list.component';
+import { PlayerGameHomeComponent } from './components/player-game-home/player-game-home.component';
 import { EventListComponent } from './components/event-list/event-list.component'
 import { CreateEventComponent } from './components/create-event/create-event.component';
 import { UserListComponent } from './components/user-list/user-list.component';
@@ -58,7 +58,7 @@ const appRoutes: Routes = [
       { path: 'users', component: UserListComponent },
       { 
         path: 'users/:userId',
-        component: PlayerEventComponent, 
+        component: PlayerGameHomeComponent, 
         resolve: {
           resolvedPlayer: PlayerResolver,
         }, 
@@ -68,7 +68,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'player/:userId',
-    component: PlayerHomeComponent,
+    component: PlayerEventListComponent,
     resolve: {
       resolvedPlayer: PlayerResolver,
     },
@@ -78,7 +78,7 @@ const appRoutes: Routes = [
         resolve: {
           resolvedEvent: EventsResolver
         },
-        component: PlayerEventComponent 
+        component: PlayerGameHomeComponent 
       },
     ]
   },
@@ -92,8 +92,8 @@ const appRoutes: Routes = [
     CreateEventComponent,
     UserListComponent,
     CreateUserComponent,
-    PlayerHomeComponent,
-    PlayerEventComponent,
+    PlayerGameHomeComponent,
+    PlayerEventListComponent,
     BetPageComponent,
     AdminEventComponent,
     AdminHomeComponent,

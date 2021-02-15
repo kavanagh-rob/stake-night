@@ -4,16 +4,20 @@ import {Router} from '@angular/router';
 import { v1 as uuid } from 'uuid';
 
 import { APIService } from 'src/app/API.service';
-import { Event, User } from '../../../models';
+import { Bet, Event, User } from '../../../models';
+import { RaceService } from 'src/app/shared/services/race.service';
+import { BetService } from 'src/app/shared/services/bet.service';
+import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
+
 
 @Component({
-  selector: 'app-player-event',
-  templateUrl: './player-event.component.html',
-  styleUrls: ['./player-event.component.css']
+  selector: 'app-player-game-home',
+  templateUrl: './player-game-home.component.html',
+  styleUrls: ['./player-game-home.component.css']
 })
-export class PlayerEventComponent implements OnInit {
+export class PlayerGameHomeComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private api: APIService) {
+  constructor(private route: ActivatedRoute, private router: Router, private api: APIService, private raceService: RaceService, private betService: BetService) {
       this.event = this.route.snapshot.data['resolvedEvent'] || this.route.parent.snapshot.data['resolvedEvent']
       this.user = this.route.snapshot.data['resolvedPlayer'] ||  this.route.parent.snapshot.data['resolvedPlayer'] 
   }
@@ -23,60 +27,42 @@ export class PlayerEventComponent implements OnInit {
 
   interval: any;
 
-  totalBetValue = 100;
+  totalBetValue :number;
 
   currentRace: any = null;
   nextRouletteGameInfo: any = null;
 
 
   ngOnInit(): void {
-    this.setCurrentGameInfo();
 
-    if (this.user === undefined){
-      this.router.navigate(['/pageNotFound']);
-    }
     this.refreshData();
     // this.interval = setInterval(() => {
     //     this.refreshData();
     // }, 12000);
   }
 
-  
-  setTestData(){
-    this.event.type = 'race';
-    this.event.Races = [];
-    this.event.Races.push({isCurrentRace: true, time: 'soon', number: '0', isActive: true, id: '001',
-      Horses: [{name: 'horse1', number: 1, liveOdds: 5, raceId: '001', id: '1215'}, {name: 'horse2', number: 2, liveOdds: 0.0, raceId: '001', id: '1215'}]});     
-  }
-
-  setCurrentGameInfo() {
-    if (this.event  && this.event.type === 'race'){
-        this.currentRace =  this.getCurrentRace();
-    }
-  }
-
-  getCurrentRace(){
-    if(this.event.Races){
-      const currentRaces: any[] = this.event.Races.filter(
-            race => race.isCurrentRace);
-      if (currentRaces.length === 1){
-        	return currentRaces[0];
-      }
-    }
-  }
-
-    
+     
   refreshData() {
-    this.api.GetEvent(this.event.id).then(eventResponse => {
-      this.event = eventResponse;
-      this.setTestData();
-      this.setCurrentGameInfo();
-      if (this.currentRace) {
-        // this.getCurrentBetsForRace();
+      if (this.event  && this.event.type === 'race'){
+        this.setCurrentRace();
+      }
+  }
+
+  setCurrentRace(){
+    this.raceService.getCurrentRace(this.event.id).then(raceResponse => {
+      if (raceResponse.items.length === 1){
+        this.currentRace = raceResponse.items[0];
+        this.setBetInfo(this.currentRace.id);
+       
       }
     });
+   }
+  
+  setBetInfo(raceId){
+    this.betService.getTotalPotForRace(this.currentRace).subscribe(res => {
+      this.totalBetValue = res;
+    })
   }
-
 
     
   getWinPot() {

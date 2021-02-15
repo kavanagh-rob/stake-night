@@ -21,7 +21,7 @@ export class UserService {
       name: user.name,
       balance: user.balance,
       payments: user.payments,
-      eventId: user.eventId,
+      eventId: user.eventId
     };
 
   }

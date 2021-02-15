@@ -19,13 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let horse of currentRace.Horses;">
+            <tr *ngFor="let horse of currentRace.Horses.items;">
                 <td>{{horse.number}}</td>
                 <td>{{horse.name}}</td>
-                <td>{{horse.liveOdds}}</td>
+                <td><span *ngIf="horseBetInfoList">{{getLiveOdds(horse)}}</span></td>
                 <td>
                     <button class="btn btn-primary" (click)="openBetModal(horse, content)">Bet</button>
-                    <button  [hidden]="currentRace.isActive" class="btn btn-warning"><fa-icon [icon]="faLock"></fa-icon></button>
+                    <button [hidden]="currentRace.isActive" class="btn btn-warning"><fa-icon [icon]="faLock"></fa-icon></button>
                 </td>
             </tr>
         </tbody>
