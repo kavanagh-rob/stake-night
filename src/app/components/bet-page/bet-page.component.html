@@ -19,12 +19,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let horse of currentRace.Horses.items;">
+            <tr *ngFor="let horse of sortHorsesByNumber(currentRace.Horses.items);">
                 <td>{{horse.number}}</td>
                 <td>{{horse.name}}</td>
                 <td><span *ngIf="horseBetInfoList">{{getLiveOdds(horse)}}</span></td>
                 <td>
-                    <button class="btn btn-primary" (click)="openBetModal(horse, content)">Bet</button>
+                    <button [hidden]="!currentRace.isActive" class="btn btn-primary" (click)="openBetModal(horse, content)">Bet</button>
                     <button [hidden]="currentRace.isActive" class="btn btn-warning"><fa-icon [icon]="faLock"></fa-icon></button>
                 </td>
             </tr>
@@ -41,7 +41,7 @@
           <div class="modal-header text-center">
             <div class="modal-title w-100 font-weight-bold">
                 <h3>Bet Slip</h3>
-                <h5 class="text-center w-100 font-weight-bold">Your Remaining Balance is €{{user.balance}}</h5>
+                <h5 class="text-center w-100 font-weight-bold">Your Remaining Balance is €{{playerProfile.balance}}</h5>
             </div>
             <button type="button" id="closeBetFormButton"  class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>

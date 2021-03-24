@@ -2,6 +2,7 @@
   import { Component, OnInit } from '@angular/core';
   import {Router, ActivatedRoute} from '@angular/router';
   import { APIService } from 'src/app/API.service';
+import { PlayerProfileService } from 'src/app/shared/services/player-profile.service';
 
 @Component({
   selector: 'app-player-event-list',
@@ -9,13 +10,33 @@
   styleUrls: ['./player-event-list.component.css']
 })
 export class PlayerEventListComponent implements OnInit {  
-    constructor(private route: ActivatedRoute, private router: Router, private api: APIService) {
-      this.events = this.route.snapshot.data['resolvedEvents'].items;
+    constructor(private route: ActivatedRoute, private router: Router, private api: APIService, private playerProfileService: PlayerProfileService) {
+      // this.events = this.route.snapshot.data['resolvedEvents'].items;
      }
      events:any[];
+     playerProfiles:any[];
   
     ngOnInit(): void {
+      this.loadUsers();
+   }
+
+    loadUsers() {
+      this.playerProfileService.listPlayerProfilesForCurrentUser().then(res => { // Success
+        this.playerProfiles = res.items;
+        this.getEventInfo();
+      });
     }
+    getEventInfo(){
+      this.events = [];
+      this.playerProfiles.forEach(async playerProfile => {
+        const event = await this.api.GetEvent(playerProfile.eventId);
+        if(event){
+          this.events.push(event);
+        }
+      });
+
+    }
+
   
     sortEvents(prop: string) {
       const dateProp = 'date';
@@ -29,7 +50,7 @@ export class PlayerEventListComponent implements OnInit {
     }
   
     navigateToEvent(eventId) {
-      this.router.navigateByUrl('/event-home/' + eventId);
+      this.router.navigateByUrl('/player/event/' + eventId);
     }
   
   }

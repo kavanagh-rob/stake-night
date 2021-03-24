@@ -3,27 +3,37 @@ type Bet @model @auth(rules: [{allow: public}]) {
   isProcessed: Boolean
   finalOdds: Float
   payout: Float
-  status: String
+  result: String
   stake: Float!
   Horse: Horse @connection
-  User: User @connection
   raceId: String!
+  playerProfileId: String
+  paymentStatus: String
+  raceNumber: String
+  playerName: String
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type PlayerProfile @model @auth(rules: [{allow: public}]) {
   id: ID!
   avatorUrl: String
   name: String!
   balance: Float
   payments: AWSJSON
   eventId: String
+  userId: String
 }
 
 type Result @model @auth(rules: [{allow: public}]) {
   id: ID!
-  WinningHorse: Horse @connection
   videoUrl: String
   totalPot: Float
+  eventId: String
+  raceId: String
+  finalOdds: Float
+  raceNumber: Int
+  winningHorseId: String
+  winningHorseName: String
+  winningHorseNumber: Int
 }
 
 type Horse @model @key(name: "byRace", fields: ["raceID"]) @auth(rules: [{allow: public}]) {

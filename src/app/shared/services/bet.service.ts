@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { APIService, CreateBetInput } from 'src/app/API.service';
+import { APIService, CreateBetInput, ListBetsQuery } from 'src/app/API.service';
 import { APICustomService } from 'src/app/API-Custom.service';
 import { Bet, Horse, Race } from 'src/models';
 import { HorseBetInfo } from '../interfaces/horse-bet-info-interface';
@@ -18,13 +18,44 @@ export class BetService {
 
   horseBetInfoArray: HorseBetInfo[] = [];
 
-  getBetInfoForRace(currentRace: Race): Observable <HorseBetInfo[]>{
+  updateBet(bet) {
+    const updatedRace = this.copyBetModel(bet);
+    return this.api.UpdateRace(updatedRace);
+  }
+
+  copyBetModel(bet: Bet): Bet {
+    return {
+      id: bet.id,
+      isProcessed: bet.isProcessed,
+      finalOdds: bet.finalOdds,
+      payout: bet.payout,
+      result: bet.result,
+      stake: bet.stake,
+      raceId: bet.raceId,
+      playerProfileId: bet.playerProfileId,
+      playerName: bet.playerName,
+      paymentStatus: bet.paymentStatus,
+      raceNumber: bet.raceNumber,
+      Horse: bet.Horse
+    };
+
+  }
+
+  getBetsForRaceByUser(raceId: string, playerProfileId: string): Promise<ListBetsQuery>{
+      return this.customApi.ListBetsWithHorseInfo({ raceId: { eq: raceId },  playerProfileId: { eq: playerProfileId }  });
+  }
+
+  getBetInfoForRace(race: Race): Observable <HorseBetInfo[]>{
     return new Observable(subscriber => {
       this.betInfoSubscriber = subscriber;
-      this.customApi.ListBetsWithHorseInfo({ raceId: { eq: currentRace.id } }).then(listBetsRes => { // Success
-        this.calculateBetTotals(currentRace, listBetsRes.items);
+      this.customApi.ListBetsWithHorseInfo({ raceId: { eq: race.id } }).then(listBetsRes => { // Success
+        this.calculateBetTotals(race, listBetsRes.items);
       });
     });
+  }
+
+  listBetWithHorses(raceId: string){
+    return this.customApi.ListBetsWithHorseInfo({ raceId: { eq: raceId } });
   }
 
   getTotalPotForRace(currentRace: Race): Observable <number>{

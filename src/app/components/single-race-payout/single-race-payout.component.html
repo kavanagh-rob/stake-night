@@ -1,0 +1,37 @@
+<div [hidden]="!resultsError" class="box-msg" role="alert">
+    <h4 class="warningText"><strong>Warning!</strong> Result not set property for Race</h4>
+</div>
+
+<div [hidden]="resultsError" class="box-msg" role="alert">
+    <h4 class="successText"><strong>Ready!</strong> A Result has been Set for this race</h4>
+</div>
+<h4>Race {{race.number}} </h4>
+<table class="table hoverTable">
+        <thead>
+            <tr>
+                <th scope="col">Race Number</th>
+                <th scope="col">User Id</th>
+                <th scope="col">Horse Name</th>
+                <th scope="col">Horse No.</th>
+                <th scope="col">Stake</th>
+                <th scope="col">Odds</th>
+                <th scope="col">Result</th>
+                <th scope="col">Value</th>
+                <th scope="col">Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bet of betsForRace;" [ngStyle]="getBetColor(bet)">
+                <td>{{bet.raceNumber}}</td>
+                <td>{{bet.playerName}}</td>   
+                <td>{{bet.Horse.name}}</td>
+                <td>{{bet.Horse.number}}</td>
+                <td>€{{bet.stake}}</td>
+                <td>{{bet.finalOdds}}</td>
+                <td>{{bet.result}}</td>
+                <td>€{{bet.payout}}</td>
+                <td>{{bet.paymentStatus}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button [disabled]="clicked" (click)="processBetsForRace(); clicked = true;"  class="btn btn-primary">Process Bets for Race {{race.number}}</button> 

@@ -8,21 +8,18 @@ mutation CreateBet(
     isProcessed
     finalOdds
     payout
-    status
+    result
     stake
     raceId
+    playerProfileId
+    paymentStatus
+    raceNumber
+    playerName
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    User {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      createdAt
-      updatedAt
-    }
     Horse {
       id
       number
@@ -30,6 +27,9 @@ mutation CreateBet(
       liveOdds
       totalBetsForHorse
       raceID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -44,21 +44,18 @@ mutation UpdateBet(
     isProcessed
     finalOdds
     payout
-    status
+    result
     stake
     raceId
+    playerProfileId
+    paymentStatus
+    raceNumber
+    playerName
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    User {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      createdAt
-      updatedAt
-    }
     Horse {
       id
       number
@@ -66,6 +63,9 @@ mutation UpdateBet(
       liveOdds
       totalBetsForHorse
       raceID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -80,21 +80,18 @@ mutation DeleteBet(
     isProcessed
     finalOdds
     payout
-    status
+    result
     stake
     raceId
+    playerProfileId
+    paymentStatus
+    raceNumber
+    playerName
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    User {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      createdAt
-      updatedAt
-    }
     Horse {
       id
       number
@@ -102,52 +99,67 @@ mutation DeleteBet(
       liveOdds
       totalBetsForHorse
       raceID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
   }
 }
-mutation CreateUser(
-  $input: CreateUserInput!
-  $condition: ModelUserConditionInput
+mutation CreatePlayerProfile(
+  $input: CreatePlayerProfileInput!
+  $condition: ModelPlayerProfileConditionInput
 ) {
-  createUser(input: $input, condition: $condition) {
+  createPlayerProfile(input: $input, condition: $condition) {
     id
     avatorUrl
     name
     balance
     payments
     eventId
+    userId
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-mutation UpdateUser(
-  $input: UpdateUserInput!
-  $condition: ModelUserConditionInput
+mutation UpdatePlayerProfile(
+  $input: UpdatePlayerProfileInput!
+  $condition: ModelPlayerProfileConditionInput
 ) {
-  updateUser(input: $input, condition: $condition) {
+  updatePlayerProfile(input: $input, condition: $condition) {
     id
     avatorUrl
     name
     balance
     payments
     eventId
+    userId
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-mutation DeleteUser(
-  $input: DeleteUserInput!
-  $condition: ModelUserConditionInput
+mutation DeletePlayerProfile(
+  $input: DeletePlayerProfileInput!
+  $condition: ModelPlayerProfileConditionInput
 ) {
-  deleteUser(input: $input, condition: $condition) {
+  deletePlayerProfile(input: $input, condition: $condition) {
     id
     avatorUrl
     name
     balance
     payments
     eventId
+    userId
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -160,18 +172,18 @@ mutation CreateResult(
     id
     videoUrl
     totalPot
+    eventId
+    raceId
+    finalOdds
+    raceNumber
+    winningHorseId
+    winningHorseName
+    winningHorseNumber
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    WinningHorse {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      createdAt
-      updatedAt
-    }
   }
 }
 mutation UpdateResult(
@@ -182,18 +194,18 @@ mutation UpdateResult(
     id
     videoUrl
     totalPot
+    eventId
+    raceId
+    finalOdds
+    raceNumber
+    winningHorseId
+    winningHorseName
+    winningHorseNumber
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    WinningHorse {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      createdAt
-      updatedAt
-    }
   }
 }
 mutation DeleteResult(
@@ -204,18 +216,18 @@ mutation DeleteResult(
     id
     videoUrl
     totalPot
+    eventId
+    raceId
+    finalOdds
+    raceNumber
+    winningHorseId
+    winningHorseName
+    winningHorseNumber
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    WinningHorse {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      createdAt
-      updatedAt
-    }
   }
 }
 mutation CreateHorse(
@@ -229,6 +241,9 @@ mutation CreateHorse(
     liveOdds
     totalBetsForHorse
     raceID
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -244,6 +259,9 @@ mutation UpdateHorse(
     liveOdds
     totalBetsForHorse
     raceID
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -259,6 +277,9 @@ mutation DeleteHorse(
     liveOdds
     totalBetsForHorse
     raceID
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -278,17 +299,31 @@ mutation CreateRace(
     showPayoutFactor
     eventID
     isCurrentRace
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
+      eventId
+      raceId
+      finalOdds
+      raceNumber
+      winningHorseId
+      winningHorseName
+      winningHorseNumber
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
+      startedAt
     }
   }
 }
@@ -307,17 +342,31 @@ mutation UpdateRace(
     showPayoutFactor
     eventID
     isCurrentRace
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
+      eventId
+      raceId
+      finalOdds
+      raceNumber
+      winningHorseId
+      winningHorseName
+      winningHorseNumber
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
+      startedAt
     }
   }
 }
@@ -336,17 +385,31 @@ mutation DeleteRace(
     showPayoutFactor
     eventID
     isCurrentRace
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
+      eventId
+      raceId
+      finalOdds
+      raceNumber
+      winningHorseId
+      winningHorseName
+      winningHorseNumber
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
+      startedAt
     }
   }
 }
@@ -361,10 +424,14 @@ mutation CreateEvent(
     name
     organiser
     type
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
+      startedAt
     }
   }
 }
@@ -379,10 +446,14 @@ mutation UpdateEvent(
     name
     organiser
     type
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
+      startedAt
     }
   }
 }
@@ -397,10 +468,14 @@ mutation DeleteEvent(
     name
     organiser
     type
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
+      startedAt
     }
   }
 }

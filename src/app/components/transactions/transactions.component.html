@@ -1,0 +1,48 @@
+<h2> Top Ups </h2>
+<table class="table hoverTable">
+    <thead>
+        <tr>
+            <th scope="col">Player Name</th>
+            <th scope="col">Player ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let payment of sortPayments(payments);">
+            <td>{{playerProfile.name}}</td>
+            <td>{{playerProfile.userId}}</td>
+            <td>{{payment.date}}</td>
+            <td [ngStyle]="{color: 'green'}">€{{payment.amount}}</td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<h2> Bets </h2>
+<table class="table hoverTable">
+    <thead>
+        <tr>
+            <th scope="col">Race Number</th>
+            <th scope="col">Horse Name</th>
+            <th scope="col">Horse Number</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Result</th>
+            <th scope="col">SP</th>
+            <th scope="col">Return</th>
+            <th scope="col">Payment</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let bet of sortBetByRace(userBetsList);" [ngStyle]="getBetColor(bet)">
+            <td>{{bet.raceNumber}}</td>
+            <td>{{bet.Horse.name}}</td>
+            <td>{{bet.Horse.number}}</td>
+            <td>€{{bet.stake}}</td>
+            <td>{{bet.result}}</td>
+            <td>{{bet.finalOdds}}</td>
+            <td>€{{bet.payout}}</td>
+            <td>{{bet.paymentStatus}}</td>
+        </tr>
+    </tbody>
+</table>
+           

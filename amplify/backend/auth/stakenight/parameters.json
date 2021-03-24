@@ -4,23 +4,20 @@
     "resourceNameTruncated": "stakenffea6b15",
     "userPoolName": "stakenight",
     "autoVerifiedAttributes": [
-        "phone_number"
+        "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-        "SMS Text Message"
+        "TOTP"
     ],
-    "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Forgot password code: {####}",
-    "emailVerificationSubject": "Your verification code",
-    "emailVerificationMessage": "Your verification code is {####}",
+    "smsAuthenticationMessage": "message {####}",
+    "smsVerificationMessage": "Body {####}",
+    "emailVerificationSubject": "Subject {####}",
+    "emailVerificationMessage": "Body {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
-        "Requires Lowercase",
-        "Requires Numbers",
-        "Requires Symbols",
-        "Requires Uppercase"
+        "Requires Lowercase"
     ],
     "requiredAttributes": [
         "email",
@@ -28,12 +25,8 @@
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": [
-        "email"
-    ],
-    "userpoolClientReadAttributes": [
-        "email"
-    ],
+    "userpoolClientWriteAttributes": [],
+    "userpoolClientReadAttributes": [],
     "userpoolClientLambdaRole": "stakenffea6b15_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "sharedId": "ffea6b15",
@@ -62,5 +55,6 @@
     "thirdPartyAuth": false,
     "authProviders": [],
     "usernameCaseSensitive": false,
-    "dependsOn": []
+    "dependsOn": [],
+    "hostedUI": false
 }

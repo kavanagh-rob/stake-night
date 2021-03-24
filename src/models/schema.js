@@ -31,8 +31,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "status": {
-                    "name": "status",
+                "result": {
+                    "name": "result",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -58,24 +58,39 @@ export const schema = {
                         "targetName": "betHorseId"
                     }
                 },
-                "User": {
-                    "name": "User",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "betUserId"
-                    }
-                },
                 "raceId": {
                     "name": "raceId",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "playerProfileId": {
+                    "name": "playerProfileId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "paymentStatus": {
+                    "name": "paymentStatus",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "raceNumber": {
+                    "name": "raceNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "playerName": {
+                    "name": "playerName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -184,8 +199,8 @@ export const schema = {
                 }
             ]
         },
-        "User": {
-            "name": "User",
+        "PlayerProfile": {
+            "name": "PlayerProfile",
             "fields": {
                 "id": {
                     "name": "id",
@@ -228,10 +243,17 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "PlayerProfiles",
             "attributes": [
                 {
                     "type": "model",
@@ -265,19 +287,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "WinningHorse": {
-                    "name": "WinningHorse",
-                    "isArray": false,
-                    "type": {
-                        "model": "Horse"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "resultWinningHorseId"
-                    }
-                },
                 "videoUrl": {
                     "name": "videoUrl",
                     "isArray": false,
@@ -289,6 +298,55 @@ export const schema = {
                     "name": "totalPot",
                     "isArray": false,
                     "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "eventId": {
+                    "name": "eventId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "raceId": {
+                    "name": "raceId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "finalOdds": {
+                    "name": "finalOdds",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "raceNumber": {
+                    "name": "raceNumber",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "winningHorseId": {
+                    "name": "winningHorseId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "winningHorseName": {
+                    "name": "winningHorseName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "winningHorseNumber": {
+                    "name": "winningHorseNumber",
+                    "isArray": false,
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 }
@@ -541,5 +599,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "cbf9243f085057e8e94dc53d6200fcc8"
+    "version": "06f0a1c017e7cfa006b43a921de57f8b"
 };

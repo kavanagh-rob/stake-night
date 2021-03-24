@@ -40,6 +40,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: red;
   }
 
+  .successText {
+    color: green;
+  }
+
   .mat-tab-body-content{
     overflow:inherit!important;
 }

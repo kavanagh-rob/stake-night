@@ -1,12 +1,12 @@
 import { Component, Input, OnInit, OnChanges, ViewEncapsulation, SimpleChange } from '@angular/core';
-import { Horse, Race, User } from '../../../models';
+import { Horse, Race, PlayerProfile } from '../../../models';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { APIService, CreateBetInput, UpdateUserInput } from 'src/app/API.service';
+import { APIService, CreateBetInput, UpdatePlayerProfileInput } from 'src/app/API.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as uuid from 'uuid';
 import { BetService } from 'src/app/shared/services/bet.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { PlayerProfileService } from 'src/app/shared/services/player-profile.service';
 import { RaceService } from 'src/app/shared/services/race.service';
 import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
 
@@ -21,10 +21,10 @@ export class BetPageComponent implements OnInit  {
   faLock = faLock;
 
   @Input()
-  currentRace: Race;
+  currentRace: any;
 
   @Input()
-  user: User;
+  playerProfile: PlayerProfile;
 
   @Input()
   event: any;
@@ -38,7 +38,7 @@ export class BetPageComponent implements OnInit  {
   buttonClicked = false;
   placingbet = false;
 
-  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private userService: UserService, private raceService: RaceService) { }
+  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private playerProfileService: PlayerProfileService, private raceService: RaceService) { }
 
   betForm: FormGroup;
 
@@ -60,7 +60,7 @@ export class BetPageComponent implements OnInit  {
 
   getLiveOdds(horse){
     const selectHorseBetInfo = this.horseBetInfoList.filter(horseBetInfo => horseBetInfo.horseId === horse.id);
-    return  selectHorseBetInfo[0] ? selectHorseBetInfo[0].liveOdds : '';
+    return  selectHorseBetInfo[0] ? selectHorseBetInfo[0].liveOdds : null;
   }
 
   openBetModal(horse, content) {
@@ -89,8 +89,8 @@ export class BetPageComponent implements OnInit  {
       return;
     }
 
-    this.api.GetUser(this.user.id).then(res => {
-      if ( Number(this.user.balance) < Number(stake)) {
+    this.api.GetPlayerProfile(this.playerProfile.id).then(res => {
+      if ( Number(this.playerProfile.balance) < Number(stake)) {
         this.balanceError = true;
         return;
       }
@@ -114,11 +114,11 @@ export class BetPageComponent implements OnInit  {
     }
     this.placingbet = true;
     
-    const updatedUser = { ...this.user }
-    updatedUser.balance = this.setTwoDecimals(Number(this.user.balance) - Number(stakeInput));
+    const updatedPlayerProfile = { ...this.playerProfile }
+    updatedPlayerProfile.balance = this.setTwoDecimals(Number(this.playerProfile.balance) - Number(stakeInput));
 
-    this.userService.updateUser(updatedUser).then(userUpdateRes => {
-      this.user = userUpdateRes;
+    this.playerProfileService.updatePlayerProfile(updatedPlayerProfile).then(userUpdateRes => {
+      this.playerProfile = userUpdateRes;
       const createBetInput = this.createNewBetModel(stakeInput);
       // submit bet
       this.api.CreateBet(createBetInput).then(resp => {
@@ -133,9 +133,11 @@ export class BetPageComponent implements OnInit  {
     return {
       id: uuid.v4(),
       raceId: this.currentRace.id,
-      status: 'PENDING',
+      raceNumber: this.currentRace.number,
+      result: 'PENDING',
       stake: stakeInput,
-      betUserId: this.user.id,
+      playerProfileId: this.playerProfile.id,
+      playerName: this.playerProfile.name,
       betHorseId: this.selectedHorse.id
     };
   }
@@ -149,6 +151,10 @@ export class BetPageComponent implements OnInit  {
         	return currentRaces[0];
       }
     }
+  }
+
+  sortHorsesByNumber(prop: string) {
+    return this.currentRace.Horses.items ? this.currentRace.Horses.items.sort((a, b) => a['number'] - b['number']) : null;
   }
 
   setTwoDecimals(input){

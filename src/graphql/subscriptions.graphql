@@ -5,21 +5,18 @@ subscription OnCreateBet {
     isProcessed
     finalOdds
     payout
-    status
+    result
     stake
     raceId
+    playerProfileId
+    paymentStatus
+    raceNumber
+    playerName
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    User {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      createdAt
-      updatedAt
-    }
     Horse {
       id
       number
@@ -27,6 +24,9 @@ subscription OnCreateBet {
       liveOdds
       totalBetsForHorse
       raceID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -38,21 +38,18 @@ subscription OnUpdateBet {
     isProcessed
     finalOdds
     payout
-    status
+    result
     stake
     raceId
+    playerProfileId
+    paymentStatus
+    raceNumber
+    playerName
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    User {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      createdAt
-      updatedAt
-    }
     Horse {
       id
       number
@@ -60,6 +57,9 @@ subscription OnUpdateBet {
       liveOdds
       totalBetsForHorse
       raceID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -71,21 +71,18 @@ subscription OnDeleteBet {
     isProcessed
     finalOdds
     payout
-    status
+    result
     stake
     raceId
+    playerProfileId
+    paymentStatus
+    raceNumber
+    playerName
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    User {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      createdAt
-      updatedAt
-    }
     Horse {
       id
       number
@@ -93,43 +90,58 @@ subscription OnDeleteBet {
       liveOdds
       totalBetsForHorse
       raceID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
   }
 }
-subscription OnCreateUser {
-  onCreateUser {
+subscription OnCreatePlayerProfile {
+  onCreatePlayerProfile {
     id
     avatorUrl
     name
     balance
     payments
     eventId
+    userId
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateUser {
-  onUpdateUser {
+subscription OnUpdatePlayerProfile {
+  onUpdatePlayerProfile {
     id
     avatorUrl
     name
     balance
     payments
     eventId
+    userId
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteUser {
-  onDeleteUser {
+subscription OnDeletePlayerProfile {
+  onDeletePlayerProfile {
     id
     avatorUrl
     name
     balance
     payments
     eventId
+    userId
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -139,18 +151,18 @@ subscription OnCreateResult {
     id
     videoUrl
     totalPot
+    eventId
+    raceId
+    finalOdds
+    raceNumber
+    winningHorseId
+    winningHorseName
+    winningHorseNumber
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    WinningHorse {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      createdAt
-      updatedAt
-    }
   }
 }
 subscription OnUpdateResult {
@@ -158,18 +170,18 @@ subscription OnUpdateResult {
     id
     videoUrl
     totalPot
+    eventId
+    raceId
+    finalOdds
+    raceNumber
+    winningHorseId
+    winningHorseName
+    winningHorseNumber
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    WinningHorse {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      createdAt
-      updatedAt
-    }
   }
 }
 subscription OnDeleteResult {
@@ -177,18 +189,18 @@ subscription OnDeleteResult {
     id
     videoUrl
     totalPot
+    eventId
+    raceId
+    finalOdds
+    raceNumber
+    winningHorseId
+    winningHorseName
+    winningHorseNumber
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
-    WinningHorse {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      createdAt
-      updatedAt
-    }
   }
 }
 subscription OnCreateHorse {
@@ -199,6 +211,9 @@ subscription OnCreateHorse {
     liveOdds
     totalBetsForHorse
     raceID
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -211,6 +226,9 @@ subscription OnUpdateHorse {
     liveOdds
     totalBetsForHorse
     raceID
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -223,6 +241,9 @@ subscription OnDeleteHorse {
     liveOdds
     totalBetsForHorse
     raceID
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -239,17 +260,31 @@ subscription OnCreateRace {
     showPayoutFactor
     eventID
     isCurrentRace
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
+      eventId
+      raceId
+      finalOdds
+      raceNumber
+      winningHorseId
+      winningHorseName
+      winningHorseNumber
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
+      startedAt
     }
   }
 }
@@ -265,17 +300,31 @@ subscription OnUpdateRace {
     showPayoutFactor
     eventID
     isCurrentRace
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
+      eventId
+      raceId
+      finalOdds
+      raceNumber
+      winningHorseId
+      winningHorseName
+      winningHorseNumber
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
+      startedAt
     }
   }
 }
@@ -291,17 +340,31 @@ subscription OnDeleteRace {
     showPayoutFactor
     eventID
     isCurrentRace
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Result {
       id
       videoUrl
       totalPot
+      eventId
+      raceId
+      finalOdds
+      raceNumber
+      winningHorseId
+      winningHorseName
+      winningHorseNumber
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
+      startedAt
     }
   }
 }
@@ -313,10 +376,14 @@ subscription OnCreateEvent {
     name
     organiser
     type
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
+      startedAt
     }
   }
 }
@@ -328,10 +395,14 @@ subscription OnUpdateEvent {
     name
     organiser
     type
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
+      startedAt
     }
   }
 }
@@ -343,10 +414,14 @@ subscription OnDeleteEvent {
     name
     organiser
     type
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
+      startedAt
     }
   }
 }

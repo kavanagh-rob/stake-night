@@ -1,0 +1,22 @@
+<div class="signin-container">
+    <amplify-authenticator>
+        <amplify-sign-up
+          slot="sign-up"
+          header-text="Create stake knight account"
+          usernameAlias="email"
+          [formFields]="formFields">
+      </amplify-sign-up>
+        <main>
+         <mat-toolbar color="primary">
+          <span>Stake Knight Application</span>
+          <span class="fill-remaining-space"></span>
+          <span class="signincont"><amplify-sign-out></amplify-sign-out></span>
+         </mat-toolbar>
+         <div class="content">
+          <!-- <router-outlet></router-outlet> -->
+         </div>
+        </main>
+    </amplify-authenticator>
+</div>
+
+   

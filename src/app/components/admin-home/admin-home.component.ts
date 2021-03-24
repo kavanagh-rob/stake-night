@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,28 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    this.event = this.route.snapshot.data['resolvedEvent'];
+  }
+
+  event;
 
   navLinks: any[];
   activeLinkIndex = -1;
   ngOnInit(): void {
-    
-  this.navLinks = [
-    {
-        label: 'users',
-        link: './users',
-        index: 0
-    }, {
-        label: 'event',
-        link: './event',
-        index: 1
-    }, {
-        label: 'live race',
-        link: './live-race',
-        index: 2
-    }
-];
-  }
+
+    this.navLinks = [
+      {
+          label: 'players',
+          link: './players',
+          index: 0
+      }, {
+          label: 'race-list',
+          link: './race-list',
+          index: 1
+      }, 
+      {
+          label: 'set result',
+          link: './result',
+          index: 3
+      }, 
+      {
+          label: 'payout',
+          link: './payout',
+          index: 4
+      },
+      {
+          label: 'top up requests',
+          link: './top-ups',
+          index: 5
+      }
+  ];
+}
 
 
 }

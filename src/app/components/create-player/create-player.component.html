@@ -2,7 +2,7 @@
     <a class="btn btn-primary" data-toggle="modal" data-target="#createUserForm">Add Player</a>
 </div>
 
-<div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+<div class="modal fade" id="createPlayerForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body mx-3">
-        <form [formGroup]="form" class="userForm">
+        <form [formGroup]="form" class="playerForm">
             <div>
                 <mat-form-field [style.width.px]="256">
                     <mat-label><span>Name</span></mat-label>
@@ -36,7 +36,7 @@
           
           
             <div class="buttonbar">
-                <button mat-raised-button color="primary" (click)="createUser()">Create User</button>
+                <button mat-raised-button color="primary" (click)="createPlayer()">Create Player Profile</button>
             </div>
           </form>
       </div>

@@ -1,0 +1,75 @@
+<div *ngIf="currentRace">
+    <h3>Set Result for Current Race : Race {{currentRace.number}}</h3>
+    <div class="text-center">
+        <div [hidden]="!existingResultError" class="box-msg" role="alert">
+            <h4 class="warningText"><strong>Warning!</strong> A Result has already been submitted for this race</h4>
+        </div>
+        <div [hidden]="!raceActiveError" class="box-msg" role="alert">
+            <h4 class="warningText"><strong>Warning!</strong> The race is still active</h4>
+        </div>
+    </div>
+    
+    <table class="table hoverTable">
+        <thead>
+            <tr>
+                <th scope="col">Horse Number</th>
+                <th scope="col">Horse Name</th>
+                <th scope="col">Return per €</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let horse of sortHorsesByNumber(currentRace.Horses.items);" [ngStyle]="highlightRaceWinner(horse.id)">
+                <td>{{horse.number}}</td>
+                <td>{{horse.name}}</td>
+                <td>{{getOddsForHorse(horse)}}</td>
+                <td><button (click)="openSetResultModal(horse, content)"  class="btn btn-primary">Set Winner</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-dialog-container" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <div class="modal-title w-100 font-weight-bold">
+                <h3>Set Race Winner</h3>
+            </div>
+            <button type="button" id="closeSetResultFormButton" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="modal-footer d-flex justify-content-center text-center">
+                <h6 class="modal-title w-100 font-weight-bold">Confirm Results</h6>
+                <h6 class="modal-title w-100 font-weight-bold">Race Number: {{currentRace.number}}</h6>
+                <h6 class="modal-title w-100 font-weight-bold">Horse Number: {{selectedHorse.number}}</h6>
+                <h6 class="modal-title w-100 font-weight-bold">Horse Name: {{selectedHorse.name}}</h6>
+                <h6 class="modal-title w-100 font-weight-bold">Horse Odds: {{getOddsForHorse(selectedHorse)}}</h6>
+            </div>
+            <form [formGroup]="raceResultForm" class="raceResultForm" (ngSubmit)="submitRaceResults()">
+                <div>
+                    <mat-form-field [style.width.px]="256">
+                        <mat-label data-error="wrong" data-success="right" for="videoUrlInput"><span>Video Replay Url</span></mat-label>
+                        <input matInput formControlName="videoUrlInput" name="videoUrlInput" type="textbox" id="videoUrlInput" class="form-control validate" required>
+                    </mat-form-field>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" mat-raised-button color="primary" class="btn btn-dark">Submit Race Results</button>
+                </div>
+            </form>
+            <div class="text-center">
+                <div [hidden]="!existingResultError" class="box-msg" role="alert">
+                    <span class="warningText"><strong>Warning!</strong> A Result has already been submitted for this race</span>
+                </div>
+                <div [hidden]="!raceActiveError" class="box-msg" role="alert">
+                    <span class="warningText"><strong>Warning!</strong> The race is still active</span>
+                </div>
+            </div>    
+         </div>
+        
+        </div>
+      </div>
+  </ng-template>
+
+

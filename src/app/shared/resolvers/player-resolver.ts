@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { APIService } from 'src/app/API.service';
+import { APIService } from 'src/app/API.service';;
 
 
 @Injectable()
@@ -10,8 +10,8 @@ export class PlayerResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot) {
 
-    if (route.params['userId']) {
-      return  this.api.GetUser(route.params['userId'])
+    if (route.params['playerProfileId']) {
+      return  this.api.GetPlayerProfile(route.params['playerProfileId'])
     }
   }
 }

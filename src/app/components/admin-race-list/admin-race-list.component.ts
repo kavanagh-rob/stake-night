@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import { v1 as uuid } from 'uuid';
 import { APIService } from 'src/app/API.service';
 import { Race } from 'src/models';
 import { RaceService } from 'src/app/shared/services/race.service';
 
 @Component({
-  selector: 'app-race-list',
-  templateUrl: './race-list.component.html',
-  styleUrls: ['./race-list.component.css']
+  selector: 'app-admin-race-list',
+  templateUrl: './admin-race-list.component.html',
+  styleUrls: ['./admin-race-list.component.css']
 })
-export class RaceListComponent implements OnInit {
+export class AdminRaceListComponent implements OnInit {
 
   
-  constructor(private route: ActivatedRoute, private router: Router, private api: APIService, private raceService: RaceService) {
+  constructor(private route: ActivatedRoute, private api: APIService, private raceService: RaceService) {
     this.event = this.route.parent.snapshot.data['resolvedEvent'];
   }
 

@@ -9,11 +9,14 @@ export declare class Bet {
   readonly isProcessed?: boolean;
   readonly finalOdds?: number;
   readonly payout?: number;
-  readonly status?: string;
+  readonly result?: string;
   readonly stake: number;
   readonly Horse?: Horse;
-  readonly User?: User;
   readonly raceId: string;
+  readonly playerProfileId?: string;
+  readonly paymentStatus?: string;
+  readonly raceNumber?: string;
+  readonly playerName?: string;
   constructor(init: ModelInit<Bet>);
   static copyOf(source: Bet, mutator: (draft: MutableModel<Bet>) => MutableModel<Bet> | void): Bet;
 }
@@ -29,22 +32,29 @@ export declare class Horse {
   static copyOf(source: Horse, mutator: (draft: MutableModel<Horse>) => MutableModel<Horse> | void): Horse;
 }
 
-export declare class User {
+export declare class PlayerProfile {
   readonly id: string;
   readonly avatorUrl?: string;
   readonly name: string;
   readonly balance?: number;
   readonly payments?: string;
   readonly eventId?: string;
-  constructor(init: ModelInit<User>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+  readonly userId?: string;
+  constructor(init: ModelInit<PlayerProfile>);
+  static copyOf(source: PlayerProfile, mutator: (draft: MutableModel<PlayerProfile>) => MutableModel<PlayerProfile> | void): PlayerProfile;
 }
 
 export declare class Result {
   readonly id: string;
-  readonly WinningHorse?: Horse;
   readonly videoUrl?: string;
   readonly totalPot?: number;
+  readonly eventId?: string;
+  readonly raceId?: string;
+  readonly finalOdds?: number;
+  readonly raceNumber?: number;
+  readonly winningHorseId?: string;
+  readonly winningHorseName?: string;
+  readonly winningHorseNumber?: number;
   constructor(init: ModelInit<Result>);
   static copyOf(source: Result, mutator: (draft: MutableModel<Result>) => MutableModel<Result> | void): Result;
 }

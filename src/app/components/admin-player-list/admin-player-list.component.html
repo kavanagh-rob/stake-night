@@ -1,0 +1,61 @@
+<div class="playerListBody">
+      <br/>
+      <h3>Available Punters</h3>
+    
+      <table class="table hoverTable">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Balance</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let playerProfile of playerProfiles; let i = index;">
+          <td (click)="navigateToUser(playerProfile.id)">{{i+1}}</td>
+          <td (click)="navigateToUser(playerProfile.id)">{{playerProfile.name}}</td>
+          <td (click)="navigateToUser(playerProfile.id)">{{playerProfile.balance}}</td>
+          <td><button (click)="openTopUpPlayerModal(playerProfile, content)"  class="btn btn-primary">Add Funds</button></td>
+        </tr>
+        </tbody>
+      </table>
+  </div>
+  
+  <app-create-player></app-create-player>
+  
+  <ng-template #content let-modal>
+    <div class="modal-dialog-container" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <div class="modal-title w-100 font-weight-bold">
+                <h5 class="text-center w-100 font-weight-bold">Top Up Player</h5>
+            </div>
+            <button type="button" id="closeTopUpPlayerFormButton"  class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="mt-3 modal-subtitle text-center">
+                <h4>Player name {{selectedPlayer.name}}</h4>
+                <h4>Player balance {{selectedPlayer.balance}}</h4>
+          </div>
+          <div class="modal-body mx-3">
+            <form  (ngSubmit)="submitTopUpForPlayer()" [formGroup]="topUpUserForm" class="text-center">
+                <div>
+                    <mat-form-field [style.width.px]="256">
+                        <mat-label data-error="wrong" data-success="right" for="topUpInput"><span>Top Up Amount</span></mat-label>
+                        <input matInput formControlName="topUpInput" name="topUpInput" type="number" id="topUpInput" class="form-control validate" required appTwoDecimal>
+                    </mat-form-field>
+                </div>
+              
+                <div class="buttonbar">
+                    <button mat-raised-button type="submit" color="primary">Top Up User</button>
+                </div>
+              </form>
+          </div>
+        
+        </div>
+      </div>
+  </ng-template>
+
+      

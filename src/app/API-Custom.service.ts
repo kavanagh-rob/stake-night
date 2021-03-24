@@ -4,11 +4,12 @@
 //  This file needs to be updated if schema api is updated 
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import { ListBetsQuery, ListRacesQuery, ModelBetFilterInput, ModelRaceFilterInput } from "./API.service";
+import { ListBetsQuery, ListRacesQuery, ModelBetFilterInput, ModelRaceFilterInput, ListResultsQuery, ModelResultFilterInput } from "./API.service";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
+
 
 
 @Injectable({
@@ -75,35 +76,39 @@ export class APICustomService {
     limit?: number,
     nextToken?: string
   ): Promise<ListBetsQuery> {
+
     const statement = `query ListBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String) {
-        listBets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      listBets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+        __typename
+        items {
           __typename
-          items {
+          id
+          isProcessed
+          finalOdds
+          payout
+          result
+          stake
+          raceId
+          playerProfileId
+          paymentStatus
+          raceNumber
+          createdAt
+          updatedAt
+          Horse {
             __typename
             id
-            isProcessed
-            finalOdds
-            payout
-            status
-            stake
-            raceId
+            number
+            name
+            liveOdds
+            totalBetsForHorse
+            raceID
             createdAt
             updatedAt
-            Horse {
-              __typename
-              id
-              number
-              name
-              liveOdds
-              totalBetsForHorse
-              raceID
-              createdAt
-              updatedAt
-            }
           }
-          nextToken
         }
-      }`;
+        nextToken
+      }
+    }`;
     const gqlAPIServiceArguments: any = {};
     if (filter) {
       gqlAPIServiceArguments.filter = filter;
@@ -119,7 +124,5 @@ export class APICustomService {
     )) as any;
     return <ListBetsQuery>response.data.listBets;
   }
-
-
   
 }
