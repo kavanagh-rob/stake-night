@@ -12,9 +12,6 @@ query GetBet($id: ID!) {
     paymentStatus
     raceNumber
     playerName
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Horse {
@@ -24,9 +21,6 @@ query GetBet($id: ID!) {
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -46,48 +40,10 @@ query ListBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String) {
       paymentStatus
       raceNumber
       playerName
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncBets(
-  $filter: ModelBetFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncBets(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      isProcessed
-      finalOdds
-      payout
-      result
-      stake
-      raceId
-      playerProfileId
-      paymentStatus
-      raceNumber
-      playerName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetPlayerProfile($id: ID!) {
@@ -99,9 +55,6 @@ query GetPlayerProfile($id: ID!) {
     payments
     eventId
     userId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -120,44 +73,10 @@ query ListPlayerProfiles(
       payments
       eventId
       userId
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncPlayerProfiles(
-  $filter: ModelPlayerProfileFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncPlayerProfiles(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      avatorUrl
-      name
-      balance
-      payments
-      eventId
-      userId
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query ListResults(
@@ -177,14 +96,10 @@ query ListResults(
       winningHorseId
       winningHorseName
       winningHorseNumber
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
   }
 }
 query GetResult($id: ID!) {
@@ -199,44 +114,8 @@ query GetResult($id: ID!) {
     winningHorseId
     winningHorseName
     winningHorseNumber
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
-  }
-}
-query SyncResults(
-  $filter: ModelResultFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncResults(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      videoUrl
-      totalPot
-      eventId
-      raceId
-      finalOdds
-      raceNumber
-      winningHorseId
-      winningHorseName
-      winningHorseNumber
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetHorse($id: ID!) {
@@ -247,9 +126,6 @@ query GetHorse($id: ID!) {
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -267,43 +143,10 @@ query ListHorses(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncHorses(
-  $filter: ModelHorseFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncHorses(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      number
-      name
-      liveOdds
-      totalBetsForHorse
-      raceID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetRace($id: ID!) {
@@ -318,9 +161,6 @@ query GetRace($id: ID!) {
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
@@ -334,15 +174,11 @@ query GetRace($id: ID!) {
       winningHorseId
       winningHorseName
       winningHorseNumber
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -363,47 +199,10 @@ query ListRaces(
       showPayoutFactor
       eventID
       isCurrentRace
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncRaces(
-  $filter: ModelRaceFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncRaces(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      isActive
-      name
-      payoutFactor
-      raceCardImageUrl
-      number
-      time
-      showPayoutFactor
-      eventID
-      isCurrentRace
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetEvent($id: ID!) {
@@ -414,14 +213,10 @@ query GetEvent($id: ID!) {
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -438,42 +233,9 @@ query ListEvents(
       name
       organiser
       type
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncEvents(
-  $filter: ModelEventFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncEvents(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      date
-      eventImage
-      name
-      organiser
-      type
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }

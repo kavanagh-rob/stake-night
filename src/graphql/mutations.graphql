@@ -15,9 +15,6 @@ mutation CreateBet(
     paymentStatus
     raceNumber
     playerName
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Horse {
@@ -27,9 +24,6 @@ mutation CreateBet(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -51,9 +45,6 @@ mutation UpdateBet(
     paymentStatus
     raceNumber
     playerName
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Horse {
@@ -63,9 +54,6 @@ mutation UpdateBet(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -87,9 +75,6 @@ mutation DeleteBet(
     paymentStatus
     raceNumber
     playerName
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Horse {
@@ -99,9 +84,6 @@ mutation DeleteBet(
       liveOdds
       totalBetsForHorse
       raceID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -119,9 +101,6 @@ mutation CreatePlayerProfile(
     payments
     eventId
     userId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -138,9 +117,6 @@ mutation UpdatePlayerProfile(
     payments
     eventId
     userId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -157,9 +133,6 @@ mutation DeletePlayerProfile(
     payments
     eventId
     userId
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -179,9 +152,6 @@ mutation CreateResult(
     winningHorseId
     winningHorseName
     winningHorseNumber
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -201,9 +171,6 @@ mutation UpdateResult(
     winningHorseId
     winningHorseName
     winningHorseNumber
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -223,9 +190,6 @@ mutation DeleteResult(
     winningHorseId
     winningHorseName
     winningHorseNumber
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -241,9 +205,6 @@ mutation CreateHorse(
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -259,9 +220,6 @@ mutation UpdateHorse(
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -277,9 +235,6 @@ mutation DeleteHorse(
     liveOdds
     totalBetsForHorse
     raceID
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -299,9 +254,6 @@ mutation CreateRace(
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
@@ -315,15 +267,11 @@ mutation CreateRace(
       winningHorseId
       winningHorseName
       winningHorseNumber
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -342,9 +290,6 @@ mutation UpdateRace(
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
@@ -358,15 +303,11 @@ mutation UpdateRace(
       winningHorseId
       winningHorseName
       winningHorseNumber
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -385,9 +326,6 @@ mutation DeleteRace(
     showPayoutFactor
     eventID
     isCurrentRace
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Result {
@@ -401,15 +339,11 @@ mutation DeleteRace(
       winningHorseId
       winningHorseName
       winningHorseNumber
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     Horses {
       nextToken
-      startedAt
     }
   }
 }
@@ -424,14 +358,10 @@ mutation CreateEvent(
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -446,14 +376,10 @@ mutation UpdateEvent(
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
@@ -468,14 +394,10 @@ mutation DeleteEvent(
     name
     organiser
     type
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     Races {
       nextToken
-      startedAt
     }
   }
 }
