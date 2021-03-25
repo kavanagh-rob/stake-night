@@ -28,6 +28,10 @@ export class PlayerProfileService {
       return this.api.CreatePlayerProfile(playerProfileInput);
   }
 
+  getPlayerProfile(playerProfileId){
+    return this.api.GetPlayerProfile(playerProfileId);
+  } 
+
   updatePlayerProfile(playerProfile){
     const updatedUser = this.copyPlayerModel(playerProfile);
     return this.api.UpdatePlayerProfile(updatedUser);

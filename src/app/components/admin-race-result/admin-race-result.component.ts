@@ -44,6 +44,7 @@ export class AdminRaceResultComponent implements OnInit {
     this.getLiveRace();
   }
 
+ 
   openSetResultModal(horse, content){
       this.selectedHorse = horse;
       this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});

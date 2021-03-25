@@ -4,12 +4,16 @@
              <mat-card-header class="matHeader">
                  <div mat-card-avatar class="user-header-image"  [ngStyle]="getUserImage()"></div>
                  <mat-card-title><span class="helloTxt">Hello {{playerProfile.name}}</span></mat-card-title>
+                                 
                  <mat-card-subtitle>
                     <div class="subText">
                      Current Balance: <span class="balanceTxt">€{{playerProfile.balance}}</span>
                      </div>
                 </mat-card-subtitle>
              </mat-card-header>
+             <div class="buttonContainer">
+                <app-player-image-upload [playerProfile]="playerProfile"></app-player-image-upload>
+             </div>
              <mat-card-content class="card-body"> 
                  <div *ngIf="currentRace" class="card-content-container">
                      <h5>Current Race: <strong>Race  {{currentRace.number}}</strong></h5>

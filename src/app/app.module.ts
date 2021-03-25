@@ -55,6 +55,7 @@ import { AdminLiveRaceComponent } from './components/admin-live-race/admin-live-
 import { AdminRaceResultComponent } from './components/admin-race-result/admin-race-result.component';
 import { AdminRacePayoutComponent } from './components/admin-race-payout/admin-race-payout.component';
 import { SingleRacePayoutComponent } from './components/single-race-payout/single-race-payout.component';
+import { PlayerImageUploadComponent } from './components/player-image-upload/player-image-upload.component';
 
 const appRoutes: Routes = [
 
@@ -180,7 +181,8 @@ const appRoutes: Routes = [
     AdminRaceResultComponent,
     AdminRacePayoutComponent,
     SafePipe,
-    SingleRacePayoutComponent
+    SingleRacePayoutComponent,
+    PlayerImageUploadComponent
   ],
   imports: [
     RouterModule.forRoot(
