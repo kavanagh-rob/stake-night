@@ -91,6 +91,7 @@ export class APICustomService {
           raceId
           playerProfileId
           paymentStatus
+          playerName
           raceNumber
           createdAt
           updatedAt

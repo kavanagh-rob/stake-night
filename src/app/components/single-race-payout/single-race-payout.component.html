@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th scope="col">Race Number</th>
-                <th scope="col">User Id</th>
+                <th scope="col">User Name</th>
                 <th scope="col">Horse Name</th>
                 <th scope="col">Horse No.</th>
                 <th scope="col">Stake</th>
@@ -34,4 +34,4 @@
             </tr>
         </tbody>
     </table>
-    <button [disabled]="clicked" (click)="processBetsForRace(); clicked = true;"  class="btn btn-primary">Process Bets for Race {{race.number}}</button> 
+    <button [disabled]="openBetsForRace && openBetsForRace.length === 0" (click)="processBetsForRace(); clicked = true;"  class="btn btn-primary">{{getSubmitButtonText()}}</button> 

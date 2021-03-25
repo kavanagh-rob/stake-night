@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APIService } from 'src/app/API.service';
+import { APIService, UpdatePlayerProfileInput } from 'src/app/API.service';
 import { PlayerProfile } from 'src/models';
 import { UserAccessService } from './user-access.service';
 import * as uuid from 'uuid';
@@ -33,7 +33,7 @@ export class PlayerProfileService {
     return this.api.UpdatePlayerProfile(updatedUser);
   } 
 
-  copyPlayerModel(playerProfile: PlayerProfile): PlayerProfile {
+  copyPlayerModel(playerProfile: PlayerProfile): UpdatePlayerProfileInput {
     return {
       id: playerProfile.id,
       avatorUrl: playerProfile.avatorUrl,

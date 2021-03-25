@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
-import { APIService, CreateBetInput, ListBetsQuery } from 'src/app/API.service';
+import { APIService, CreateBetInput, ListBetsQuery, UpdateBetInput } from 'src/app/API.service';
 import { APICustomService } from 'src/app/API-Custom.service';
 import { Bet, Horse, Race } from 'src/models';
 import { HorseBetInfo } from '../interfaces/horse-bet-info-interface';
@@ -20,10 +20,10 @@ export class BetService {
 
   updateBet(bet) {
     const updatedRace = this.copyBetModel(bet);
-    return this.api.UpdateRace(updatedRace);
+    return this.api.UpdateBet(updatedRace);
   }
 
-  copyBetModel(bet: Bet): Bet {
+  copyBetModel(bet: Bet): UpdateBetInput {
     return {
       id: bet.id,
       isProcessed: bet.isProcessed,
@@ -36,7 +36,7 @@ export class BetService {
       playerName: bet.playerName,
       paymentStatus: bet.paymentStatus,
       raceNumber: bet.raceNumber,
-      Horse: bet.Horse
+      betHorseId: bet.Horse.id
     };
 
   }

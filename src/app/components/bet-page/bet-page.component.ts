@@ -9,6 +9,7 @@ import { BetService } from 'src/app/shared/services/bet.service';
 import { PlayerProfileService } from 'src/app/shared/services/player-profile.service';
 import { RaceService } from 'src/app/shared/services/race.service';
 import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
+import { ResultService } from 'src/app/shared/services/result.service';
 
 
 @Component({
@@ -38,12 +39,14 @@ export class BetPageComponent implements OnInit  {
   buttonClicked = false;
   placingbet = false;
 
-  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private playerProfileService: PlayerProfileService, private raceService: RaceService) { }
+  hasResult;
+
+  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private playerProfileService: PlayerProfileService, private raceService: RaceService, private resultService: ResultService) { }
 
   betForm: FormGroup;
 
-  ngOnChanges(changes: SimpleChange) {
-    
+  async ngOnChanges(changes: SimpleChange) {
+    this.hasResult =  await (await this.api.ListResults({ raceId: { eq: this.currentRace.id }})).items.length > 0;
   }
 
   ngOnInit(): void {

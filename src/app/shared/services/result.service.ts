@@ -9,6 +9,13 @@ export class ResultService {
 
   constructor(private api: APIService){}
 
-  createResult(resultInput){
-   return this.api.CreateResult(resultInput);
+  async getRaceResult(raceId){
+    let raceResult = null;;
+    const results = await this.api.ListResults({ raceId: { eq: raceId }}) ;
+   
+    if(results.items.length === 1){
+      raceResult = results.items[0]; 
+    }
+    return raceResult;
+  }
 }

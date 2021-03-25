@@ -4,8 +4,11 @@
         <h2 [hidden]="!currentRace.isActive"> Live Odds </h2>
         <h2 [hidden]="currentRace.isActive"> Final Odds </h2>
     </div>
-    <div  [hidden]="currentRace.isActive" class="col-4">
+    <div  [hidden]="hasResult || currentRace.isActive" class="col-4">
         <img class="runningGif" src="/assets/images/running.gif" />
+    </div>
+    <div [hidden]="!hasResult" class="col-4">
+        <span class="finishedText mr-2">Race Completed  <img class="finishedImage" src="/assets/images/flag.png" /></span>
     </div>
 </div>
 <div *ngIf="currentRace">
@@ -25,7 +28,7 @@
                 <td><span *ngIf="horseBetInfoList">{{getLiveOdds(horse)}}</span></td>
                 <td>
                     <button [hidden]="!currentRace.isActive" class="btn btn-primary" (click)="openBetModal(horse, content)">Bet</button>
-                    <button [hidden]="currentRace.isActive" class="btn btn-warning"><fa-icon [icon]="faLock"></fa-icon></button>
+                    <button [hidden]="currentRace.isActive" class="btn" [ngClass]="{'btn-warning': !hasResult, 'btn-danger':hasResult }" ><fa-icon [icon]="faLock"></fa-icon></button>
                 </td>
             </tr>
         </tbody>

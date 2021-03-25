@@ -26,7 +26,6 @@ export class AdminRacePayoutComponent implements OnInit {
 
   ngOnInit() {
     this.getRacesForEvent();
-    // this.loadBetsForEvent();
   }
 
   async getRacesForEvent(){

@@ -17,3 +17,13 @@
 .runningGif{
     height: 60px;
 }
+.finishedImage{
+    height: 40px;
+}
+
+.finishedText{
+    color: green;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-style: italic;
+}

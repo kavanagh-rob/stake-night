@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APIService } from 'src/app/API.service';
+import { APIService, UpdateRaceInput } from 'src/app/API.service';
 import { APICustomService } from 'src/app/API-Custom.service';
 import { Event, Race } from 'src/models';
 
@@ -63,7 +63,7 @@ export class RaceService {
     return this.api.UpdateRace(updatedRace);
   } 
 
-  copyRaceModel(race: Race): Race {
+  copyRaceModel(race: Race): UpdateRaceInput {
     return {
       isCurrentRace: race.isCurrentRace,
       id: race.id,

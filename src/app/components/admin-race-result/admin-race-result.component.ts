@@ -26,7 +26,6 @@ export class AdminRaceResultComponent implements OnInit {
 
   raceActiveError = false;
   raceNotFoundError = false;
-  raceResultError = false;
   existingResultError = false;
 
   raceResultForm: FormGroup;
@@ -47,11 +46,14 @@ export class AdminRaceResultComponent implements OnInit {
 
   openSetResultModal(horse, content){
       this.selectedHorse = horse;
-      console.log( this.selectedHorse);
       this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
   }
 
   async submitRaceResults(){
+    if(this.raceActiveError){
+      alert('Woops!!! The race is still active suspend betting before setting a winner');
+      return
+    }
     this.betInfoForCurrentRace = await this.betService.getBetInfoForRace(this.currentRace).toPromise();
     const result = this.createResultInput();
     const resultsForCurrentRace = await this.api.ListResults({ raceId: { eq: this.currentRace.id } });

@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { APIService } from 'src/app/API.service';
+import { APIService, UpdateBetInput } from 'src/app/API.service';
 import { BetService } from 'src/app/shared/services/bet.service';
 import { RaceService } from 'src/app/shared/services/race.service';
-import { Bet, PlayerProfile, Race } from 'src/models';
+import { Bet, PlayerProfile, Race, Result } from 'src/models';
 import { Observable, forkJoin } from 'rxjs';
 import { PlayerProfileService } from 'src/app/shared/services/player-profile.service';
+import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
+
 
 @Component({
   selector: 'app-single-race-payout',
@@ -17,12 +19,14 @@ export class SingleRacePayoutComponent implements OnInit {
   @Input()
   race: Race;
 
-  raceResult;
-  betsForRace: Bet[];
+  raceResult: Result;
+  betsForRace: any[];
   playerList: PlayerProfile[];
   clicked = false;
 
   resultsError = false;
+  horseBetInfoList: HorseBetInfo[]; 
+  openBetsForRace: Bet[];
 
   betsToPay: Bet[]= [];
   updateBetCalls = [];
@@ -32,25 +36,60 @@ export class SingleRacePayoutComponent implements OnInit {
 
   constructor(private betService: BetService, private playerProfileService: PlayerProfileService, private api: APIService) { }
 
-  ngOnInit() {
-    this.getBetsForRace();
-    this.getRaceResult();
+  async ngOnInit() {
+    this.betsForRace = await this.getBetsForRace();
+    this.raceResult = await this.getRaceResult();
+    this.horseBetInfoList = await this.getHorseBetInfoForRace();
+    await this.setBetResultInfo();
+    this.openBetsForRace = await this.getOpenBetsForRace();
   }
 
-
+  
   async getBetsForRace(){
-    this.betsForRace = (await this.betService.listBetWithHorses(this.race.id)).items;
+   return (await this.betService.listBetWithHorses(this.race.id)).items;
   }
 
   async getRaceResult(){
+    let raceResult = null;;
     const results = await this.api.ListResults({ raceId: { eq: this.race.id }}) ;
+   
     if(results.items.length === 1){
-      this.raceResult = results.items[0]; 
+      raceResult = results.items[0]; 
     }
     else{
       this.resultsError = true;
     }
+    return raceResult;
   }
+
+  async getHorseBetInfoForRace(){
+    return await this.betService.getBetInfoForRace(this.race).toPromise();
+  }
+
+  async setBetResultInfo() {
+    this.betsForRace.forEach(bet => {
+      // change this for no stats check
+      if (bet.result === 'N/A' || bet.result === 'PENDING'){
+        const startingPrice =  this.getHorseOdds(bet.Horse.id);
+        if (!startingPrice) {
+          return;
+        }
+        bet.finalOdds = startingPrice;
+        bet.result = this.getBetResult(bet.Horse.id);
+        bet.payout = bet.result === 'WIN' ? this.setTwoDecimals(Number(bet.finalOdds) * Number(bet.stake)) : 0;
+      }
+    });
+  }
+
+  getHorseOdds(horseId){
+    return this.horseBetInfoList.filter(
+      horseBetInfo => horseBetInfo.horseId === horseId)[0].liveOdds;
+  }
+
+  getBetResult(horseId) {
+      return this.raceResult.winningHorseId === horseId ? 'WIN' : 'LOSE'  
+  }
+
 
 
   processBetsForRace(){
@@ -61,9 +100,8 @@ export class SingleRacePayoutComponent implements OnInit {
         return;
       }
       else{
-        const openBetsForRace = this.getOpenBetsForRace();
-        this.setBetsToPay(openBetsForRace);
-        this.upDateBetJoin();
+        this.setBetsToPay(this.openBetsForRace);
+        this.updateBetJoin();
       }
     }
   }
@@ -72,11 +110,25 @@ export class SingleRacePayoutComponent implements OnInit {
     return this.betsForRace.filter(
       bet => {
         let isBetOpen = true;
-        if ( bet.raceId !== this.race.id || this.isCompletedBet(bet)) {
+        if (this.isCompletedBet(bet)) {
           isBetOpen = false;
         }
         return isBetOpen;
         });
+  }
+
+  isCompletedBet(bet: Bet){
+    let isCompleted = false;
+    if ((bet.result === 'PENDING')){
+      isCompleted = false;
+    }
+    else if ((bet.isProcessed && bet.result !== 'WIN')){
+      isCompleted = true;
+    }
+    else if (bet.result === 'WIN' && bet.paymentStatus === 'COMPLETE') {
+      isCompleted = true;
+    }
+    return isCompleted;
   }
 
   setBetsToPay(openBetsForRace){
@@ -90,7 +142,7 @@ export class SingleRacePayoutComponent implements OnInit {
     });
    }
 
-  upDateBetJoin(){
+  updateBetJoin(){
     forkJoin(this.updateBetCalls).subscribe(
       data => { // Note: data is an array now
         this.getDistinctPlayersToPay();
@@ -142,6 +194,7 @@ export class SingleRacePayoutComponent implements OnInit {
   completeBetJoin(completedBetPromises){
     forkJoin(this.updatePlayerCalls).subscribe(
       data => { // Note: data is an array now
+        location.reload();
       }, err => console.log('error ' + err),
       () => console.log('Completed Processing Bets')
     );
@@ -152,19 +205,6 @@ export class SingleRacePayoutComponent implements OnInit {
     .filter((value, index, self) => self.indexOf(value) === index);
   }
 
-  isCompletedBet(bet: Bet){
-    let isCompleted = false;
-    if ((bet.result === 'PENDING')){
-      isCompleted = false;
-    }
-    else if ((bet.isProcessed && bet.result !== 'WIN')){
-      isCompleted = true;
-    }
-    else if (bet.result === 'WIN' && bet.paymentStatus === 'COMPLETE') {
-      isCompleted = true;
-    }
-    return isCompleted;
-  }
 
   getBetColor(bet) {
     let color = '';
@@ -184,6 +224,10 @@ export class SingleRacePayoutComponent implements OnInit {
       color = 'green';
     }
     return { 'background-color': color };
+  }
+
+  getSubmitButtonText(){
+    return this.openBetsForRace && this.openBetsForRace.length > 0 ? 'Process Bets for Race '+ this.race.number : 'All Bets Closed';
   }
 
   setTwoDecimals(input){
