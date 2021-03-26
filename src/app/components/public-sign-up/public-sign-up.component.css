@@ -2,6 +2,10 @@
     width: 100%;  
 }
 
+.signin-container {
+    position: fixed;
+} 
+
 amplify-authenticator {
     display: flex;
     justify-content: center;
@@ -15,8 +19,8 @@ amplify-authenticator {
         amplify-authenticator {
             justify-content: center;
             align-items: center;
-            flex: 1;
-            height: 75vh;
+            /* flex: 1;
+            height: 75vh; */
           }
 
       }
