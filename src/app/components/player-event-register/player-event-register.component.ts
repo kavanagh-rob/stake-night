@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { APIService } from 'src/app/API.service';
-import { UserAccessService } from 'src/app/shared/services/user-access.service';
+
 import { PlayerProfileService } from 'src/app/shared/services/player-profile.service';
 
 @Component({

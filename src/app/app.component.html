@@ -1,16 +1,11 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <div class="row w-100">
-    <div class="col-1">
+    <div class="col-2">
       <img width="40" alt="Angular Logo" src="assets/images/horse.svg"/>
     </div>
-    <div class="col-4">
-      <span class ="topHeader"><h2>Stake Knight</h2></span>
-    </div>
-    <div class="col-3">
-      <span [hidden]="!isAdmin" class="float-right">
-        <button mat-raised-button color="primary" [routerLink]="['/admin-home']">Admin Page</button>
-      </span>
+    <div class="col-5">
+      <span class ="topHeader"><h2 class ="topHeader">Stake Knight</h2></span>
     </div>
     <div class="col-4">
       <span [hidden]="!isSignedIn" class="float-right">

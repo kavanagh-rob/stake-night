@@ -13,6 +13,8 @@ amplify-authenticator {
   }
 
 
+
+
 .auth-container {
     min-height: auto !important;
 }
@@ -213,6 +215,13 @@ main {
 
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
+    .topHeader{
+      font-size: 1.1em;
+    }
+
+    .button{
+      padding: 6px;
+    }
 
     .card-container > *:not(.circle-link) ,
     .terminal {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAccessService } from 'src/app/shared/services/user-access.service';
 
 @Component({
   selector: 'app-player-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userAuthService: UserAccessService) { }
 
   navLinks: any[];
 
@@ -20,7 +21,19 @@ export class PlayerHomeComponent implements OnInit {
           index: 0
       }
   ];
-}
+  
+  this.checkAdmin();
+  }
 
+async checkAdmin() {
+  const isAdmin = await this.userAuthService.isAdminUser();
+  if(isAdmin){
+    this.navLinks.push(
+      {
+        label: 'admin-home',
+        link: '../admin-home',
+        index: 1})  
+      }
+}
 
 }
