@@ -3,9 +3,11 @@
 }
 
 .signin-container {
-    position: fixed;
+    height: 100%;
 } 
-
+amplify-sign-up{
+    z-index: 10;
+}
 amplify-authenticator {
     display: flex;
     justify-content: center;
