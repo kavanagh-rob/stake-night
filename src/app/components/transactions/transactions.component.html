@@ -3,7 +3,6 @@
     <thead>
         <tr>
             <th scope="col">Player Name</th>
-            <th scope="col">Player ID</th>
             <th scope="col">Date</th>
             <th scope="col">Amount</th>
         </tr>
@@ -11,7 +10,6 @@
     <tbody>
         <tr *ngFor="let payment of sortPayments(payments);">
             <td>{{playerProfile.name}}</td>
-            <td>{{playerProfile.userId}}</td>
             <td>{{payment.date}}</td>
             <td [ngStyle]="{color: 'green'}">€{{payment.amount}}</td>
         </tr>
@@ -19,7 +17,7 @@
 </table>
 <br/>
 <h2> Bets </h2>
-<table class="table hoverTable">
+<table class="betTable table hoverTable">
     <thead>
         <tr>
             <th scope="col">Race Number</th>

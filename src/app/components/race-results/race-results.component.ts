@@ -17,7 +17,6 @@ export class RaceResultsComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.ListResults({ eventId: { eq: this.event.id } }).then(res => {
-      console.log(res);
       this.eventResults = res.items
     })
   }

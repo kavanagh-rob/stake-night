@@ -2,7 +2,8 @@
     <div class="col-xs-12 card-container">
         <mat-card class="user-card">
              <mat-card-header class="matHeader">
-                 <div mat-card-avatar class="user-header-image"  [ngStyle]="getUserImage()"></div>
+                 <img  mat-card-avatar src="{{playerProfile.avatorUrl}}">
+                 <!-- <div mat-card-avatar class="user-header-image"  [ngStyle]="getUserImage()"></div> -->
                  <mat-card-title><span class="helloTxt">Hello {{playerProfile.name}}</span></mat-card-title>
                                  
                  <mat-card-subtitle>
