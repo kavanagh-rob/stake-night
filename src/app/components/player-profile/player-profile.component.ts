@@ -31,6 +31,14 @@ export class PlayerProfileComponent implements OnInit {
   //   }
   //   return { 'background-image': 'url(' + avator + ')' };
   // }
+
+  getUserImage(){
+    let avator = 'https://www.disneyclips.com/images/images/donald-duck25.png';
+    if (this.playerProfile.avatorUrl){
+      avator = this.playerProfile.avatorUrl;
+    }
+    return avator;
+  }
   
   getPoolPayoutFactor(){
     if (this.currentRace.payoutFactor && this.currentRace.payoutFactor > 0 && this.currentRace.payoutFactor < 1) {
