@@ -15,7 +15,7 @@
     </mat-tab>
 </mat-tab-group>
 
-<div *ngIf="!currentRace" class="card-content-container">
+<div *ngIf="pageInitialized && !currentRace" class="card-content-container">
     <h3 [style.color]="'blue'">{{event.name}}</h3>
     <img class="racecard-image" [src]="getEventStartCardImage()"/>
     <br/>

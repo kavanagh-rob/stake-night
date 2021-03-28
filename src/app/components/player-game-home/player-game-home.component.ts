@@ -58,7 +58,9 @@ export class PlayerGameHomeComponent implements OnInit {
         this.currentRace = null;
       }
     })
-    .finally(() => {this.pageInitialized = true})
+    .finally(() => {
+      this.pageInitialized = true;
+    })
    }
   
   setBetInfo(){

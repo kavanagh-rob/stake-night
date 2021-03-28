@@ -126,6 +126,7 @@ export class BetPageComponent implements OnInit  {
       // submit bet
       this.api.CreateBet(createBetInput).then(resp => {
         document.getElementById('closeBetFormButton').click();
+        location.reload();
       });
 
     });
