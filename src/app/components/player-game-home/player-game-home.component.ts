@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import { v1 as uuid } from 'uuid';
@@ -15,7 +15,7 @@ import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface
   templateUrl: './player-game-home.component.html',
   styleUrls: ['./player-game-home.component.css']
 })
-export class PlayerGameHomeComponent implements OnInit {
+export class PlayerGameHomeComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private api: APIService, private raceService: RaceService, private betService: BetService) {
       this.event = this.route.snapshot.data['resolvedEvent'] || this.route.parent.snapshot.data['resolvedEvent']
@@ -26,13 +26,13 @@ export class PlayerGameHomeComponent implements OnInit {
 
   playerProfile: PlayerProfile;
 
-  interval: any;
-
   totalBetValue :number;
 
   currentRace: any = null;
 
   pageInitialized = false;
+
+  interval: any;
 
   ngOnInit(): void {
     this.refreshData();
@@ -41,6 +41,9 @@ export class PlayerGameHomeComponent implements OnInit {
     }, 5000);
   }
 
+  ngOnDestroy(){
+    clearInterval(this.interval);
+  }
      
   refreshData() {
       if (this.event  && this.event.type === 'race'){

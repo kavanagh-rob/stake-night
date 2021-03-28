@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ViewEncapsulation, SimpleChange } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation, SimpleChange, OnDestroy } from '@angular/core';
 import { Horse, Race, PlayerProfile } from '../../../models';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,7 +18,7 @@ import { ResultService } from 'src/app/shared/services/result.service';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./bet-page.component.css']
 })
-export class BetPageComponent implements OnInit  {
+export class BetPageComponent implements OnInit, OnDestroy  {
   faLock = faLock;
 
   @Input()
@@ -41,6 +41,8 @@ export class BetPageComponent implements OnInit  {
 
   hasResult;
 
+  interval: any;
+
   constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private playerProfileService: PlayerProfileService, private raceService: RaceService, private resultService: ResultService) { }
 
   betForm: FormGroup;
@@ -54,6 +56,18 @@ export class BetPageComponent implements OnInit  {
       stake: new FormControl(null),
     });
 
+    this.refreshData();
+    this.interval = setInterval(() => {
+        this.refreshData();
+    }, 5000);
+
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.interval);
+  }
+
+  refreshData(){
     if(this.currentRace){
       this.betService.getBetInfoForRace(this.currentRace).subscribe((data) => {
         this.horseBetInfoList = data;
