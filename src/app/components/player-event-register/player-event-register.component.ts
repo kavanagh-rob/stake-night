@@ -46,10 +46,12 @@ export class PlayerEventRegisterComponent implements OnInit {
       this.selectedEvent = await this.api.GetEvent(eventId);
       if(this.selectedEvent === null){
         this.eventNotFoundError = true;
+        return;
       }
       const userProfiles = await this.playerProfileService.listPlayerProfilesForCurrentUserByEventId(eventId);
       if(userProfiles.items.length > 0){
         this.profileExistsError = true;
+        return;
       }
       this.createPlayer(eventId);
 
