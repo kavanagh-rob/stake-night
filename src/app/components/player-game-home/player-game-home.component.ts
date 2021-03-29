@@ -45,10 +45,11 @@ export class PlayerGameHomeComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
      
-  refreshData() {
+  async refreshData() {
       if (this.event  && this.event.type === 'race'){
         this.setCurrentRace();
       }
+      this.playerProfile = await this.api.GetPlayerProfile(this.playerProfile.id);
   }
 
   setCurrentRace(){
