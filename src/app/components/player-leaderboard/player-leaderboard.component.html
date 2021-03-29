@@ -1,0 +1,21 @@
+<div class="playerListBody">
+    <br/>
+    <h3>Leaderboard</h3>
+  
+    <table class="table hoverTable">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Balance</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let playerProfile of sortProfilesByBalance(playerProfiles); let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{playerProfile.name}}</td>
+        <td>{{playerProfile.balance}}</td>
+      </tr>
+      </tbody>
+    </table>
+</div>

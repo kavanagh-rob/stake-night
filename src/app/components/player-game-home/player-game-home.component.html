@@ -7,10 +7,13 @@
     <mat-tab label="Card">
         <app-race-card [currentRace]="currentRace"></app-race-card>
     </mat-tab>
-    <mat-tab label="History">
+    <mat-tab label="Hist">
         <app-transactions [currentRace]="currentRace" [playerProfile]="playerProfile" [event]="event"></app-transactions>
     </mat-tab>
-    <mat-tab label="Results">
+    <mat-tab label="Rank">
+        <app-player-leaderboard [event]="event"></app-player-leaderboard>
+    </mat-tab>
+    <mat-tab label="Res">
         <app-race-results [event]="event"></app-race-results>
     </mat-tab>
 </mat-tab-group>
