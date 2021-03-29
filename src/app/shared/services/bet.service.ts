@@ -73,6 +73,7 @@ export class BetService {
   }
 
   private calculateBetTotals(currentRace: Race, raceBets: Bet[]) { 
+    this.horseBetInfoArray = [];
     this.totalBetValue = 0;
     this.api.ListHorses({ raceID: { eq: currentRace.id } }).then(listHorseRes => {
       const horseList: Horse[] = listHorseRes.items;
