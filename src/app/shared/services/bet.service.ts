@@ -13,8 +13,6 @@ export class BetService {
   constructor(private api: APIService, private customApi: APICustomService) { }
 
   totalBetValue;
-  betInfoSubscriber: Subscriber<HorseBetInfo[]>;
-  betTotalSubscriber: Subscriber<number>;
 
   horseBetInfoArray: HorseBetInfo[] = [];
 
@@ -46,33 +44,32 @@ export class BetService {
   }
 
   getBetInfoForRace(race: Race): Observable <HorseBetInfo[]>{
-    return new Observable(subscriber => {
-      this.betInfoSubscriber = subscriber;
+    return new Observable( betInfoSubscriber => {
       this.customApi.ListBetsWithHorseInfo({ raceId: { eq: race.id } }).then(listBetsRes => { // Success
-        this.calculateBetTotals(race, listBetsRes.items);
+        this.calculateBetTotals(race, listBetsRes.items, betInfoSubscriber);
       });
     });
   }
+
 
   listBetWithHorses(raceId: string){
     return this.customApi.ListBetsWithHorseInfo({ raceId: { eq: raceId } });
   }
 
   getTotalPotForRace(currentRace: Race): Observable <number>{
-    return new Observable(subscriber => {
-      this.betTotalSubscriber = subscriber;
+    return new Observable(betTotalSubscriber => {
       this.api.ListBets({ raceId: { eq: currentRace.id } }).then(listBetsRes => { // Success
         let count = 0;
         listBetsRes.items.forEach(bet => {
           count = count + bet.stake;
         });
-        this.betTotalSubscriber.next(count);
-        this.betTotalSubscriber.complete();
+        betTotalSubscriber.next(count);
+        betTotalSubscriber.complete();
       });
     });
   }
 
-  private calculateBetTotals(currentRace: Race, raceBets: Bet[]) { 
+  private calculateBetTotals(currentRace: Race, raceBets: Bet[], betInfoSubscriber) { 
     this.horseBetInfoArray = [];
     this.totalBetValue = 0;
     this.api.ListHorses({ raceID: { eq: currentRace.id } }).then(listHorseRes => {
@@ -87,14 +84,14 @@ export class BetService {
         this.horseBetInfoArray.push({horseId: horse.id, betTotal: betTotalForHorse});
         this.totalBetValue = Number(this.totalBetValue) + Number(betTotalForHorse);
       });
-      this.getLiveToteOdds(horseList, currentRace.payoutFactor);
+      this.getLiveToteOdds(horseList, currentRace.payoutFactor, betInfoSubscriber);
 
     }); 
 
     this.totalBetValue = this.setTwoDecimals(this.totalBetValue); 
   }
 
-  private getLiveToteOdds(horseList: Horse[], payoutFactor) {
+  private getLiveToteOdds(horseList: Horse[], payoutFactor, betInfoSubscriber) {
     horseList.forEach(
       horse => {
         const totalBetsForHorse =  this.getBetTotalForHorse(horse.id)
@@ -105,8 +102,8 @@ export class BetService {
         }
         this.getBetInfoForHorse(horse.id).liveOdds = factoredHorseOdds;
       });
-      this.betInfoSubscriber.next(this.horseBetInfoArray);
-      this.betInfoSubscriber.complete();
+      betInfoSubscriber.next(this.horseBetInfoArray);
+      betInfoSubscriber.complete();
   }
 
   private getBetTotalForHorse(horseId){

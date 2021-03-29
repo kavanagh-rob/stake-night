@@ -42,7 +42,10 @@ export class SingleRacePayoutComponent implements OnInit {
     this.horseBetInfoList = await this.getHorseBetInfoForRace();
     await this.setBetResultInfo();
     this.openBetsForRace = await this.getOpenBetsForRace();
+
   }
+
+
 
   
   async getBetsForRace(){
