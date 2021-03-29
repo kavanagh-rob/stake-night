@@ -22,7 +22,7 @@ export class PlayerEventRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventRegisterForm = new FormGroup({
-      eventId: new FormControl(null),
+      eventId: new FormControl('racenight'),
       name: new FormControl(null),
       avatorUrl: new FormControl(null),
     });
@@ -33,10 +33,11 @@ export class PlayerEventRegisterComponent implements OnInit {
     this.eventNotFoundError = false;
     this.profileExistsError = false;
     this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+    this.setSelectedEvent();
   }
 
   async setSelectedEvent(){
-    const eventId = this.eventRegisterForm.get('eventId').value.toLowerCase().trim();
+    const eventId: string = this.eventRegisterForm.get('eventId').value.toLowerCase().trim();
     this.selectedEvent = await this.api.GetEvent(eventId);
   }
 

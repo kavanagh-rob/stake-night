@@ -30,7 +30,7 @@
                 <div>
                     <mat-form-field [style.width.px]="256">
                         <mat-label data-error="wrong" data-success="right" for="eventId"><span>Enter Event Id</span></mat-label>
-                        <input matInput formControlName="eventId" name="eventId" type="textbox" id="eventId" (blur)="setSelectedEvent()" class="form-control validate" required>
+                        <input matInput formControlName="eventId" name="eventId" type="textbox" id="eventId" (blur)="setSelectedEvent()" placeholder="racenight" class="form-control validate" required>
                     </mat-form-field>
                     <div [hidden]="!eventNotFoundError" class="alert alert-error box-msg warningText" role="alert">
                         <strong>Sorry!</strong> Event not Found
