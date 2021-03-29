@@ -20,6 +20,7 @@ export class PlayerHomeComponent implements OnInit {
           link: '../player',
           index: 0
       }
+
   ];
   
   this.checkAdmin();
@@ -32,6 +33,7 @@ async checkAdmin() {
       {
         label: 'admin-home',
         link: '../admin-home',
+        class: 'adminLink',
         index: 1})  
       }
 }

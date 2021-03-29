@@ -133,6 +133,8 @@ const appRoutes: Routes = [
   },
   { path: 'public',
     component: PublicHomeComponent,
+    canActivate: [ PublicAuthGuardService ],
+    canActivateChild: [ PublicAuthGuardService ],
     children: [
       { path: '', redirectTo: 'register', pathMatch: 'full' },
       { 
@@ -145,7 +147,6 @@ const appRoutes: Routes = [
       },
     ]
   },
-
   { path: 'access-denied',
     component: ErrorPageComponent,
   },

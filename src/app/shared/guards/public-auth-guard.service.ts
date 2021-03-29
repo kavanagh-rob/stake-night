@@ -17,6 +17,7 @@ export class PublicAuthGuardService implements CanActivate, CanActivateChild {
 
   async canActiveLogic(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
     const isLoggedIn = await this.userAccessService.isLoggedInUser();
+    console.log(isLoggedIn);
     if (!isLoggedIn) {
       return true;
     } else {

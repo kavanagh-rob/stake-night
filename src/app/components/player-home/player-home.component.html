@@ -3,7 +3,8 @@
     *ngFor="let link of navLinks"
     [routerLink]="link.link"
     routerLinkActive #rla="routerLinkActive"
-    [active]="rla.isActive">
+    [active]="rla.isActive"
+    [ngClass]="link.class">
     <span [ngClass]="{'activeLink': rla.isActive, 'inactiveLink': !rla.isActive }">{{link.label}}</span>
     </a>
     </nav>
