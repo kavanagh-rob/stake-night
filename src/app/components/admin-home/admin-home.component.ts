@@ -38,11 +38,11 @@ export class AdminHomeComponent implements OnInit {
           link: './payout',
           index: 4
       },
-      {
-          label: 'top up requests',
-          link: './top-ups',
-          index: 5
-      }
+      // {
+      //     label: 'top up requests',
+      //     link: './top-ups',
+      //     index: 5
+      // }
   ];
 }
 

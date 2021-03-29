@@ -36,7 +36,7 @@ export class PlayerEventRegisterComponent implements OnInit {
   }
 
   async setSelectedEvent(){
-    const eventId = this.eventRegisterForm.get('eventId').value;
+    const eventId = this.eventRegisterForm.get('eventId').value.toLowerCase().trim();
     this.selectedEvent = await this.api.GetEvent(eventId);
   }
 
