@@ -65,7 +65,6 @@ export class PlayerGameHomeComponent implements OnInit, OnDestroy {
     })
     .finally(() => {
       this.pageInitialized = true;
-      console.log(this.pageInitialized);
     })
    }
   

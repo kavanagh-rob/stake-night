@@ -41,8 +41,10 @@ export class PlayerEventRegisterComponent implements OnInit {
   }
 
   async registerForEvent(){
+    this.eventNotFoundError = false;
+    this.profileExistsError = false;
     if (this.eventRegisterForm.valid) {
-      const eventId = this.eventRegisterForm.get('eventId').value;
+      const eventId = this.eventRegisterForm.get('eventId').value.toLowerCase().trim();
       this.selectedEvent = await this.api.GetEvent(eventId);
       if(this.selectedEvent === null){
         this.eventNotFoundError = true;

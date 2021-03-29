@@ -17,7 +17,7 @@ export class PlayerHomeComponent implements OnInit {
     this.navLinks = [
      {
           label: 'event-list',
-          link: './player',
+          link: '../player',
           index: 0
       }
   ];
