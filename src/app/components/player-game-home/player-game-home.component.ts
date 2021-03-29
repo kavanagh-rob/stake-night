@@ -46,7 +46,7 @@ export class PlayerGameHomeComponent implements OnInit, OnDestroy {
   }
      
   async refreshData() {
-      if (this.event  && this.event.type === 'race'){
+      if (this.event){
         this.setCurrentRace();
       }
       this.playerProfile = await this.api.GetPlayerProfile(this.playerProfile.id);
@@ -60,10 +60,12 @@ export class PlayerGameHomeComponent implements OnInit, OnDestroy {
        
       }else{
         this.currentRace = null;
+        this.pageInitialized = true;
       }
     })
     .finally(() => {
       this.pageInitialized = true;
+      console.log(this.pageInitialized);
     })
    }
   
