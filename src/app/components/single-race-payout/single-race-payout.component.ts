@@ -77,9 +77,9 @@ export class SingleRacePayoutComponent implements OnInit {
         if (!startingPrice) {
           return;
         }
-        bet.finalOdds = startingPrice;
+        bet.finalOdds = bet.result === 'WIN' ? this.raceResult.finalOdds: startingPrice;
         bet.result = this.getBetResult(bet.Horse.id);
-        bet.payout = bet.result === 'WIN' ? this.setTwoDecimals(Number(bet.finalOdds) * Number(bet.stake)) : 0;
+        bet.payout = bet.result === 'WIN' ? this.setTwoDecimals(Number(this.raceResult.finalOdds) * Number(bet.stake)) : 0;
       }
     });
   }
