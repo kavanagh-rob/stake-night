@@ -150,6 +150,7 @@ export class BetPageComponent implements OnInit, OnDestroy  {
   createNewBetModel(stakeInput): CreateBetInput{
     return {
       id: uuid.v4(),
+      eventId: this.event.id,
       raceId: this.currentRace.id,
       raceNumber: this.currentRace.number,
       result: 'PENDING',

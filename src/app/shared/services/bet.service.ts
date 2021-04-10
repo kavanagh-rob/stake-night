@@ -30,6 +30,7 @@ export class BetService {
       result: bet.result,
       stake: bet.stake,
       raceId: bet.raceId,
+      eventId: bet.eventId,
       playerProfileId: bet.playerProfileId,
       playerName: bet.playerName,
       paymentStatus: bet.paymentStatus,
@@ -39,8 +40,8 @@ export class BetService {
 
   }
 
-  getBetsForRaceByUser(raceId: string, playerProfileId: string): Promise<ListBetsQuery>{
-      return this.customApi.ListBetsWithHorseInfo({ raceId: { eq: raceId },  playerProfileId: { eq: playerProfileId }  });
+  getBetsForEventByUser(eventId: string, playerProfileId: string): Promise<ListBetsQuery>{
+      return this.customApi.ListBetsWithHorseInfo({ eventId: { eq: eventId },  playerProfileId: { eq: playerProfileId }  });
   }
 
   getBetInfoForRace(race: Race): Observable <HorseBetInfo[]>{
@@ -88,7 +89,7 @@ export class BetService {
 
     }); 
 
-    this.totalBetValue = this.setTwoDecimals(this.totalBetValue);
+    this.totalBetValue = this.setFourDecimals(this.totalBetValue);
   }
 
   private getLiveToteOdds(horseList: Horse[], horseBetInfoArray: HorseBetInfo[], payoutFactor, betInfoSubscriber) {
@@ -96,9 +97,9 @@ export class BetService {
       horse => {
         const totalBetsForHorse =  this.getBetTotalForHorse(horseBetInfoArray, horse.id)
         let factoredHorseOdds = totalBetsForHorse === 0 ?
-        this.setTwoDecimals(this.totalBetValue) : this.setTwoDecimals(Number(this.totalBetValue) / Number(totalBetsForHorse));
+        this.setFourDecimals(this.totalBetValue) : this.setFourDecimals(Number(this.totalBetValue) / Number(totalBetsForHorse));
         if (payoutFactor && payoutFactor > 0 && payoutFactor < 1) {
-          factoredHorseOdds =   this.setTwoDecimals(factoredHorseOdds * Number(payoutFactor));
+          factoredHorseOdds =   this.setFourDecimals(factoredHorseOdds * Number(payoutFactor));
         }
         this.getBetInfoForHorse(horseBetInfoArray,horse.id).liveOdds = factoredHorseOdds;
       });
@@ -115,8 +116,8 @@ export class BetService {
     horseBetInfo => horseBetInfo.horseId === horseId)[0];
   }
 
-   private setTwoDecimals(input){
-    return Number((Math.round(Number(input) * 100) / 100).toFixed(2));
+   private setFourDecimals(input){
+    return Number((Math.round(Number(input) * 100) / 100).toFixed(4));
   }
 
  

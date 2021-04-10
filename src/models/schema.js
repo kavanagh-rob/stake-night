@@ -92,6 +92,13 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "eventId": {
+                    "name": "eventId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -599,5 +606,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "06f0a1c017e7cfa006b43a921de57f8b"
+    "version": "91a10434c08f218cc2177229bf8c3042"
 };

@@ -43,7 +43,7 @@ export class PlayerProfileComponent implements OnInit {
     if (this.currentRace.payoutFactor && this.currentRace.payoutFactor > 0 && this.currentRace.payoutFactor < 1) {
       return this.setTwoDecimals(Number(this.currentRace.payoutFactor) * Number(this.totalBetValue));
      }
-    return this.totalBetValue;
+    return this.setTwoDecimals(this.totalBetValue);
   }
 
   getGameStatusStyle(isActive){

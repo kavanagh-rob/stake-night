@@ -58,6 +58,8 @@ import { SingleRacePayoutComponent } from './components/single-race-payout/singl
 import { PlayerImageUploadComponent } from './components/player-image-upload/player-image-upload.component';
 import { PlayerLeaderboardComponent } from './components/player-leaderboard/player-leaderboard.component';
 
+import { TwoDecimalDirective } from './shared/two-decimal.directive';
+
 const appRoutes: Routes = [
 
   { 
@@ -157,6 +159,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    TwoDecimalDirective,
     EventListComponent,
     CreateEventComponent,
     AdminPlayerListComponent,

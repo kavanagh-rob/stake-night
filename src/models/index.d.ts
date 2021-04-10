@@ -17,6 +17,7 @@ export declare class Bet {
   readonly paymentStatus?: string;
   readonly raceNumber?: string;
   readonly playerName?: string;
+  readonly eventId?: string;
   constructor(init: ModelInit<Bet>);
   static copyOf(source: Bet, mutator: (draft: MutableModel<Bet>) => MutableModel<Bet> | void): Bet;
 }

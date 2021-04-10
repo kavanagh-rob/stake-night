@@ -116,8 +116,6 @@ export class AdminRaceResultComponent implements OnInit {
     if(horseBetInfo && horseBetInfo[0]){
       return horseBetInfo[0].liveOdds;
     }
-      
-
   }
 
   sortHorsesByNumber(prop: string) {

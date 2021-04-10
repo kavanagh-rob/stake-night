@@ -11,6 +11,7 @@ type Bet @model @auth(rules: [{allow: public}]) {
   paymentStatus: String
   raceNumber: String
   playerName: String
+  eventId: String
 }
 
 type PlayerProfile @model @auth(rules: [{allow: public}]) {

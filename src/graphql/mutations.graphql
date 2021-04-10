@@ -15,6 +15,7 @@ mutation CreateBet(
     paymentStatus
     raceNumber
     playerName
+    eventId
     createdAt
     updatedAt
     Horse {
@@ -45,6 +46,7 @@ mutation UpdateBet(
     paymentStatus
     raceNumber
     playerName
+    eventId
     createdAt
     updatedAt
     Horse {
@@ -75,6 +77,7 @@ mutation DeleteBet(
     paymentStatus
     raceNumber
     playerName
+    eventId
     createdAt
     updatedAt
     Horse {

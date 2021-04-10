@@ -35,7 +35,7 @@ export class TransactionsComponent implements OnInit {
 
   
   getCurrentBetsForRace() {
-    this.betService.getBetsForRaceByUser(this.currentRace.id, this.playerProfile.id).then(res => { 
+    this.betService.getBetsForEventByUser(this.event.id, this.playerProfile.id).then(res => { 
      this.userBetsList = res.items;
     })
   }
@@ -51,18 +51,6 @@ export class TransactionsComponent implements OnInit {
       b['raceNumber'] - a['raceNumber']);
   }
     
-
-
-    // betsQueryData.table_name = this.eventInfo.dbBetTableName;
-    // this.dataService.queryBets(betsQueryData).then(res => {
-    //   this.getUserBets(res.Items);
-    // });
-  // }
-  // getUserBets(betList){
-  //   this.userBetsList = betList.filter(
-  //     bet => bet.userId === this.user.userId && bet.eventId === this.eventInfo.eventInfoId);
-  // }
-
 
   sortBets(prop: string) {
     if (!this.userBetsList){

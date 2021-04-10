@@ -1,4 +1,4 @@
-.betTable{
-    display: block;
+.betTableContainer{
     overflow-x: auto;
+    display: block;
 }

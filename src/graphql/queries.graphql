@@ -12,6 +12,7 @@ query GetBet($id: ID!) {
     paymentStatus
     raceNumber
     playerName
+    eventId
     createdAt
     updatedAt
     Horse {
@@ -40,6 +41,7 @@ query ListBets($filter: ModelBetFilterInput, $limit: Int, $nextToken: String) {
       paymentStatus
       raceNumber
       playerName
+      eventId
       createdAt
       updatedAt
     }
