@@ -9,7 +9,8 @@ import { BetService } from 'src/app/shared/services/bet.service';
 import { PlayerProfileService } from 'src/app/shared/services/player-profile.service';
 import { RaceService } from 'src/app/shared/services/race.service';
 import { HorseBetInfo } from 'src/app/shared/interfaces/horse-bet-info-interface';
-import { ResultService } from 'src/app/shared/services/result.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -38,12 +39,15 @@ export class BetPageComponent implements OnInit, OnDestroy  {
   raceExpiredError = false;
   buttonClicked = false;
   placingbet = false;
+  isAdminPage;
 
   hasResult;
 
   interval: any;
 
-  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private playerProfileService: PlayerProfileService, private raceService: RaceService, private resultService: ResultService) { }
+  constructor(private modalService: NgbModal, private api: APIService, private betService: BetService, private playerProfileService: PlayerProfileService, private raceService: RaceService, private router: Router) {
+    this.isAdminPage =  router.url.startsWith('/admin-home');
+   }
 
   betForm: FormGroup;
 
@@ -70,7 +74,6 @@ export class BetPageComponent implements OnInit, OnDestroy  {
   refreshData(){
     if(this.currentRace){
       this.betService.getBetInfoForRace(this.currentRace).subscribe((data) => {
-        console.log(data);
         this.horseBetInfoList = data;
      });
     }

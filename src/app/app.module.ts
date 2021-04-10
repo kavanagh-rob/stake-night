@@ -95,16 +95,7 @@ const appRoutes: Routes = [
       },
       { path: 'race-list',component: AdminEventComponent},
       { path: 'result', component: AdminRaceResultComponent },
-      { path: 'payout', component: AdminRacePayoutComponent },
-      // { 
-      //   path: 'live-race', 
-      //   component: AdminLiveRaceComponent,
-      //   children: [
-      //     { path: '', redirectTo: 'result', pathMatch: 'full' },
-      //     { path: 'result', component: AdminRaceResultComponent },
-      //     { path: 'payout', component: AdminRacePayoutComponent },
-      //   ]
-      // },
+      { path: 'payout', component: AdminRacePayoutComponent }
     ]
   },
   {

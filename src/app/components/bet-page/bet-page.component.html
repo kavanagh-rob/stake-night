@@ -27,7 +27,7 @@
                 <td>{{horse.name}}</td>
                 <td><span *ngIf="horseBetInfoList">{{getLiveOdds(horse)}}</span></td>
                 <td>
-                    <button [hidden]="!currentRace.isActive" class="btn btn-primary" (click)="openBetModal(horse, content)">Bet</button>
+                    <button [hidden]="!currentRace.isActive || isAdminPage" class="btn btn-primary" (click)="openBetModal(horse, content)">Bet</button>
                     <button [hidden]="currentRace.isActive" class="btn" [ngClass]="{'btn-warning': !hasResult, 'btn-danger':hasResult }" ><fa-icon [icon]="faLock"></fa-icon></button>
                 </td>
             </tr>
