@@ -70,6 +70,7 @@ export class BetPageComponent implements OnInit, OnDestroy  {
   refreshData(){
     if(this.currentRace){
       this.betService.getBetInfoForRace(this.currentRace).subscribe((data) => {
+        console.log(data);
         this.horseBetInfoList = data;
      });
     }

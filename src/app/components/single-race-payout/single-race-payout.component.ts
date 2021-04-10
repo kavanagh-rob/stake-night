@@ -37,15 +37,16 @@ export class SingleRacePayoutComponent implements OnInit {
   constructor(private betService: BetService, private playerProfileService: PlayerProfileService, private api: APIService) { }
 
   async ngOnInit() {
+    await this.loadBetData();
+  }
+
+  async loadBetData(){
     this.betsForRace = await this.getBetsForRace();
     this.raceResult = await this.getRaceResult();
     this.horseBetInfoList = await this.getHorseBetInfoForRace();
     await this.setBetResultInfo();
     this.openBetsForRace = await this.getOpenBetsForRace();
-
   }
-
-
 
   
   async getBetsForRace(){
@@ -95,7 +96,8 @@ export class SingleRacePayoutComponent implements OnInit {
 
 
 
-  processBetsForRace(){
+  async processBetsForRace(){
+    await this.loadBetData();
     if (confirm('Process Bets for Race ' + this.race.number + ', Winner  (Name: ' +
     this.raceResult.winningHorseName + ', Number ' + this.raceResult.winningHorseNumber +
     ', Odds ' + this.raceResult.finalOdds + ')')) {

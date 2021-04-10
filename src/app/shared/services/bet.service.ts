@@ -14,7 +14,7 @@ export class BetService {
 
   totalBetValue;
 
-  horseBetInfoArray: HorseBetInfo[] = [];
+  // horseBetInfoArray: HorseBetInfo[] = [];
 
   updateBet(bet) {
     const updatedRace = this.copyBetModel(bet);
@@ -70,7 +70,7 @@ export class BetService {
   }
 
   private calculateBetTotals(currentRace: Race, raceBets: Bet[], betInfoSubscriber) { 
-    this.horseBetInfoArray = [];
+    const horseBetInfoArray: HorseBetInfo[] = [];
     this.totalBetValue = 0;
     this.api.ListHorses({ raceID: { eq: currentRace.id } }).then(listHorseRes => {
       const horseList: Horse[] = listHorseRes.items;
@@ -81,37 +81,37 @@ export class BetService {
         betsForHorse.forEach(betForHorse => {
             betTotalForHorse = Number(betTotalForHorse) + Number(betForHorse.stake);
           });
-        this.horseBetInfoArray.push({horseId: horse.id, betTotal: betTotalForHorse});
+        horseBetInfoArray.push({horseId: horse.id, betTotal: betTotalForHorse});
         this.totalBetValue = Number(this.totalBetValue) + Number(betTotalForHorse);
       });
-      this.getLiveToteOdds(horseList, currentRace.payoutFactor, betInfoSubscriber);
+      this.getLiveToteOdds(horseList, horseBetInfoArray, currentRace.payoutFactor, betInfoSubscriber);
 
     }); 
 
-    this.totalBetValue = this.setTwoDecimals(this.totalBetValue); 
+    this.totalBetValue = this.setTwoDecimals(this.totalBetValue);
   }
 
-  private getLiveToteOdds(horseList: Horse[], payoutFactor, betInfoSubscriber) {
+  private getLiveToteOdds(horseList: Horse[], horseBetInfoArray: HorseBetInfo[], payoutFactor, betInfoSubscriber) {
     horseList.forEach(
       horse => {
-        const totalBetsForHorse =  this.getBetTotalForHorse(horse.id)
+        const totalBetsForHorse =  this.getBetTotalForHorse(horseBetInfoArray, horse.id)
         let factoredHorseOdds = totalBetsForHorse === 0 ?
         this.setTwoDecimals(this.totalBetValue) : this.setTwoDecimals(Number(this.totalBetValue) / Number(totalBetsForHorse));
         if (payoutFactor && payoutFactor > 0 && payoutFactor < 1) {
           factoredHorseOdds =   this.setTwoDecimals(factoredHorseOdds * Number(payoutFactor));
         }
-        this.getBetInfoForHorse(horse.id).liveOdds = factoredHorseOdds;
+        this.getBetInfoForHorse(horseBetInfoArray,horse.id).liveOdds = factoredHorseOdds;
       });
-      betInfoSubscriber.next(this.horseBetInfoArray);
+      betInfoSubscriber.next(horseBetInfoArray);
       betInfoSubscriber.complete();
   }
 
-  private getBetTotalForHorse(horseId){
-    return this.getBetInfoForHorse(horseId) ? this.getBetInfoForHorse(horseId).betTotal : 0;
+  private getBetTotalForHorse(horseBetInfoArray, horseId){
+    return this.getBetInfoForHorse(horseBetInfoArray, horseId) ? this.getBetInfoForHorse(horseBetInfoArray, horseId).betTotal : 0;
    }
 
-  private getBetInfoForHorse(horseId){
-   return this.horseBetInfoArray.filter(
+  private getBetInfoForHorse(horseBetInfoArray, horseId){
+   return horseBetInfoArray.filter(
     horseBetInfo => horseBetInfo.horseId === horseId)[0];
   }
 

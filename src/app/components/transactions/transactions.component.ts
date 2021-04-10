@@ -106,8 +106,4 @@ export class TransactionsComponent implements OnInit {
     this.accordianOpened = this.accordianOpened === index ? -1 : index;
   }
 
-  setTwoDecimals(input){
-    return Number((Math.round(Number(input) * 100) / 100).toFixed(2));
-  }
-
 }

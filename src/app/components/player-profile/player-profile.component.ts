@@ -24,14 +24,6 @@ export class PlayerProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // getUserImage(){
-  //   let avator = 'https://www.disneyclips.com/images/images/donald-duck25.png';
-  //   if (this.playerProfile.avatorUrl){
-  //     avator = this.playerProfile.avatorUrl;
-  //   }
-  //   return { 'background-image': 'url(' + avator + ')' };
-  // }
-
   getUserImage(){
     let avator = 'https://www.disneyclips.com/images/images/donald-duck25.png';
     if (this.playerProfile.avatorUrl){

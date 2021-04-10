@@ -77,10 +77,6 @@ export class PlayerGameHomeComponent implements OnInit, OnDestroy {
   getEventStartCardImage() {
     return this.event && this.event.eventImage ? this.event.eventImage : '';
   }
-
-  setTwoDecimals(input){
-    return Number((Math.round(Number(input) * 100) / 100).toFixed(2));
-  }
-    
+   
 
 }
